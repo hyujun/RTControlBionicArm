@@ -120,6 +120,7 @@ public:
 
 		default:
 			std::cout << "WARNING. Elmo Gold Whistle pdo index out of range." << std::endl;
+			break;
 		}
 
 		// CHECK FOR STATE CHANGE
@@ -178,15 +179,15 @@ public:
         domains = domains_;
     }
 
-    int32_t  target_position_           = 0; 						/**<write*/
-    int32_t  target_velocity_           = 0; 						/**<write*/
-    int16_t  target_torque_             = 0; 						/**<write (max torque (max current) = 1000)*/
-    uint16_t max_torque_                = 1300; 					/**<write (max current = 1000, as set in Elmo Motion Studio)*/
-    uint16_t control_word_              = 0; 						/**<write*/
+    int32_t  target_position_           = 0; 		/**<write*/
+    int32_t  target_velocity_           = 0; 		/**<write*/
+    int16_t  target_torque_             = 0; 		/**<write (max torque (max current) = 1000)*/
+    uint16_t max_torque_                = 1300; 	/**<write (max current = 1000, as set in Elmo Motion Studio)*/
+    uint16_t control_word_              = 0; 		/**<write*/
     int8_t   mode_of_operation_         = MODE_CYCLIC_SYNC_TORQUE; 	/**<write (use enum ModeOfOperation for convenience)*/
 
     int32_t  position_                  = 0; 		/**<read*/
-    int32_t  velocity_					= 0;		/**<read*/
+    int32_t  velocity_			= 0;		/**<read*/
     int16_t  torque_                    = 0; 		/**<read*/
     uint16_t status_word_               = 0; 		/**<read*/
     int8_t   mode_of_operation_display_ = 0; 		/**<read*/
@@ -238,12 +239,12 @@ private:
         STATE_QUICK_STOP_ACTIVE				= 8,
         STATE_FAULT_REACTION_ACTIVE			= 9,
         STATE_FAULT							= 10,
-		STATE_HOMING_PROGRESS				= 11,
-		STATE_HOMING_NOT_START				= 12,
-		STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
-		STATE_HOMING_COMPLITE				= 14,
-		STATE_HOMING_ERROR					= 15,
-		STATE_HOMING_UNDIFINED
+	STATE_HOMING_PROGRESS				= 11,
+	STATE_HOMING_NOT_START				= 12,
+	STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
+	STATE_HOMING_COMPLITE				= 14,
+	STATE_HOMING_ERROR					= 15,
+	STATE_HOMING_UNDIFINED
     };
 
     std::map<DeviceState,std::string> device_state_str_ = {
