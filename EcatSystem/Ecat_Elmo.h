@@ -22,8 +22,7 @@ namespace hyuEcat{
 class EcatElmo : public Slave
 {
 public:
-public:
-	EcatElmo() : Slave(Elmo_VendorID, Elmo_ProductCode) {}
+    EcatElmo() : Slave(Elmo_VendorID, Elmo_ProductCode) {}
     virtual ~EcatElmo() {}
 
     /**
@@ -159,25 +158,25 @@ public:
 	 * @return address of Elmo_syncs[0]
 	 * @see PDOConfig.h
 	 */
-    virtual const ec_sync_info_t* syncs() { return &Elmo_syncs[0]; }
+	virtual const ec_sync_info_t* syncs() { return &Elmo_syncs[0]; }
 
-    /**
-     * @brief size of sync
-     * @return normalized size of Elmo_sync
-     * @see PDOConfig.h
-     */
-    virtual size_t syncSize() {
-        return sizeof(Elmo_syncs)/sizeof(ec_sync_info_t);
-    }
+	/**
+	 * @brief size of sync
+	 * @return normalized size of Elmo_sync
+	 * @see PDOConfig.h
+	 */
+	virtual size_t syncSize() {
+	    return sizeof(Elmo_syncs)/sizeof(ec_sync_info_t);
+	}
 
 
-    virtual const ec_pdo_entry_info_t* channels() {
-        return Elmo_pdo_entries;
-    }
+	virtual const ec_pdo_entry_info_t* channels() {
+	    return Elmo_pdo_entries;
+	}
 
-    virtual void domains(DomainMap& domains) const {
-        domains = domains_;
-    }
+	virtual void domains(DomainMap& domains) const {
+	    domains = domains_;
+	}
 
     int32_t  target_position_           = 0; 		/**<write*/
     int32_t  target_velocity_           = 0; 		/**<write*/
@@ -229,21 +228,21 @@ private:
      */
     enum DeviceState
     {
-        STATE_UNDEFINED 					= 0,
-        STATE_START 						= 1,
+        STATE_UNDEFINED 			= 0,
+        STATE_START 				= 1,
         STATE_NOT_READY_TO_SWITCH_ON		= 3,
-        STATE_SWITCH_ON_DISABLED			= 4,
-        STATE_READY_TO_SWITCH_ON			= 5,
-        STATE_SWITCH_ON						= 6,
-        STATE_OPERATION_ENABLED				= 7,
-        STATE_QUICK_STOP_ACTIVE				= 8,
-        STATE_FAULT_REACTION_ACTIVE			= 9,
-        STATE_FAULT							= 10,
-	STATE_HOMING_PROGRESS				= 11,
-	STATE_HOMING_NOT_START				= 12,
+        STATE_SWITCH_ON_DISABLED		= 4,
+        STATE_READY_TO_SWITCH_ON		= 5,
+        STATE_SWITCH_ON				= 6,
+        STATE_OPERATION_ENABLED			= 7,
+        STATE_QUICK_STOP_ACTIVE			= 8,
+        STATE_FAULT_REACTION_ACTIVE		= 9,
+        STATE_FAULT				= 10,
+	STATE_HOMING_PROGRESS			= 11,
+	STATE_HOMING_NOT_START			= 12,
 	STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
-	STATE_HOMING_COMPLITE				= 14,
-	STATE_HOMING_ERROR					= 15,
+	STATE_HOMING_COMPLITE			= 14,
+	STATE_HOMING_ERROR			= 15,
 	STATE_HOMING_UNDIFINED
     };
 
@@ -257,12 +256,12 @@ private:
          {STATE_QUICK_STOP_ACTIVE,      		"Quick Stop Active"},
          {STATE_FAULT_REACTION_ACTIVE,  		"Fault Reaction Active"},
          {STATE_FAULT,                  		"Fault"},
-		 {STATE_HOMING_PROGRESS,        		"Homing Progress"},
-		 {STATE_HOMING_NOT_START,       		"Homing Not Start"},
-		 {STATE_HOMING_ATTAINED_NOT_REACHED, 	"Homing Attained not reached"},
-		 {STATE_HOMING_COMPLITE,        		"Homing Finished"},
-		 {STATE_HOMING_ERROR,           		"Homing Error"},
-		 {STATE_HOMING_UNDIFINED,       		"Homing Undefined"}
+	 {STATE_HOMING_PROGRESS,        		"Homing Progress"},
+	 {STATE_HOMING_NOT_START,       		"Homing Not Start"},
+	 {STATE_HOMING_ATTAINED_NOT_REACHED, 		"Homing Attained not reached"},
+	 {STATE_HOMING_COMPLITE,        		"Homing Finished"},
+	 {STATE_HOMING_ERROR,           		"Homing Error"},
+	 {STATE_HOMING_UNDIFINED,       		"Homing Undefined"}
     };
 
     DeviceState deviceState(uint16_t status_word)

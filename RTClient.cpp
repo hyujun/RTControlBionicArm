@@ -68,11 +68,6 @@ static double TargetVel_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetAcc_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
 
-#if defined(_WITH_KIST_HAND_)
-static double Hand_ActualPos_Rad[HAND_DOF] = {0.0,};
-static double Hand_ActualVel_Rad[HAND_DOF] = {0.0,};
-#endif
-
 static double manipulatorpower=0;
 static double best_manipulatorpower=0;
 
@@ -142,8 +137,6 @@ void RTRArm_run(void *arg)
 
 	DualArm.UpdateManipulatorParam();
 
-	HYUControl::KistHand kisthand;
-
 	/* Arguments: &task (NULL=self),
 	 *            start time,
 	 *            period
@@ -158,41 +151,15 @@ void RTRArm_run(void *arg)
 
 		ecatmaster.RxUpdate();
 
-#if defined(_WITH_KIST_HAND_)
-		//read the motor data
 		for(k=0; k < BIONIC_ARM_DOF; k++)
 		{
-			DeviceState[k] = 			ecat_elmo[ElmoDualArmMap[k]].Elmo_DeviceState();
-			StatusWord[k] = 			ecat_elmo[ElmoDualArmMap[k]].status_word_;
-			ModeOfOperationDisplay[k] = ecat_elmo[ElmoDualArmMap[k]].mode_of_operation_display_;
-			ControlWord[k] = 			ecat_elmo[ElmoDualArmMap[k]].control_word_;
-			ActualPos[k] = 				ecat_elmo[ElmoDualArmMap[k]].position_;
-			ActualVel[k] = 				ecat_elmo[ElmoDualArmMap[k]].velocity_;
-			ActualTor[k] = 				ecat_elmo[ElmoDualArmMap[k]].torque_;
+			DeviceState[k] = 		ecat_elmo[k].Elmo_DeviceState();
+			StatusWord[k] = 		ecat_elmo[k].status_word_;
+			ModeOfOperationDisplay[k] = 	ecat_elmo[k].mode_of_operation_display_;
+			ActualPos[k] = 			ecat_elmo[k].position_;
+			ActualVel[k] = 			ecat_elmo[k].velocity_;
+			ActualTor[k] = 			ecat_elmo[k].torque_;
 		}
-
-		for(k=0; k < HAND_DOF; k++)
-		{
-			Hand_DeviceState[k] = 				ecat_elmo[ElmoHandMap[k]].Elmo_DeviceState();
-			Hand_StatusWord[k] = 				ecat_elmo[ElmoHandMap[k]].status_word_;
-			Hand_ModeOfOperationDisplay[k] = 	ecat_elmo[ElmoHandMap[k]].mode_of_operation_display_;
-			Hand_ControlWord[k] = 				ecat_elmo[ElmoHandMap[k]].control_word_;
-			Hand_ActualPos[k] = 				ecat_elmo[ElmoHandMap[k]].position_;
-			Hand_ActualVel[k] = 				ecat_elmo[ElmoHandMap[k]].velocity_;
-			Hand_ActualTor[k] = 				ecat_elmo[ElmoHandMap[k]].torque_;
-		}
-
-#else
-		for(k=0; k < BIONIC_ARM_DOF; k++)
-		{
-			DeviceState[k] = 			ecat_elmo[k].Elmo_DeviceState();
-			StatusWord[k] = 			ecat_elmo[k].status_word_;
-			ModeOfOperationDisplay[k] = ecat_elmo[k].mode_of_operation_display_;
-			ActualPos[k] = 				ecat_elmo[k].position_;
-			ActualVel[k] = 				ecat_elmo[k].velocity_;
-			ActualTor[k] = 				ecat_elmo[k].torque_;
-		}
-#endif
 
 		if( system_ready )
 		{
@@ -202,15 +169,6 @@ void RTRArm_run(void *arg)
 				once_flag = 1;
 			}
 
-#if defined(_WITH_KIST_HAND_)
-			kisthand.HandEnctoRad(Hand_ActualPos, Hand_ActualPos_Rad);
-			kisthand.HandVelocityConvert(Hand_ActualVel, Hand_ActualVel_Rad);
-
-			if(double_gt >= 1)
-				HandMotion=1;
-
-			kisthand.HandControl(HandMotion, Hand_ActualPos_Rad, Hand_TargetVel, double_gt);
-#endif
 
 			DualArm.ENCtoRAD(ActualPos, ActualPos_Rad);
 			DualArm.VelocityConvert(ActualVel, ActualVel_Rad);
@@ -238,33 +196,6 @@ void RTRArm_run(void *arg)
 
 			manipulatorpower = DualArm.PowerComsumption(ActualTor);
 
-#if defined(_WITH_KIST_HAND_)
-			//write the motor data
-			for(OutputCommandCount=0; OutputCommandCount < BIONIC_ARM_DOF; ++OutputCommandCount)
-			{
-				if(double_gt >= 1.0)
-				{
-					ecat_elmo[ElmoDualArmMap[OutputCommandCount]].writeTorque(TargetTor[OutputCommandCount]);
-				}
-				else
-				{
-					ecat_elmo[ElmoDualArmMap[OutputCommandCount]].writeTorque(0);
-				}
-			}
-
-			for(OutputCommandCount=0; OutputCommandCount < HAND_DOF; ++OutputCommandCount)
-			{
-				if(double_gt >= 1.0)
-				{
-					ecat_elmo[ElmoHandMap[OutputCommandCount]].writeVelocity(Hand_TargetVel[OutputCommandCount]);
-				}
-				else
-				{
-					ecat_elmo[ElmoHandMap[OutputCommandCount]].writeVelocity(0);
-				}
-			}
-
-#else
 			//write the motor data
 			for(int j=0; j < BIONIC_ARM_DOF; ++j)
 			{
@@ -278,7 +209,6 @@ void RTRArm_run(void *arg)
 					ecat_elmo[j].writeTorque(0);
 				}
 			}
-#endif
 		}
 
 		ecatmaster.TxUpdate();
@@ -294,7 +224,7 @@ void RTRArm_run(void *arg)
 
 		if ( isSlaveInit() == 1 )
 		{
-			float_dt = ((float)(long)(p3 - p1))*1e-3; 		// us
+			float_dt = ((float)(long)(p3 - p1))*1e-3; 	// us
 			double_gt += ((double)(long)(p3 - p1))*1e-9; 	// s
 			ethercat_time = (long) now - previous;
 
@@ -415,23 +345,6 @@ void print_run(void *arg)
 				rt_printf("\n");
 			}
 
-#if defined(_WITH_KIST_HAND_)
-			for(int Hand=0; Hand < HAND_DOF; Hand++)
-			{
-				rt_printf("\nID: %d, ", Hand+1);
-				if(Hand < 2)
-				{
-					rt_printf("Right Index & Middle: ");
-					rt_printf("\tModeOfOp: %d,",			Hand_ModeOfOperationDisplay[Hand]);
-					//rt_printf("\tActPos(inc): %d,", 		Hand_ActualPos[Hand]);
-					rt_printf("\tActPos(Deg): %0.2lf,", 	Hand_ActualPos_Rad[Hand]*RADtoDEG);
-					rt_printf("\tActVel(Deg/s): %0.2lf,", 	Hand_ActualVel_Rad[Hand]*RADtoDEG);
-					rt_printf("\tActVel(inc/s): %d,", 		Hand_ActualVel[Hand]);
-					rt_printf("\tTarVel(inc): %d,", 		Hand_TargetVel[Hand]);
-					rt_printf("\tActTor(%): %d,",			Hand_ActualTor[Hand]);
-				}
-			}
-#endif
 			rt_printf("\n");
 		}
 		else
@@ -503,8 +416,12 @@ void tcpip_run(void *arg)
 
 	while(1)
 	{
-		rt_task_wait_period(NULL);
-		current_Thread = server.currentConnections();
+		  rt_task_wait_period(NULL);
+		  current_Thread = server.currentConnections();
+		  if(current_Thread != 0)
+		  {
+
+		  }
 	}
 
 }
@@ -535,17 +452,17 @@ void signal_handler(int signum)
 
 	ecatmaster.deactivate();
 
-    rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
-    exit(signum);
+	rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
+	exit(signum);
 }
 
 /****************************************************************************/
 int main(int argc, char **argv)
 {
 	// Perform auto-init of rt_print buffers if the task doesn't do so
-    rt_print_auto_init(1);
+	rt_print_auto_init(1);
 
-    signal(SIGHUP, signal_handler);
+	signal(SIGHUP, signal_handler);
 	signal(SIGINT, signal_handler);
 	signal(SIGTERM, signal_handler);
 	signal(SIGKILL, signal_handler);
@@ -560,39 +477,21 @@ int main(int argc, char **argv)
 	//cycle_ns = 500000; // nanosecond -> 2kHz
 	cycle_ns = 1000000; // nanosecond -> 1kHz
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
-	//cycle_ns = 2e6; // nanosecond -> 500Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
 
 #if defined(_ECAT_ON_)
-
-#if defined(_WITH_KIST_HAND_)
-	int CheckElmoHand=0;
-	int SlaveNum;
-	for(SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
-	{
-		ecatmaster.addSlave(0, SlaveNum, &ecat_elmo[SlaveNum]);
-		if(ElmoHandMap[CheckElmoHand] == SlaveNum)
-		{
-			ecat_elmo[SlaveNum].mode_of_operation_ = 9;
-			//ecat_elmo[SlaveNum].writeTorque(-10);
-			CheckElmoHand++;
-		}
-	}
-#else
 	int SlaveNum;
 	for(SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
 	{
 		ecatmaster.addSlave(0, SlaveNum, &ecat_elmo[SlaveNum]);
 	}
 #endif
-
 
 #if defined(_USE_DC_MODE_)
 	ecatmaster.activateWithDC(0, cycle_ns);  //is a first arg DC location of MotorDriver?
 #else
 	ecatmaster.activate();
-#endif
 #endif
 
 #if defined(_PLOT_ON_)
@@ -627,7 +526,6 @@ int main(int argc, char **argv)
 
 	rt_task_create(&tcpip_task, "TCPIP_PROC_Task", 0, 80, T_FPU);
 	rt_task_start(&tcpip_task, &tcpip_run, NULL);
-
 
 	// Must pause here
 	pause();

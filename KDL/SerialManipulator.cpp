@@ -106,7 +106,7 @@ void SerialManipulator::TorqueConvert(double *_pTorque, short *_pOutput, short &
 
 	for(int i=0; i < this->mDoF_Total; i++)
 	{
-		_pOutput[i] = (short)round(((_pTorque[i]/(double)serial_Motor_info[i].motor_harmonic)/serial_Motor_info[i].torque_const_Nm_A)/serial_Motor_info[i].max_current_A*1000.0*(100.0/70.0));
+		_pOutput[i] = (short)round(((_pTorque[i]/(double)serial_Motor_info[i].motor_harmonic)/serial_Motor_info[i].torque_const_Nm_A)/serial_Motor_info[i].max_current_A*1000.0*(100.0/90.0));
 
 		if(_pOutput[i] <= -_MaxOutput)
 			_pOutput[i] = -_MaxOutput;
