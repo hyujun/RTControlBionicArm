@@ -120,7 +120,6 @@ void RTRArm_run(void *arg)
 	RTIME p1 = 0;
 	RTIME p3 = 0;
 
-	int once_flag = 0;
 	short MaxTor = 1200;
 
 	int k=0;
@@ -131,11 +130,11 @@ void RTRArm_run(void *arg)
 	VectorXd finPos(BIONIC_ARM_DOF);
 	finPos.setZero();
 
-	SerialManipulator DualArm;
-	HYUControl::Controller Control(&DualArm);
-	HYUControl::Motion motion(&DualArm);
+	SerialManipulator BionicArm;
+	HYUControl::Controller Control(&BionicArm);
+	HYUControl::Motion motion(&BionicArm);
 
-	DualArm.UpdateManipulatorParam();
+	BionicArm.UpdateManipulatorParam();
 
 	/* Arguments: &task (NULL=self),
 	 *            start time,
@@ -153,48 +152,31 @@ void RTRArm_run(void *arg)
 
 		for(k=0; k < BIONIC_ARM_DOF; k++)
 		{
-			DeviceState[k] = 		ecat_elmo[k].Elmo_DeviceState();
-			StatusWord[k] = 		ecat_elmo[k].status_word_;
+			DeviceState[k] = 				ecat_elmo[k].Elmo_DeviceState();
+			StatusWord[k] = 				ecat_elmo[k].status_word_;
 			ModeOfOperationDisplay[k] = 	ecat_elmo[k].mode_of_operation_display_;
-			ActualPos[k] = 			ecat_elmo[k].position_;
-			ActualVel[k] = 			ecat_elmo[k].velocity_;
-			ActualTor[k] = 			ecat_elmo[k].torque_;
+			ActualPos[k] = 					ecat_elmo[k].position_;
+			ActualVel[k] = 					ecat_elmo[k].velocity_;
+			ActualTor[k] = 					ecat_elmo[k].torque_;
 		}
 
 		if( system_ready )
 		{
-			if( once_flag == 0)
-			{
-				//DualArm.ENCtoRAD(ActualPos, TargetPos_Rad);
-				once_flag = 1;
-			}
 
+			BionicArm.ENCtoRAD(ActualPos, ActualPos_Rad);
+			BionicArm.VelocityConvert(ActualVel, ActualVel_Rad);
 
-			DualArm.ENCtoRAD(ActualPos, ActualPos_Rad);
-			DualArm.VelocityConvert(ActualVel, ActualVel_Rad);
+			BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
 
-			DualArm.pKin->PrepareJacobian(ActualPos_Rad);
-			DualArm.pDyn->PrepareDynamics(ActualPos_Rad, ActualVel_Rad);
+			//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
+			BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
 
-			//DualArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
-			DualArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
-
-			DualArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
+			BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
 			motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
 
-			//if( ControlMotion == MOVE_FRICTION )
-			//	Control.FrictionIdentification( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, double_gt );
-			//else if( ControlMotion == MOVE_CLIK_JOINT )
-			//	Control.CLIKTaskController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetPos_Task, TargetVel_Task, nullMotion, TargetToq, float_dt );
-			//else
-			//{
-				//Control.PDGravController(ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq );
-				Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
-			//}
+			Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
 
-			DualArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
-
-			manipulatorpower = DualArm.PowerComsumption(ActualTor);
+			BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
 			//write the motor data
 			for(int j=0; j < BIONIC_ARM_DOF; ++j)
@@ -224,7 +206,7 @@ void RTRArm_run(void *arg)
 
 		if ( isSlaveInit() == 1 )
 		{
-			float_dt = ((float)(long)(p3 - p1))*1e-3; 	// us
+			float_dt = ((float)(long)(p3 - p1))*1e-3; 		// us
 			double_gt += ((double)(long)(p3 - p1))*1e-9; 	// s
 			ethercat_time = (long) now - previous;
 
@@ -282,6 +264,66 @@ void RTRArm_run(void *arg)
 	}
 }
 
+void can_task_proc(void *arg)
+{
+	CAN_FRAME txframe, rxframe;
+	RTIME now, previous;
+	RTIME p1 = 0;
+	RTIME p3 = 0;
+
+	float float_dt_can=0;
+	unsigned long can_time=0;
+	unsigned long can_worst_time=0;
+
+	unsigned int can_cycle_ns = 70e6;
+	rt_task_set_periodic(NULL, TM_NOW, can_cycle_ns);
+
+	while(1)
+	{
+		rt_task_wait_period(NULL);
+		previous = rt_timer_read();
+
+		if(system_ready)
+		{
+			//control code
+			//
+
+			float_dt_can = ((float)(long)(p3 - p1))*1e-3; 		// us
+			can_time = (long) now - previous;
+
+			if ( can_worst_time<can_time )
+				can_worst_time=can_time;
+
+			if( can_time > (unsigned long)can_cycle_ns )
+			{
+				fault_count++;
+				can_worst_time=0;
+			}
+		}
+		else
+		{
+			can_worst_time = 0;
+			can_time = 0;
+		}
+
+		p1 = p3;
+		p3 = rt_timer_read();
+		now = rt_timer_read();
+
+	}
+}
+
+void serial_task_proc(void *arg)
+{
+	unsigned int serial_cycle_ns = 50e6;
+	rt_task_set_periodic(NULL, TM_NOW, serial_cycle_ns);
+	for(;;)
+	{
+		rt_task_wait_period(NULL);
+
+	}
+}
+
 void print_run(void *arg)
 {
 	long stick=0;
@@ -309,8 +351,8 @@ void print_run(void *arg)
 		if ( system_ready )
 		{
 			rt_printf("Time=%0.2fs\n", double_gt);
-			rt_printf("actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d, PowerComsumption=%0.2lfW\n",
-					ethercat_time/1000, float_dt, worst_time/1000, fault_count, best_manipulatorpower);
+			rt_printf("actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+					ethercat_time/1000, float_dt, worst_time/1000, fault_count);
 
 			for(int j=0; j<BIONIC_ARM_DOF; ++j)
 			{
@@ -319,20 +361,20 @@ void print_run(void *arg)
 #if defined(_DEBUG_)
 				//rt_printf(" StatWord: 0x%04X, ",	StatusWord[j]);
 				//rt_printf(" DeviceState: %d, ",	DeviceState[j]);
-				rt_printf(" ModeOfOp: %d,",			ModeOfOperationDisplay[j]);
+				rt_printf(" ModeOfOp: %d,",		ModeOfOperationDisplay[j]);
 				//rt_printf("\n");
 #endif
 				rt_printf("\tActPos(Deg): %0.2lf,", 	ActualPos_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarPos(Deg): %0.2lf,",	TargetPos_Rad[j]*RADtoDEG);
-				//rt_printf("\tActPos(inc): %d,", 		ActualPos[j]);
+				//rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
 				//rt_printf("\n");
 				rt_printf("\tActVel(Deg/s): %0.1lf,", 	ActualVel_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarVel(Deg/s): %0.1lf,",	TargetVel_Rad[j]*RADtoDEG);
 				//rt_printf("\tActVel(inc/s): %d,", 	ActualVel[j]);
 				//rt_printf("\n");
-				rt_printf("\tActTor(%): %d,",			ActualTor[j]);
+				rt_printf("\tActTor(%): %d,",		ActualTor[j]);
 				rt_printf("\tCtrlTor(Nm): %0.1lf", 	TargetToq[j]);
-				//rt_printf("\tTarTor(%): %d", 			TargetTor[j]);
+				//rt_printf("\tTarTor(%): %d", 		TargetTor[j]);
 				//rt_printf("\n");
 			}
 
@@ -370,7 +412,6 @@ void print_run(void *arg)
 	}
 }
 
-
 void plot_run(void *arg)
 {
 	ssize_t len;
@@ -380,7 +421,9 @@ void plot_run(void *arg)
 
 	int err = rt_queue_bind(&msg_plot, "PLOT_QUEUE", TM_INFINITE);
 	if(err)
+	{
 		fprintf(stderr, "Failed to queue bind, code %d\n", err);
+	}
 
 	rt_task_set_periodic(NULL, TM_NOW, 1e7);
 
@@ -430,6 +473,8 @@ void tcpip_run(void *arg)
 void signal_handler(int signum)
 {
 	rt_printf("\nSignal Interrupt: %d", signum);
+
+	int res = -1;
 #if defined(_PLOT_ON_)
 	rt_queue_unbind(&msg_plot);
 	rt_printf("\nPlotting RTTask Closing....");
@@ -443,6 +488,32 @@ void signal_handler(int signum)
 	rt_printf("\nConsolPrint RTTask Closing....");
 	rt_task_delete(&print_task);
 	rt_printf("\nConsolPrint RTTask Closing Success....");
+
+#if defined(_CAN_ON_)
+	rt_printf("\nSERCAN RTTask Closing....");
+	res = rt_task_delete(&can_task);
+	if(sercan_fd > 0)
+	{
+		res = close(sercan_fd);
+		res = rt_printf("\nSERCAN RTTask Closing Success...");
+	}
+#endif
+
+#if defined(_RS232_ON_)
+	rt_printf("\nSerial RTTask Closing...");
+	res = rt_task_delete(&serial_task);
+	if(serial_fd > 0)
+	{
+		if(close(serial_fd) == 0)
+		{
+			rt_printf("\nSerial Closing Success...");
+		}
+		else
+		{
+			rt_printf("\nSerial Closing Failure...");
+		}
+	}
+#endif
 
 #if defined(_ECAT_ON_)
 	rt_printf("\nEtherCAT RTTask Closing....");
@@ -470,7 +541,7 @@ int main(int argc, char **argv)
 	signal(SIGQUIT, signal_handler);
 
 	/* Avoids memory swapping for this program */
-	mlockall( MCL_CURRENT|MCL_FUTURE );
+	mlockall(MCL_CURRENT|MCL_FUTURE);
 
 	// TO DO: Specify the cycle period (cycle_ns) here, or use default value
 	//cycle_ns = 250000; // nanosecond -> 4kHz
@@ -479,6 +550,29 @@ int main(int argc, char **argv)
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
+#if defined(_RS232_ON_)
+	char PortName[30];
+	unsigned int SerialBoud = 115200;
+	strcpy(PortName, COM1);
+	rt_printf("Serial Configuration : port=#%s, boudrate=%i\n", PortName, SerialBoud);
+	serial_fd = tp_open_serial_port(PortName, SerialBoud);
+	if(serial_fd < 0)
+		exit(EXIT_FAILURE);
+#endif
+
+#if defined(_CAN_ON_)
+	sercan_fd = SERCAN_open();
+	if(sercan_fd < 0)
+	{
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		rt_printf("Sercan Driver Activated : %d\t", sercan_fd);
+		int CANdevBitrate = SERCAN_GetBitRate(sercan_fd, 10);
+		rt_printf("Sercan Bitrate : %d\n", CANdevBitrate);
+	}
+#endif
 
 #if defined(_ECAT_ON_)
 	int SlaveNum;
@@ -489,7 +583,7 @@ int main(int argc, char **argv)
 #endif
 
 #if defined(_USE_DC_MODE_)
-	ecatmaster.activateWithDC(0, cycle_ns);  //is a first arg DC location of MotorDriver?
+	ecatmaster.activateWithDC(0, cycle_ns);
 #else
 	ecatmaster.activate();
 #endif
@@ -521,7 +615,18 @@ int main(int argc, char **argv)
 	rt_task_start(&RTArm_task, &RTRArm_run, NULL);
 #endif
 
-	rt_task_create(&print_task, "CONSOLE_PROC_Task", 0, 70, T_FPU);
+#if defined(_CAN_ON_)
+	rt_task_create(&can_task, "CAN_PROC_TASK", 0, 98, T_FPU);
+	rt_task_start(&can_task, &can_task_proc, NULL);
+
+#endif
+
+#if defined(_RS232_ON_)
+	rt_task_create(&serial_task, "SERIAL_PROC_TASK", 0, 95, T_FPU);
+	rt_task_start(&serial_task, &serial_task_proc, NULL);
+#endif
+
+	rt_task_create(&print_task, "CONSOLE_PROC_Task", 0, 60, T_FPU);
 	rt_task_start(&print_task, &print_run, NULL);
 
 	rt_task_create(&tcpip_task, "TCPIP_PROC_Task", 0, 80, T_FPU);

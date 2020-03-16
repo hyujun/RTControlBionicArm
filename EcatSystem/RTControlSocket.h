@@ -89,6 +89,8 @@ public:
 
 	}
 private:
+
+	Poco::Net::Socket::SocketList connectedSockList;
 	double received_Data[6];
 	int j;
 };
