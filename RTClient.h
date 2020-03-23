@@ -45,6 +45,7 @@
 #include "Control/Motion.h"
 #include "KDL/SerialManipulator.h"
 #include "Control/KistHand.h"
+#include "devMouseObject.h"
 
 #define WAKEUP_TIME				(5)				/**<Initial waiting time*/
 #define NSEC_PER_SEC 			1000000000		/**<Expression of second in nano second*/

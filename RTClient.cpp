@@ -12,6 +12,10 @@
 hyuEcat::Master ecatmaster;
 hyuEcat::EcatElmo ecat_elmo[ELMO_TOTAL];
 
+int serial_fd = -1;
+int sercan_fd = -1;
+
+
 struct LOGGING_PACK
 {
 	double 	Time;				/**< Global Time			*/
@@ -71,7 +75,6 @@ static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
 static double manipulatorpower=0;
 static double best_manipulatorpower=0;
 
-#if defined(_ECAT_ON_)
 int isSlaveInit(void)
 {
 	int elmo_count = 0;
@@ -85,7 +88,7 @@ int isSlaveInit(void)
 		}
 	}
 
-	for(int j=0; j<((int)ecatmaster.GetConnectedSlaves()-1); j++)
+	for(int j=0; j<((int)ecatmaster.GetConnectedSlaves()); j++)
 	{
 		if(ecatmaster.GetSlaveState(j) == 0x08)
 		{
@@ -93,12 +96,11 @@ int isSlaveInit(void)
 		}
 	}
 
-	if((elmo_count == ELMO_TOTAL) && (slave_count == ((int)ecatmaster.GetConnectedSlaves()-1)))
+	if((elmo_count == ELMO_TOTAL) && (slave_count == ((int)ecatmaster.GetConnectedSlaves())))
 		return 1;
 	else
 		return 0;
 }
-#endif
 
 Vector3d ForwardPos[2];
 Vector3d ForwardOri[2];
@@ -131,8 +133,8 @@ void RTRArm_run(void *arg)
 	finPos.setZero();
 
 	SerialManipulator BionicArm;
-	HYUControl::Controller Control(&BionicArm);
-	HYUControl::Motion motion(&BionicArm);
+	//HYUControl::Controller Control(&BionicArm);
+	//HYUControl::Motion motion(&BionicArm);
 
 	BionicArm.UpdateManipulatorParam();
 
@@ -150,7 +152,7 @@ void RTRArm_run(void *arg)
 
 		ecatmaster.RxUpdate();
 
-		for(k=0; k < BIONIC_ARM_DOF; k++)
+		for(k=0; k < ELMO_TOTAL; k++)
 		{
 			DeviceState[k] = 				ecat_elmo[k].Elmo_DeviceState();
 			StatusWord[k] = 				ecat_elmo[k].status_word_;
@@ -166,25 +168,25 @@ void RTRArm_run(void *arg)
 			BionicArm.ENCtoRAD(ActualPos, ActualPos_Rad);
 			BionicArm.VelocityConvert(ActualVel, ActualVel_Rad);
 
-			BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
+			//BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
 
 			//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
-			BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
+			//BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
 
-			BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
-			motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
+			//BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
+			//motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
 
-			Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
+			//Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
 
-			BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
+			//BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
 			//write the motor data
-			for(int j=0; j < BIONIC_ARM_DOF; ++j)
+			for(int j=0; j < ELMO_TOTAL; ++j)
 			{
 
 				if(double_gt >= 1.0)
 				{
-					ecat_elmo[j].writeTorque(TargetTor[j]);
+					//ecat_elmo[j].writeTorque(TargetTor[j]);
 				}
 				else
 				{
@@ -315,11 +317,29 @@ void can_task_proc(void *arg)
 
 void serial_task_proc(void *arg)
 {
+	int kchr;
+	int chr;
+	int nbytes;
+
 	unsigned int serial_cycle_ns = 50e6;
 	rt_task_set_periodic(NULL, TM_NOW, serial_cycle_ns);
 	for(;;)
 	{
 		rt_task_wait_period(NULL);
+
+		//write
+		if(NRMKkbhit())
+		{
+			kchr =  getchar();
+			write(serial_fd, &kchr, 1);
+		}
+
+		//read
+		nbytes = read(serial_fd, &chr, 1);
+		if(nbytes > 0)
+		{
+
+		}
 
 	}
 }
@@ -354,7 +374,7 @@ void print_run(void *arg)
 			rt_printf("actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
 					ethercat_time/1000, float_dt, worst_time/1000, fault_count);
 
-			for(int j=0; j<BIONIC_ARM_DOF; ++j)
+			for(int j=0; j<ELMO_TOTAL; ++j)
 			{
 				rt_printf("\t \nID: %d,", j+1);
 
@@ -366,7 +386,7 @@ void print_run(void *arg)
 #endif
 				rt_printf("\tActPos(Deg): %0.2lf,", 	ActualPos_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarPos(Deg): %0.2lf,",	TargetPos_Rad[j]*RADtoDEG);
-				//rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
+				rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
 				//rt_printf("\n");
 				rt_printf("\tActVel(Deg/s): %0.1lf,", 	ActualVel_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarVel(Deg/s): %0.1lf,",	TargetVel_Rad[j]*RADtoDEG);
@@ -395,9 +415,10 @@ void print_run(void *arg)
 			{
 				rt_printf("\nReady Time: %i sec", stick);
 
+#if defined(_ECAT_ON_)
 				rt_printf("\nMaster State: %s, AL state: 0x%02X, ConnectedSlaves : %d",
 						ecatmaster.GetEcatMasterLinkState().c_str(), ecatmaster.GetEcatMasterState(), ecatmaster.GetConnectedSlaves());
-				for(int i=0; i<((int)ecatmaster.GetConnectedSlaves()-1); i++)
+				for(int i=0; i<((int)ecatmaster.GetConnectedSlaves()); i++)
 				{
 					rt_printf("\nID: %d , SlaveState: 0x%02X, SlaveConnection: %s, SlaveNMT: %s ", i,
 							ecatmaster.GetSlaveState(i), ecatmaster.GetSlaveConnected(i).c_str(), ecatmaster.GetSlaveNMT(i).c_str());
@@ -406,6 +427,7 @@ void print_run(void *arg)
 					rt_printf(" StatWord: 0x%04X, ", ecat_elmo[i].status_word_);
 
 				}
+#endif
 				rt_printf("\n");
 			}
 		}
@@ -466,7 +488,6 @@ void tcpip_run(void *arg)
 
 		  }
 	}
-
 }
 
 /****************************************************************************/
@@ -475,6 +496,11 @@ void signal_handler(int signum)
 	rt_printf("\nSignal Interrupt: %d", signum);
 
 	int res = -1;
+
+	rt_printf("\nConsolPrint RTTask Closing....");
+	rt_task_delete(&print_task);
+	rt_printf("\nConsolPrint RTTask Closing Success....");
+
 #if defined(_PLOT_ON_)
 	rt_queue_unbind(&msg_plot);
 	rt_printf("\nPlotting RTTask Closing....");
@@ -484,10 +510,6 @@ void signal_handler(int signum)
 	rt_printf("\nTCPIP RTTask Closing....");
 	rt_task_delete(&tcpip_task);
 	rt_printf("\nTCPIP RTTask Closing Success....");
-
-	rt_printf("\nConsolPrint RTTask Closing....");
-	rt_task_delete(&print_task);
-	rt_printf("\nConsolPrint RTTask Closing Success....");
 
 #if defined(_CAN_ON_)
 	rt_printf("\nSERCAN RTTask Closing....");
@@ -519,9 +541,9 @@ void signal_handler(int signum)
 	rt_printf("\nEtherCAT RTTask Closing....");
 	rt_task_delete(&RTArm_task);
 	rt_printf("\nEtherCAT RTTask Closing Success....");
-#endif
 
 	ecatmaster.deactivate();
+#endif
 
 	rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
 	exit(signum);
@@ -545,8 +567,8 @@ int main(int argc, char **argv)
 
 	// TO DO: Specify the cycle period (cycle_ns) here, or use default value
 	//cycle_ns = 250000; // nanosecond -> 4kHz
-	//cycle_ns = 500000; // nanosecond -> 2kHz
-	cycle_ns = 1000000; // nanosecond -> 1kHz
+	cycle_ns = 500000; // nanosecond -> 2kHz
+	//cycle_ns = 1000000; // nanosecond -> 1kHz
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
@@ -580,12 +602,13 @@ int main(int argc, char **argv)
 	{
 		ecatmaster.addSlave(0, SlaveNum, &ecat_elmo[SlaveNum]);
 	}
-#endif
 
 #if defined(_USE_DC_MODE_)
 	ecatmaster.activateWithDC(0, cycle_ns);
 #else
 	ecatmaster.activate();
+#endif
+
 #endif
 
 #if defined(_PLOT_ON_)
