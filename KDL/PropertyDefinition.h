@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-
+#include <stdint.h>
 //#define _WITH_HAND_
 
 /**
@@ -65,6 +65,13 @@ typedef struct{
 	double f;
 }FrictionTanh;
 
+typedef struct{
+    int32_t 	HomingOffset;
+    int8_t 		HomingMethod;
+    uint32_t 	HomingSpeed;
+    uint16_t 	HomingCurrentLimit;
+}homing_info;
+
 /**
  * @brief Predefined kinematic object
  */
@@ -83,3 +90,5 @@ extern robot_motor_info serial_Motor_info[];
 extern FrictionMap frictionmap[];
 
 extern FrictionTanh frictiontanh[];
+
+extern homing_info hominginfo[];

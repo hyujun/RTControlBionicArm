@@ -32,12 +32,12 @@ void Trajectory::SetPoly5th( const double &_CurrentTime, Eigen::VectorXd &_Start
 	this->StateVec.resize(6, NumberJoint);
 	StateVec.setZero();
 
-	m_cof << 1.0, 0.0, 					0.0, 						0.0, 						0.0, 						0.0,
-			 0.0, 1.0, 					0.0, 						0.0, 						0.0, 						0.0,
-			 0.0, 0.0, 					2.0, 						0.0, 						0.0, 						0.0,
-			 1.0, pow(TrajDuration,1), 	pow(TrajDuration,2), 		pow(TrajDuration,3), 		pow(TrajDuration,4), 		pow(TrajDuration,5),
-			 0.0, 1.0, 					2.0*pow(TrajDuration,1), 	3.0*pow(TrajDuration,2), 	4.0*pow(TrajDuration,3), 	5.0*pow(TrajDuration,4),
-			 0.0, 0.0, 					2.0, 						6.0*pow(TrajDuration,1), 	12.0*pow(TrajDuration,2),	20.0*pow(TrajDuration,3);
+	m_cof << 1.0, 	0.0, 					0.0, 						0.0, 						0.0, 						0.0,
+			 0.0, 	1.0, 					0.0, 						0.0, 						0.0, 						0.0,
+			 0.0, 	0.0, 					2.0, 						0.0, 						0.0, 						0.0,
+			 1.0, 	pow(TrajDuration,1), 	pow(TrajDuration,2), 		pow(TrajDuration,3), 		pow(TrajDuration,4), 		pow(TrajDuration,5),
+			 0.0, 	1.0, 					2.0*pow(TrajDuration,1), 	3.0*pow(TrajDuration,2), 	4.0*pow(TrajDuration,3), 	5.0*pow(TrajDuration,4),
+			 0.0, 	0.0, 					2.0, 						6.0*pow(TrajDuration,1), 	12.0*pow(TrajDuration,2),	20.0*pow(TrajDuration,3);
 
 	StateVec.row(0) = _StartPos.transpose();
 	StateVec.row(1) = _StartVel.transpose();

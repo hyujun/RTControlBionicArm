@@ -59,6 +59,9 @@ public:
     {
     	target_velocity_ = velocity;
     }
+
+
+
     /**
      * @brief Define a TPDO & RPDO process
      * @param[in] index
@@ -93,9 +96,6 @@ public:
 		case 5:
 			EC_WRITE_S8(domain_address, mode_of_operation_);
 			break;
-//		case 6:
-//			EC_WRITE_S8(domain_address, dummy);
-//			break;
 		//TxPDO
 		case 6:
 			velocity_ = EC_READ_S32(domain_address);
@@ -238,24 +238,24 @@ private:
         STATE_QUICK_STOP_ACTIVE			= 8,
         STATE_FAULT_REACTION_ACTIVE		= 9,
         STATE_FAULT				= 10,
-	STATE_HOMING_PROGRESS			= 11,
-	STATE_HOMING_NOT_START			= 12,
-	STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
-	STATE_HOMING_COMPLITE			= 14,
-	STATE_HOMING_ERROR			= 15,
-	STATE_HOMING_UNDIFINED
+		STATE_HOMING_PROGRESS			= 11,
+		STATE_HOMING_NOT_START			= 12,
+		STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
+		STATE_HOMING_COMPLITE			= 14,
+		STATE_HOMING_ERROR			= 15,
+		STATE_HOMING_UNDIFINED
     };
 
     std::map<DeviceState,std::string> device_state_str_ = {
-         {STATE_START,                  		"Start"},
-         {STATE_NOT_READY_TO_SWITCH_ON, 		"Not Ready to Switch On"},
-         {STATE_SWITCH_ON_DISABLED,     		"Switch on Disabled"},
-         {STATE_READY_TO_SWITCH_ON,     		"Ready to Switch On"},
-         {STATE_SWITCH_ON,              		"Switch On"},
-         {STATE_OPERATION_ENABLED,      		"Operation Enabled"},
-         {STATE_QUICK_STOP_ACTIVE,      		"Quick Stop Active"},
-         {STATE_FAULT_REACTION_ACTIVE,  		"Fault Reaction Active"},
-         {STATE_FAULT,                  		"Fault"},
+	 {STATE_START,                  		"Start"},
+	 {STATE_NOT_READY_TO_SWITCH_ON, 		"Not Ready to Switch On"},
+	 {STATE_SWITCH_ON_DISABLED,     		"Switch on Disabled"},
+	 {STATE_READY_TO_SWITCH_ON,     		"Ready to Switch On"},
+	 {STATE_SWITCH_ON,              		"Switch On"},
+	 {STATE_OPERATION_ENABLED,      		"Operation Enabled"},
+	 {STATE_QUICK_STOP_ACTIVE,      		"Quick Stop Active"},
+	 {STATE_FAULT_REACTION_ACTIVE,  		"Fault Reaction Active"},
+	 {STATE_FAULT,                  		"Fault"},
 	 {STATE_HOMING_PROGRESS,        		"Homing Progress"},
 	 {STATE_HOMING_NOT_START,       		"Homing Not Start"},
 	 {STATE_HOMING_ATTAINED_NOT_REACHED, 		"Homing Attained not reached"},

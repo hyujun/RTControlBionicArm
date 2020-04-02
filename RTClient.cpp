@@ -8,18 +8,18 @@
 //Modify this number to indicate the actual number of motor on the network
 #define ELMO_TOTAL 5
 #define BIONIC_ARM_DOF 6
-
+/****************************************************************************/
 hyuEcat::Master ecatmaster;
 hyuEcat::EcatElmo ecat_elmo[ELMO_TOTAL];
-
+HYUControl::Trajectory traj5th;
+/****************************************************************************/
 int serial_fd = -1;
 int sercan_fd = -1;
-
-
+/****************************************************************************/
 struct LOGGING_PACK
 {
-	double 	Time;				/**< Global Time			*/
-	double 	ActualPos[BIONIC_ARM_DOF]; 	/**< Actual Position in Radian		*/
+	double 	Time;						/**< Global Time						*/
+	double 	ActualPos[BIONIC_ARM_DOF]; 	/**< Actual Position in Radian			*/
 	double 	ActualVel[BIONIC_ARM_DOF];	/**< Actual Velocity in Radian/second	*/
 	short  	ActualToq[BIONIC_ARM_DOF];
 	double 	DesiredPos[BIONIC_ARM_DOF];
@@ -29,7 +29,7 @@ struct LOGGING_PACK
 
 // NRMKDataSocket for plotting axes data in Data Scope
 EcatDataSocket datasocket;
-
+/****************************************************************************/
 // When all slaves or drives reach OP mode,
 // system_ready becomes 1.
 int system_ready = 0;
@@ -37,7 +37,7 @@ int system_ready = 0;
 // Global time (beginning from zero)
 double double_gt=0; //real global time
 float float_dt=0;
-
+/****************************************************************************/
 // EtherCAT Data (Dual-Arm)
 UINT16	StatusWord[BIONIC_ARM_DOF] = {0,};
 INT32 	ActualPos[BIONIC_ARM_DOF] = {0,};
@@ -45,37 +45,37 @@ INT32 	ActualVel[BIONIC_ARM_DOF] = {0,};
 INT16 	ActualTor[BIONIC_ARM_DOF] = {0,};
 INT8	ModeOfOperationDisplay[BIONIC_ARM_DOF] = {0,};
 INT8	DeviceState[BIONIC_ARM_DOF] = {0,};
-
 INT16 	TargetTor[BIONIC_ARM_DOF] = {0,};		//100.0 persentage
+INT32 	TargetPos[BIONIC_ARM_DOF] = {0, };
 /****************************************************************************/
 // Xenomai RT tasks
 RT_TASK RTArm_task;
 RT_TASK print_task;
 RT_TASK plot_task;
 RT_TASK tcpip_task;
+RT_TASK serial_task;
+RT_TASK can_task;
+RT_TASK can_rev_task;
 
+RT_QUEUE msg_can;
 RT_QUEUE msg_plot;
 RT_QUEUE msg_tcpip;
-
-void signal_handler(int signum);
-int isSlaveInit(void);
-
+/****************************************************************************/
 // For RT thread management
 unsigned long fault_count=0;
 unsigned long ethercat_time=0;
 unsigned long worst_time=0;
-
+/****************************************************************************/
 static double ActualPos_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double ActualVel_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetPos_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetVel_Rad[BIONIC_ARM_DOF] = {0.0,};
-static double TargetAcc_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
+int TrajFlag[BIONIC_ARM_DOF] = {0,};
+int j_homing = ELMO_TOTAL;
+int HomingFlag = 0;
 
-static double manipulatorpower=0;
-static double best_manipulatorpower=0;
-
-int isSlaveInit(void)
+static int isSlaveInit(void)
 {
 	int elmo_count = 0;
 	int slave_count = 0;
@@ -102,6 +102,64 @@ int isSlaveInit(void)
 		return 0;
 }
 
+
+static int isElmoHoming(void)
+{
+	int num_traj=5;
+	VectorXd TargetInitPos(num_traj);
+	VectorXd TargetInitVel(num_traj);
+	VectorXd TargetPos(num_traj);
+	VectorXd CurrentPos(num_traj);
+	VectorXd CurrentVel(num_traj);
+	VectorXd CurrentAcc(num_traj);
+	double TargetDuration = 10.0;
+
+	TargetInitPos << ActualPos[0], ActualPos[1], ActualPos[2], ActualPos[3], ActualPos[4];
+	TargetInitVel << ActualVel[0], ActualVel[1], ActualVel[2], ActualVel[3], ActualVel[4];
+	TargetPos.setZero();
+
+
+	if(j_homing == 0)
+	{
+		HomingFlag = 1;
+		for(int i=0;i<ELMO_TOTAL-1;i++){
+			TrajFlag[i] = -1;
+			ecat_elmo[i].mode_of_operation_ = ecat_elmo[i].MODE_CYCLIC_SYNC_TORQUE;
+		}
+		return 0;
+	}
+
+	if(!ecat_elmo[j_homing-1].isHoming())  //check homing and change the mode to homing mode
+	{
+		ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_HOMING;
+		TrajFlag[j_homing-1] = 1;
+
+	}
+	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 1)
+	{
+		ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION;
+		ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];
+		if(ecat_elmo[j_homing-1].mode_of_operation_display_ == ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION)
+		{
+			ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];    //Keep the end of motion
+			traj5th.SetPoly5th(double_gt, TargetInitPos, TargetInitVel, TargetPos, TargetDuration, num_traj); //make trajectory to go to the 90 deg position
+			TrajFlag[j_homing-1] = 2;
+		}
+	}
+	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 2)
+	{
+		traj5th.Poly5th(double_gt, CurrentPos, CurrentVel, CurrentAcc);
+		ecat_elmo[j_homing-1].target_position_ = static_cast<int32_t>(round(CurrentPos(j_homing-1)));
+		if( ActualPos[j_homing-1] == static_cast<int32_t>(TargetInitPos(j_homing-1)) )
+			TrajFlag[j_homing-1] = 3;
+	}
+	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 3)
+	{
+		j_homing--;
+	}
+	return 0;
+}
+
 Vector3d ForwardPos[2];
 Vector3d ForwardOri[2];
 Vector3d ForwardAxis[2];
@@ -126,8 +184,8 @@ void RTRArm_run(void *arg)
 
 	int k=0;
 
-	uint16_t ControlMotion = SYSTEM_BEGIN;
-	uint16_t JointState = SYSTEM_BEGIN;
+	//uint16_t ControlMotion = SYSTEM_BEGIN;
+	//uint16_t JointState = SYSTEM_BEGIN;
 
 	VectorXd finPos(BIONIC_ARM_DOF);
 	finPos.setZero();
@@ -178,7 +236,7 @@ void RTRArm_run(void *arg)
 
 			//Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
 
-			//BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
+			BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
 			//write the motor data
 			for(int j=0; j < ELMO_TOTAL; ++j)
@@ -219,9 +277,6 @@ void RTRArm_run(void *arg)
 				if ( worst_time<ethercat_time )
 					worst_time=ethercat_time;
 
-				if(best_manipulatorpower < manipulatorpower)
-					best_manipulatorpower = manipulatorpower;
-
 				if( ethercat_time > (unsigned long)cycle_ns )
 				{
 					fault_count++;
@@ -261,23 +316,45 @@ void RTRArm_run(void *arg)
 			double_gt = 0;
 			worst_time = 0;
 			ethercat_time = 0;
-			best_manipulatorpower=0;
 		}
 	}
 }
 
+float float_dt_can=0;
+unsigned long can_time=0;
+unsigned long can_worst_time=0;
+unsigned long can_fault_count=0;
+
+unsigned short port[4] = {0, 0, 0, 0};
+float Temp[2] = {0, 0};
+float Pos[2] = {0, 0};
+int L_force[2] = {0, 0};
+
 void can_task_proc(void *arg)
 {
 	CAN_FRAME txframe, rxframe;
+
 	RTIME now, previous;
 	RTIME p1 = 0;
 	RTIME p3 = 0;
 
-	float float_dt_can=0;
-	unsigned long can_time=0;
-	unsigned long can_worst_time=0;
+	int CanDevFlag=0;
+	int CanReadyCounter = 0;
+	int can_id = 1;
+	int res = -1;
 
-	unsigned int can_cycle_ns = 70e6;
+	ssize_t len;
+	void *msg;
+	memset(&rxframe, 0, sizeof(CAN_FRAME));
+
+	int err = rt_queue_bind(&msg_can, "CAN_QUEUE", TM_INFINITE);
+	if(err)
+	{
+		fprintf(stderr, "Failed to queue bind, code %d\n", err);
+	}
+
+
+	unsigned int can_cycle_ns = 25e6;
 	rt_task_set_periodic(NULL, TM_NOW, can_cycle_ns);
 
 	while(1)
@@ -290,6 +367,98 @@ void can_task_proc(void *arg)
 			//control code
 			//
 
+			while(1)
+			{
+				if(CanDevFlag == 0)
+				{
+					memset(txframe.data, 0, sizeof(txframe.data));
+					txframe.can_id = 0x600 | can_id;
+					txframe.can_dlc = 6;
+					txframe.data[0] = 'P';
+					txframe.data[1] = '1';
+
+					txframe.data[2] = 0x00FF & port[0];
+					txframe.data[3] = (0xFF00 & port[0]) >> 8;
+
+					txframe.data[4] = 0x00FF & port[1];
+					txframe.data[5] = (0xFF00 & port[1]) >> 8;
+
+					SERCAN_write(sercan_fd, txframe);
+
+					CanDevFlag = 1;
+				}
+				else
+				{
+					if ( (len = rt_queue_receive(&msg_can, &msg, TM_INFINITE)) > 0 )
+					{
+						memcpy(&rxframe, msg, sizeof(CAN_FRAME));
+						Temp[0] = (float)(rxframe.data[2] + (rxframe.data[3] << 8))*0.02;
+						Pos[0] = (float)(rxframe.data[4] + (rxframe.data[5] << 8))/32768*3.3;
+						L_force[0] = (float)(rxframe.data[6] + (rxframe.data[7] << 8));
+						rt_queue_free(&msg_can, msg);
+						CanReadyCounter = 0;
+						CanDevFlag = 0;
+						break;
+					}
+					else
+					{
+						CanReadyCounter++;
+						if(CanReadyCounter > 10)
+						{
+							CanReadyCounter = 0;
+							CanDevFlag = 0;
+						}
+					}
+				}
+			}
+
+			while(1)
+			{
+				if(CanDevFlag == 0)
+				{
+					memset(txframe.data, 0, sizeof(txframe.data));
+					txframe.can_id = 0x600 | can_id;
+					txframe.can_dlc = 6;
+					txframe.data[0] = 'P';
+					txframe.data[1] = '2';
+
+					txframe.data[2] = 0x00FF & port[2];
+					txframe.data[3] = (0xFF00 & port[2]) >> 8;
+
+					txframe.data[4] = 0x00FF & port[3];
+					txframe.data[5] = (0xFF00 & port[3]) >> 8;
+
+					SERCAN_write(sercan_fd, txframe);
+
+					CanDevFlag = 1;
+				}
+				else
+				{
+
+					if ( (len = rt_queue_receive(&msg_can, &msg, TM_INFINITE)) > 0 )
+					{
+						memcpy(&rxframe, msg, sizeof(CAN_FRAME));
+						Temp[1] = (float)(rxframe.data[2] + (rxframe.data[3] << 8))*0.02;
+						Pos[1] = (float)(rxframe.data[4] + (rxframe.data[5] << 8))/32768*3.3;
+						L_force[1] = (float)(rxframe.data[6] + (rxframe.data[7] << 8));
+						rt_queue_free(&msg_can, msg);
+						CanReadyCounter = 0;
+						CanDevFlag = 0;
+						break;
+					}
+					else
+					{
+						CanReadyCounter++;
+						if(CanReadyCounter > 50)
+						{
+							CanReadyCounter = 0;
+							CanDevFlag = 0;
+						}
+					}
+				}
+			}
+
+			now = rt_timer_read();
 			float_dt_can = ((float)(long)(p3 - p1))*1e-3; 		// us
 			can_time = (long) now - previous;
 
@@ -298,7 +467,7 @@ void can_task_proc(void *arg)
 
 			if( can_time > (unsigned long)can_cycle_ns )
 			{
-				fault_count++;
+				can_fault_count++;
 				can_worst_time=0;
 			}
 		}
@@ -310,36 +479,99 @@ void can_task_proc(void *arg)
 
 		p1 = p3;
 		p3 = rt_timer_read();
-		now = rt_timer_read();
-
 	}
 }
 
+void can_rev_proc(void *arg)
+{
+	void *msg;
+	int len = sizeof(can_frame);
+	int res = -1;
+
+	can_frame rxframe;
+	unsigned int can_rev_cycle_ns = 5e5;
+	rt_task_set_periodic(NULL, TM_NOW, can_rev_cycle_ns);
+	while(1)
+	{
+		rt_task_wait_period(NULL);
+		rxframe.can_id=0x0;
+		rxframe.can_dlc = 0;
+		res = SERCAN_read(sercan_fd, &rxframe);
+		if(res == SERCAN_ERR_FREE && rxframe.can_id == 0x581)
+		{
+			msg = rt_queue_alloc(&msg_can, len);
+			if(msg == NULL)
+				rt_printf("rt_queue_alloc Failed to allocate, NULL pointer received\n");
+
+			memcpy(msg, &rxframe, len);
+			rt_queue_send(&msg_can, msg, len, Q_NORMAL);
+		}
+	}
+}
+
+float float_dt_serial=0;
+unsigned long serial_time=0;
+unsigned long serial_worst_time=0;
+unsigned long serial_fault_count=0;
+
+unsigned char kchr = 97;
+unsigned char chr;
+
 void serial_task_proc(void *arg)
 {
-	int kchr;
-	int chr;
+
 	int nbytes;
 
-	unsigned int serial_cycle_ns = 50e6;
+	RTIME now, previous;
+	RTIME p1 = 0;
+	RTIME p3 = 0;
+
+	unsigned int serial_cycle_ns = 1e6;
 	rt_task_set_periodic(NULL, TM_NOW, serial_cycle_ns);
 	for(;;)
 	{
 		rt_task_wait_period(NULL);
+		previous = rt_timer_read();
 
-		//write
-		if(NRMKkbhit())
+		if(system_ready)
 		{
-			kchr =  getchar();
-			write(serial_fd, &kchr, 1);
+			kchr = 0;
+			chr = 0;
+			//write
+			if(NRMKkbhit())
+			{
+				kchr =  'a';
+				write(serial_fd, &kchr, 1);
+			}
+
+			//read
+			nbytes = read(serial_fd, &chr, 1);
+			if(nbytes > 0)
+			{
+
+			}
+
+			now = rt_timer_read();
+			float_dt_serial = ((float)(long)(p3 - p1))*1e-3; 		// us
+			serial_time = (long) now - previous;
+
+			if ( serial_worst_time<serial_time )
+				serial_worst_time=serial_time;
+
+			if( serial_time > (unsigned long)serial_cycle_ns )
+			{
+				serial_fault_count++;
+				serial_worst_time=0;
+			}
+		}
+		else
+		{
+			serial_worst_time = 0;
+			serial_time = 0;
 		}
 
-		//read
-		nbytes = read(serial_fd, &chr, 1);
-		if(nbytes > 0)
-		{
-
-		}
+		p1 = p3;
+		p3 = rt_timer_read();
 
 	}
 }
@@ -347,6 +579,7 @@ void serial_task_proc(void *arg)
 void print_run(void *arg)
 {
 	long stick=0;
+	unsigned int reset_count=0;
 	int count=0;
 
 	rt_printf("\nPlease WAIT at least %i (s) until the system getting ready...\n", WAKEUP_TIME);
@@ -365,15 +598,27 @@ void print_run(void *arg)
 		if ( ++count >= roundl(NSEC_PER_SEC/PrintPeriod) )
 		{
 			++stick;
+			reset_count++;
 			count=0;
 		}
 
 		if ( system_ready )
 		{
 			rt_printf("Time=%0.2fs\n", double_gt);
-			rt_printf("actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+#if defined(_ECAT_ON_)
+			rt_printf("Eact actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
 					ethercat_time/1000, float_dt, worst_time/1000, fault_count);
+#endif
 
+#if defined(_CAN_ON_)
+			rt_printf("CAN actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+					can_time/1000, float_dt_can, can_worst_time/1000, can_fault_count);
+#endif
+
+#if defined(_RS232_ON_)
+			rt_printf("RS232 actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+					serial_time/1000, float_dt_serial, serial_worst_time/1000, serial_fault_count);
+#endif
 			for(int j=0; j<ELMO_TOTAL; ++j)
 			{
 				rt_printf("\t \nID: %d,", j+1);
@@ -397,7 +642,21 @@ void print_run(void *arg)
 				//rt_printf("\tTarTor(%): %d", 		TargetTor[j]);
 				//rt_printf("\n");
 			}
+#if defined(_CAN_ON_)
 
+			for(int k=0; k<2; k++)
+			{
+				rt_printf("\t \nID: %d,", k+1);
+				rt_printf(" Temp: %0.2f,", 	Temp[k]);
+				rt_printf("\tPos: %0.2f,", 	Pos[k]);
+				rt_printf("\tLoadCell: %d,", L_force[k]);
+			}
+#endif
+
+#if defined(_RS232_ON_)
+			rt_printf("\t \nID: %d,", 1);
+			rt_printf(" Send: %d, Recieved: %d, Send: %c, Recieved: %c", kchr, chr, kchr, chr);
+#endif
 			rt_printf("\nForward Kinematics -->");
 			for(int cNum = 0; cNum < NumChain; cNum++)
 			{
@@ -407,27 +666,42 @@ void print_run(void *arg)
 				rt_printf("\n");
 			}
 
-			rt_printf("\n");
+			rt_printf("\n\n");
 		}
 		else
 		{
 			if ( count==0 )
 			{
 				rt_printf("\nReady Time: %i sec", stick);
-
-#if defined(_ECAT_ON_)
 				rt_printf("\nMaster State: %s, AL state: 0x%02X, ConnectedSlaves : %d",
 						ecatmaster.GetEcatMasterLinkState().c_str(), ecatmaster.GetEcatMasterState(), ecatmaster.GetConnectedSlaves());
-				for(int i=0; i<((int)ecatmaster.GetConnectedSlaves()); i++)
+#if defined(_ECAT_ON_)
+				if(ecatmaster.GetConnectedSlaves() == 0)
 				{
-					rt_printf("\nID: %d , SlaveState: 0x%02X, SlaveConnection: %s, SlaveNMT: %s ", i,
-							ecatmaster.GetSlaveState(i), ecatmaster.GetSlaveConnected(i).c_str(), ecatmaster.GetSlaveNMT(i).c_str());
+					reset_count++;
 
-					rt_printf(" SlaveStatus : %s,", ecat_elmo[i].GetDevState().c_str());
-					rt_printf(" StatWord: 0x%04X, ", ecat_elmo[i].status_word_);
-
+					if(reset_count >= 10)
+					{
+						rt_printf("\n\nEcat master does not find any SLAVES!\n\n");
+						raise(SIGINT);
+					}
 				}
+				else
+				{
+
+					for(int i=0; i<((int)ecatmaster.GetConnectedSlaves()); i++)
+					{
+						rt_printf("\nID: %d , SlaveState: 0x%02X, SlaveConnection: %s, SlaveNMT: %s ", i,
+								ecatmaster.GetSlaveState(i), ecatmaster.GetSlaveConnected(i).c_str(), ecatmaster.GetSlaveNMT(i).c_str());
+
+						rt_printf(" SlaveStatus : %s,", ecat_elmo[i].GetDevState().c_str());
+						rt_printf(" StatWord: 0x%04X, ", ecat_elmo[i].status_word_);
+
+					}
+					reset_count=0;
 #endif
+				}
+
 				rt_printf("\n");
 			}
 		}
@@ -491,56 +765,66 @@ void tcpip_run(void *arg)
 }
 
 /****************************************************************************/
-void signal_handler(int signum)
+static void signal_handler(int signum)
 {
-	rt_printf("\nSignal Interrupt: %d", signum);
+	rt_printf("\n-- Signal Interrupt: %d", signum);
 
-	int res = -1;
-
-	rt_printf("\nConsolPrint RTTask Closing....");
+	rt_printf("\n-- ConsolPrint RTTask Closing....");
 	rt_task_delete(&print_task);
-	rt_printf("\nConsolPrint RTTask Closing Success....");
+	rt_printf("\n-- ConsolPrint RTTask Closing Success....");
 
 #if defined(_PLOT_ON_)
 	rt_queue_unbind(&msg_plot);
-	rt_printf("\nPlotting RTTask Closing....");
+	rt_printf("\n-- Plotting RTTask Closing....");
 	rt_task_delete(&plot_task);
 #endif
 
-	rt_printf("\nTCPIP RTTask Closing....");
+#if defined(_TCP_ON_)
+	rt_printf("\n-- TCPIP RTTask Closing....");
 	rt_task_delete(&tcpip_task);
-	rt_printf("\nTCPIP RTTask Closing Success....");
+	rt_printf("\n-- TCPIP RTTask Closing Success....");
+#endif
 
 #if defined(_CAN_ON_)
-	rt_printf("\nSERCAN RTTask Closing....");
-	res = rt_task_delete(&can_task);
+	rt_printf("\n-- SERCAN RTTask Closing....");
+	rt_task_delete(&can_task);
+	rt_task_delete(&can_rev_task);
+	rt_queue_unbind(&msg_can);
 	if(sercan_fd > 0)
 	{
-		res = close(sercan_fd);
-		res = rt_printf("\nSERCAN RTTask Closing Success...");
+		if(close(sercan_fd)== -1)
+		{
+			 fprintf(stderr, "\n-- SERCAN Closing Fail, errno:%d, %s\n", errno, strerror(errno));
+			 //perror("SERCAN");
+		}
+		else
+		{
+			rt_printf("\n-- SERCAN Closing Success...");
+		}
 	}
 #endif
 
 #if defined(_RS232_ON_)
-	rt_printf("\nSerial RTTask Closing...");
-	res = rt_task_delete(&serial_task);
+	rt_printf("\n-- Serial RTTask Closing...");
+	rt_task_delete(&serial_task);
 	if(serial_fd > 0)
 	{
-		if(close(serial_fd) == 0)
+		if(close(serial_fd) == -1)
 		{
-			rt_printf("\nSerial Closing Success...");
+			 fprintf(stderr, "\n-- Serial Closing Fail, errno:%d, %s\n", errno, strerror(errno));
+			 //perror("Serial");
 		}
 		else
 		{
-			rt_printf("\nSerial Closing Failure...");
+			rt_printf("\n-- Serial Closing Success...");
 		}
 	}
 #endif
 
 #if defined(_ECAT_ON_)
-	rt_printf("\nEtherCAT RTTask Closing....");
+	rt_printf("\n-- EtherCAT RTTask Closing....");
 	rt_task_delete(&RTArm_task);
-	rt_printf("\nEtherCAT RTTask Closing Success....");
+	rt_printf("\n-- EtherCAT RTTask Closing Success....");
 
 	ecatmaster.deactivate();
 #endif
@@ -555,15 +839,17 @@ int main(int argc, char **argv)
 	// Perform auto-init of rt_print buffers if the task doesn't do so
 	rt_print_auto_init(1);
 
-	signal(SIGHUP, signal_handler);
-	signal(SIGINT, signal_handler);
-	signal(SIGTERM, signal_handler);
-	signal(SIGKILL, signal_handler);
-	signal(SIGFPE, signal_handler);
+	signal(SIGHUP, 	signal_handler);
+	signal(SIGINT, 	signal_handler);
 	signal(SIGQUIT, signal_handler);
+	signal(SIGFPE, 	signal_handler);
+	signal(SIGKILL, signal_handler);
+	signal(SIGTERM, signal_handler);
 
 	/* Avoids memory swapping for this program */
 	mlockall(MCL_CURRENT|MCL_FUTURE);
+
+	rt_printf("\n-- Now Configure the Devices...");
 
 	// TO DO: Specify the cycle period (cycle_ns) here, or use default value
 	//cycle_ns = 250000; // nanosecond -> 4kHz
@@ -573,26 +859,39 @@ int main(int argc, char **argv)
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
 #if defined(_RS232_ON_)
+	rt_printf("\n-- Serial Configuration");
 	char PortName[30];
 	unsigned int SerialBoud = 115200;
+	//unsigned int SerialBoud = 9600;
 	strcpy(PortName, COM1);
-	rt_printf("Serial Configuration : port=#%s, boudrate=%i\n", PortName, SerialBoud);
 	serial_fd = tp_open_serial_port(PortName, SerialBoud);
 	if(serial_fd < 0)
-		exit(EXIT_FAILURE);
+	{
+		fprintf(stderr, "\n-- Serial Closing Fail, errno:%d, %s", errno, strerror(errno));
+		//perror("Serial");
+		signal_handler(EXIT_FAILURE);
+	}
+	rt_printf("\n-- Serial Configuration : port : #%s, boudrate : %i bps", PortName, SerialBoud);
 #endif
 
 #if defined(_CAN_ON_)
+	rt_printf("\n-- SerCAN Configuration");
 	sercan_fd = SERCAN_open();
 	if(sercan_fd < 0)
 	{
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "\n-- SERCAN Open Fail, errno:%d, %s", errno, strerror(errno));
+		signal_handler(EXIT_FAILURE);
 	}
 	else
 	{
-		rt_printf("Sercan Driver Activated : %d\t", sercan_fd);
-		int CANdevBitrate = SERCAN_GetBitRate(sercan_fd, 10);
-		rt_printf("Sercan Bitrate : %d\n", CANdevBitrate);
+		rt_printf("\n-- Sercan Driver Activated : %d", sercan_fd);
+		int CANdevBitrate = SERCAN_GetBitRate(sercan_fd, 100);
+		rt_printf("\tSercan Bitrate : %d bps", CANdevBitrate);
+		if(CANdevBitrate <= 0)
+		{
+			fprintf(stderr, "\n-- SERCAN Open Fail, errno:%d, %s", errno, strerror(errno));
+			signal_handler(EXIT_FAILURE);
+		}
 	}
 #endif
 
@@ -600,7 +899,11 @@ int main(int argc, char **argv)
 	int SlaveNum;
 	for(SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
 	{
-		ecatmaster.addSlave(0, SlaveNum, &ecat_elmo[SlaveNum]);
+		ecat_elmo[SlaveNum].setHomingParam(hominginfo[SlaveNum].HomingOffset,
+				hominginfo[SlaveNum].HomingMethod,
+				hominginfo[SlaveNum].HomingSpeed,
+				hominginfo[SlaveNum].HomingCurrentLimit);
+		ecatmaster.addSlaveWithHoming(0, SlaveNum, &ecat_elmo[SlaveNum]);
 	}
 
 #if defined(_USE_DC_MODE_)
@@ -612,18 +915,19 @@ int main(int argc, char **argv)
 #endif
 
 #if defined(_PLOT_ON_)
+	rt_printf("\n-- TCP(Plot) Configuration");
 	// TO DO: Create data socket server
 	datasocket.setPeriod(period);
 
 	if (datasocket.startServer(SOCK_TCP, NRMK_PORT_DATA))
-		rt_printf("Data server started at IP of : %s on Port: %d\n", datasocket.getAddress(), NRMK_PORT_DATA);
+		rt_printf("\n-- Data server started at IP of : %s on Port: %d", datasocket.getAddress(), NRMK_PORT_DATA);
 
-	rt_printf("Waiting for Data Scope to connect...\n");
+	rt_printf("\n-- Waiting for Data Scope to connect...\n");
 	datasocket.waitForConnection(0);
 #endif
 
 	// RTArm_task: create and start
-	rt_printf("Now running rt task ...\n");
+	rt_printf("\n-- Now running rt task ...\n");
 
 
 #if defined(_PLOT_ON_)
@@ -639,9 +943,13 @@ int main(int argc, char **argv)
 #endif
 
 #if defined(_CAN_ON_)
-	rt_task_create(&can_task, "CAN_PROC_TASK", 0, 98, T_FPU);
-	rt_task_start(&can_task, &can_task_proc, NULL);
+	rt_queue_create(&msg_can, "CAN_QUEUE", sizeof(can_frame)*20, 20, Q_FIFO|Q_SHARED);
 
+	rt_task_create(&can_rev_task, "CAN_RECV_TASK", 0, 98, NULL);
+	rt_task_start(&can_rev_task, &can_rev_proc, NULL);
+
+	rt_task_create(&can_task, "CAN_PROC_TASK", 0, 97, T_FPU);
+	rt_task_start(&can_task, &can_task_proc, NULL);
 #endif
 
 #if defined(_RS232_ON_)
@@ -652,9 +960,10 @@ int main(int argc, char **argv)
 	rt_task_create(&print_task, "CONSOLE_PROC_Task", 0, 60, T_FPU);
 	rt_task_start(&print_task, &print_run, NULL);
 
+#if defined(_TCP_ON_)
 	rt_task_create(&tcpip_task, "TCPIP_PROC_Task", 0, 80, T_FPU);
 	rt_task_start(&tcpip_task, &tcpip_run, NULL);
-
+#endif
 	// Must pause here
 	pause();
 

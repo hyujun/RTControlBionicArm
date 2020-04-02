@@ -43,6 +43,7 @@
 #include "EcatSystem/Ecat_KistSensor.h"
 #include "Control/Controller.h"
 #include "Control/Motion.h"
+#include "Control/Trajectory.h"
 #include "KDL/SerialManipulator.h"
 #include "Control/KistHand.h"
 #include "devMouseObject.h"
@@ -53,10 +54,10 @@
 #define _DEBUG_ 			/**<Debug Print Parameter*/
 #define _ECAT_ON_ 			/**<EtherCAT device enable Parameter*/
 #define _USE_DC_MODE_		/**<EtherCAT Distributed Clock mode enable Parameter*/
-//#define _CAN_ON_
-//#define _RS232_ON_
+#define _CAN_ON_
+//#define _TCP_ON_
+#define _RS232_ON_
 //#define _PLOT_ON_
-//#define _WITH_KIST_HAND_
 
 typedef unsigned int UINT32;	/**<typedef uint32_t*/
 typedef int64_t		INT64;		/**<typedef uint64_t*/

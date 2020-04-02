@@ -1,28 +1,29 @@
 #include "PropertyDefinition.h"
 
-#define ENC_OFFSET_J1 0
-#define ENC_OFFSET_J2 0
-#define ENC_OFFSET_J3 0
+#define ENC_OFFSET_J1 4369066
+#define ENC_OFFSET_J2 8956586
+#define ENC_OFFSET_J3 2184533
 #define ENC_OFFSET_J4 0
-#define ENC_OFFSET_J5 0
+#define ENC_OFFSET_J5 54272
 
 #define HARMONIC_100 100
+#define GEAR_ELBOW 26*2
 #define GEAR_PS 53
-#define GEAR_ELBOW 26
+
 
 #define ABS_ENC_19 524288
 #define ABS_ENC_18 262144
-#define INC_ENC_10 1024
+#define INC_ENC_10 1024*4
 
-#define MAX_CURRENT_TYPE1 1.6
-#define MAX_CURRENT_TYPE2 2.31
-#define MAX_CURRENT_TYPE3 3.34
-#define MAX_CURRENT_TYPE4 3.21
+#define MAX_CURRENT_TYPE1 1.8
+#define MAX_CURRENT_TYPE2 2
+#define MAX_CURRENT_TYPE3 3.21
+#define MAX_CURRENT_TYPE4 3.34
 
-#define TORQUE_CONST_TYPE1 0.229 	// Nm/A Arm 1,2,3
+#define TORQUE_CONST_TYPE1 0.183 	// Nm/A Arm 1,2,3
 #define TORQUE_CONST_TYPE2 0.091 	// Nm/A Arm 4
-#define TORQUE_CONST_TYPE3 0.014 	// Nm/A Arm 5,6
-#define TORQUE_CONST_TYPE4 0.0369 	// Nm/A Waist 1,2
+#define TORQUE_CONST_TYPE3 0.0369 	// Nm/A Arm 5,6
+#define TORQUE_CONST_TYPE4 0.014 	// Nm/A Waist 1,2
 
 // {w_x, w_y, w_z, q_x, q_y, q_z, l_x, l_y, l_z}
 robot_kinematic_info serial_Kinematic_info[] = {
@@ -79,8 +80,8 @@ robot_motor_info serial_Motor_info[] = {
 		{HARMONIC_100, ABS_ENC_18, MAX_CURRENT_TYPE1, TORQUE_CONST_TYPE1, ENC_OFFSET_J1},
 		{HARMONIC_100, ABS_ENC_18, MAX_CURRENT_TYPE1, TORQUE_CONST_TYPE1, ENC_OFFSET_J2},
 		{HARMONIC_100, ABS_ENC_18, MAX_CURRENT_TYPE2, TORQUE_CONST_TYPE2, ENC_OFFSET_J3},
-		{GEAR_PS, INC_ENC_10, MAX_CURRENT_TYPE3, TORQUE_CONST_TYPE3, ENC_OFFSET_J4},
-		{GEAR_ELBOW, INC_ENC_10, MAX_CURRENT_TYPE4, TORQUE_CONST_TYPE4, ENC_OFFSET_J5},
+		{GEAR_ELBOW, INC_ENC_10, MAX_CURRENT_TYPE3, TORQUE_CONST_TYPE3, ENC_OFFSET_J4},
+		{GEAR_PS, INC_ENC_10, MAX_CURRENT_TYPE4, TORQUE_CONST_TYPE4, ENC_OFFSET_J5},
 };
 
 FrictionMap frictionmap[] ={
@@ -93,10 +94,18 @@ FrictionMap frictionmap[] ={
 };
 
 FrictionTanh frictiontanh[] = {
-		{215, 24.83, 22.54, 20.5, 11.81, 0.715}, 		// 1
-		{215, 24.83, 22.54, 34.7, 11.81, 0.715},	 	// 2
+		{215, 24.83, 22.54, 20.5, 11.81, 0.715}, 			// 1
+		{215, 24.83, 22.54, 34.7, 11.81, 0.715},	 		// 2
 		{41.87, 573.8, 592.2, 6.811, 12.96, 0.138}, 		// 3
 		{19.99, 35.09, 64.18, 17.6, 36.34, 2.398e-7},		// 4
 		{2.069, 59.79, 95.02, 18.5, 3.299, 2.49e-7},		// 5
 		{151.3, 16.42, 17.26, 4.56, 14.47, 0.05998}, 		// 6
+};
+
+homing_info hominginfo[] = {
+		{4369066, 	-1, ABS_ENC_18, 900},
+		{8956586, 	-1, ABS_ENC_18, 900},
+		{2184533, 	-2, ABS_ENC_18, 900},
+		{0, 		-1, INC_ENC_10, 900},
+		{54272, 	-1, INC_ENC_10, 900},
 };
