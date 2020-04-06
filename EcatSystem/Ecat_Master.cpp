@@ -130,7 +130,6 @@ void Master::addSlaveWithHoming(uint16_t alias, uint16_t position, EcatElmo* sla
 	}
 	m_slave_info.push_back(slave_info);
 
-
 	if(slave->isHomingEnable())
 	{
 		//Homing Precess

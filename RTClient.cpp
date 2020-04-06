@@ -6,7 +6,7 @@
 #include "RTClient.h"
 
 //Modify this number to indicate the actual number of motor on the network
-#define ELMO_TOTAL 5
+#define ELMO_TOTAL 3
 #define BIONIC_ARM_DOF 6
 /****************************************************************************/
 hyuEcat::Master ecatmaster;
@@ -15,6 +15,7 @@ HYUControl::Trajectory traj5th;
 /****************************************************************************/
 int serial_fd = -1;
 int sercan_fd = -1;
+
 /****************************************************************************/
 struct LOGGING_PACK
 {
@@ -29,6 +30,7 @@ struct LOGGING_PACK
 
 // NRMKDataSocket for plotting axes data in Data Scope
 EcatDataSocket datasocket;
+devMouseObject dMouse;
 /****************************************************************************/
 // When all slaves or drives reach OP mode,
 // system_ready becomes 1.
@@ -68,11 +70,10 @@ unsigned long worst_time=0;
 /****************************************************************************/
 static double ActualPos_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double ActualVel_Rad[BIONIC_ARM_DOF] = {0.0,};
-static double TargetPos_Rad[BIONIC_ARM_DOF] = {0.0,};
-static double TargetVel_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
 int TrajFlag[BIONIC_ARM_DOF] = {0,};
-int j_homing = ELMO_TOTAL;
+//int j_homing = ELMO_TOTAL;
+int j_homing = 3;
 int HomingFlag = 0;
 
 static int isSlaveInit(void)
@@ -102,61 +103,70 @@ static int isSlaveInit(void)
 		return 0;
 }
 
-
 static int isElmoHoming(void)
 {
-	int num_traj=5;
+	int num_traj=ELMO_TOTAL;
 	VectorXd TargetInitPos(num_traj);
 	VectorXd TargetInitVel(num_traj);
-	VectorXd TargetPos(num_traj);
+	VectorXd TargetFinalPos(num_traj);
 	VectorXd CurrentPos(num_traj);
 	VectorXd CurrentVel(num_traj);
 	VectorXd CurrentAcc(num_traj);
 	double TargetDuration = 10.0;
 
-	TargetInitPos << ActualPos[0], ActualPos[1], ActualPos[2], ActualPos[3], ActualPos[4];
-	TargetInitVel << ActualVel[0], ActualVel[1], ActualVel[2], ActualVel[3], ActualVel[4];
-	TargetPos.setZero();
+	CurrentPos.setZero();
+	CurrentVel.setZero();
+	//TargetInitPos << hominginfo[0].HomingOffset, hominginfo[1].HomingOffset,
+	//		-hominginfo[2].HomingOffset, hominginfo[3].HomingOffset, hominginfo[4].HomingOffset;
 
+	TargetInitPos << ActualPos[0], ActualPos[1], ActualPos[2], ActualPos[3], ActualPos[4];
+
+	TargetInitVel.setZero();
+	TargetFinalPos.setZero();
 
 	if(j_homing == 0)
 	{
 		HomingFlag = 1;
-		for(int i=0;i<ELMO_TOTAL-1;i++){
+		for(int i=0;i<ELMO_TOTAL;i++){
 			TrajFlag[i] = -1;
 			ecat_elmo[i].mode_of_operation_ = ecat_elmo[i].MODE_CYCLIC_SYNC_TORQUE;
 		}
-		return 0;
 	}
-
-	if(!ecat_elmo[j_homing-1].isHoming())  //check homing and change the mode to homing mode
+	else
 	{
-		ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_HOMING;
-		TrajFlag[j_homing-1] = 1;
-
-	}
-	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 1)
-	{
-		ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION;
-		ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];
-		if(ecat_elmo[j_homing-1].mode_of_operation_display_ == ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION)
+		if(!ecat_elmo[j_homing-1].isHoming())  //check homing and change the mode to homing mode
 		{
-			ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];    //Keep the end of motion
-			traj5th.SetPoly5th(double_gt, TargetInitPos, TargetInitVel, TargetPos, TargetDuration, num_traj); //make trajectory to go to the 90 deg position
-			TrajFlag[j_homing-1] = 2;
+			ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_HOMING;
+			TrajFlag[j_homing-1] = 1;
+
+		}
+		else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 1)
+		{
+			ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION;
+			ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];
+			if(ecat_elmo[j_homing-1].mode_of_operation_display_ == ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION && !traj5th.isReady())
+			{
+				//rt_printf("\nTargetInitPos:%0.1f, TargetInitVel:%0.1f, TargetFinalPos:%0.1f\n",
+				//		TargetInitPos(j_homing-1), TargetInitVel(j_homing-1), TargetFinalPos(j_homing-1));
+				ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];    //Keep the end of motion
+				traj5th.SetPoly5th(double_gt, TargetInitPos, TargetInitVel, TargetFinalPos, TargetDuration, num_traj); //make trajectory to go to the 90 deg position
+				TrajFlag[j_homing-1] = 2;
+			}
+		}
+		else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 2)
+		{
+			traj5th.Poly5th(double_gt, CurrentPos, CurrentVel, CurrentAcc);
+			TargetPos[j_homing-1] = (int32_t)(round(CurrentPos(j_homing-1)));
+			ecat_elmo[j_homing-1].target_position_ = TargetPos[j_homing-1];
+			if( ActualPos[j_homing-1] == (int32_t)(TargetFinalPos(j_homing-1)) )
+				TrajFlag[j_homing-1] = 3;
+		}
+		else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 3)
+		{
+			j_homing--;
 		}
 	}
-	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 2)
-	{
-		traj5th.Poly5th(double_gt, CurrentPos, CurrentVel, CurrentAcc);
-		ecat_elmo[j_homing-1].target_position_ = static_cast<int32_t>(round(CurrentPos(j_homing-1)));
-		if( ActualPos[j_homing-1] == static_cast<int32_t>(TargetInitPos(j_homing-1)) )
-			TrajFlag[j_homing-1] = 3;
-	}
-	else if(ecat_elmo[j_homing-1].isHoming() && TrajFlag[j_homing-1] == 3)
-	{
-		j_homing--;
-	}
+
 	return 0;
 }
 
@@ -168,6 +178,11 @@ int NumChain;
 // RTArm_task
 void RTRArm_run(void *arg)
 {
+	int fd  = dMouse.getMousefd();;
+	struct input_event ie = dMouse.getInputEvent();;
+	struct mouse_t mouse = dMouse.getMouse();;
+	struct fb_t fb;
+
 #if defined(_PLOT_ON_)
 	int sampling_time 	= 20;	// Data is sampled every 10 cycles.
 	int sampling_tick 	= sampling_time;
@@ -180,8 +195,10 @@ void RTRArm_run(void *arg)
 	RTIME p1 = 0;
 	RTIME p3 = 0;
 
+
 	short MaxTor = 1200;
 
+	int reset_counter=0;
 	int k=0;
 
 	//uint16_t ControlMotion = SYSTEM_BEGIN;
@@ -226,29 +243,51 @@ void RTRArm_run(void *arg)
 			BionicArm.ENCtoRAD(ActualPos, ActualPos_Rad);
 			BionicArm.VelocityConvert(ActualVel, ActualVel_Rad);
 
-			//BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
-
-			//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
-			//BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
-
-			//BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
-			//motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
-
-			//Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
-
-			BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
-
-			//write the motor data
-			for(int j=0; j < ELMO_TOTAL; ++j)
+			if(HomingFlag == 0)
 			{
+				isElmoHoming();
+				//HomingFlag = 1;
+			}
+			else
+			{
+				//BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
 
-				if(double_gt >= 1.0)
+				//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
+				//BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
+
+				//BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
+				//motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
+
+				//Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
+
+				BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
+
+				//write the motor data
+				for(int j=0; j < ELMO_TOTAL; ++j)
 				{
-					//ecat_elmo[j].writeTorque(TargetTor[j]);
+
+					if(double_gt >= 1.0)
+					{
+						//ecat_elmo[j].writeTorque(TargetTor[j]);
+					}
+					else
+					{
+						ecat_elmo[j].writeTorque(0);
+					}
 				}
-				else
+
+				if (read(fd, &ie, sizeof(struct input_event)))
 				{
-					ecat_elmo[j].writeTorque(0);
+					//print_event(&ie);
+					dMouse.print_mouse_state(&mouse);
+					dMouse.fb_draw(&fb, &mouse.current, CURSOR_COLOR);
+
+					/*
+					if (event_handler[ie.type] == EV_REL)
+						cursor(&ie, &mouse);
+					elseif(event_handler[ie.type] == EV_KEY)
+						button(&ie, &mouse);
+					*/
 				}
 			}
 		}
@@ -266,6 +305,7 @@ void RTRArm_run(void *arg)
 
 		if ( isSlaveInit() == 1 )
 		{
+			reset_counter=1;
 			float_dt = ((float)(long)(p3 - p1))*1e-3; 		// us
 			double_gt += ((double)(long)(p3 - p1))*1e-9; 	// s
 			ethercat_time = (long) now - previous;
@@ -312,8 +352,12 @@ void RTRArm_run(void *arg)
 		}
 		else
 		{
+			if(reset_counter == 0)
+			{
+				double_gt = 0;
+			}
+
 			system_ready = 0;
-			double_gt = 0;
 			worst_time = 0;
 			ethercat_time = 0;
 		}
@@ -353,8 +397,7 @@ void can_task_proc(void *arg)
 		fprintf(stderr, "Failed to queue bind, code %d\n", err);
 	}
 
-
-	unsigned int can_cycle_ns = 25e6;
+	unsigned int can_cycle_ns = 20e6;
 	rt_task_set_periodic(NULL, TM_NOW, can_cycle_ns);
 
 	while(1)
@@ -364,9 +407,6 @@ void can_task_proc(void *arg)
 
 		if(system_ready)
 		{
-			//control code
-			//
-
 			while(1)
 			{
 				if(CanDevFlag == 0)
@@ -449,7 +489,7 @@ void can_task_proc(void *arg)
 					else
 					{
 						CanReadyCounter++;
-						if(CanReadyCounter > 50)
+						if(CanReadyCounter > 10)
 						{
 							CanReadyCounter = 0;
 							CanDevFlag = 0;
@@ -514,12 +554,11 @@ unsigned long serial_time=0;
 unsigned long serial_worst_time=0;
 unsigned long serial_fault_count=0;
 
-unsigned char kchr = 97;
+unsigned char kchr;
 unsigned char chr;
 
 void serial_task_proc(void *arg)
 {
-
 	int nbytes;
 
 	RTIME now, previous;
@@ -632,6 +671,7 @@ void print_run(void *arg)
 				rt_printf("\tActPos(Deg): %0.2lf,", 	ActualPos_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarPos(Deg): %0.2lf,",	TargetPos_Rad[j]*RADtoDEG);
 				rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
+				rt_printf("\tTarPos(inc): %d,", 	TargetPos[j]);
 				//rt_printf("\n");
 				rt_printf("\tActVel(Deg/s): %0.1lf,", 	ActualVel_Rad[j]*RADtoDEG);
 				//rt_printf("\tTarVel(Deg/s): %0.1lf,",	TargetVel_Rad[j]*RADtoDEG);
@@ -731,7 +771,8 @@ void plot_run(void *arg)
 		{
 			memcpy(&logBuff, msg, sizeof(LOGGING_PACK));
 
-			datasocket.updateControlData( logBuff.ActualPos, logBuff.DesiredPos, logBuff.ActualVel, logBuff.DesiredVel, logBuff.ActualToq, logBuff.DesiredToq );
+			datasocket.updateControlData( logBuff.ActualPos, logBuff.DesiredPos, logBuff.ActualVel,
+											logBuff.DesiredVel, logBuff.ActualToq, logBuff.DesiredToq );
 			datasocket.update( logBuff.Time );
 
 			rt_queue_free(&msg_plot, msg);
@@ -794,12 +835,11 @@ static void signal_handler(int signum)
 	{
 		if(close(sercan_fd)== -1)
 		{
-			 fprintf(stderr, "\n-- SERCAN Closing Fail, errno:%d, %s\n", errno, strerror(errno));
-			 //perror("SERCAN");
+			 fprintf(stderr, "\n-- SERCAN RTTask Closing Fail, errno:%d, %s\n", errno, strerror(errno));
 		}
 		else
 		{
-			rt_printf("\n-- SERCAN Closing Success...");
+			rt_printf("\n-- SERCAN RTTask Closing Success...");
 		}
 	}
 #endif
@@ -811,12 +851,11 @@ static void signal_handler(int signum)
 	{
 		if(close(serial_fd) == -1)
 		{
-			 fprintf(stderr, "\n-- Serial Closing Fail, errno:%d, %s\n", errno, strerror(errno));
-			 //perror("Serial");
+			 fprintf(stderr, "\n-- Serial RTTask Closing Fail, errno:%d, %s\n", errno, strerror(errno));
 		}
 		else
 		{
-			rt_printf("\n-- Serial Closing Success...");
+			rt_printf("\n-- Serial RTTask Closing Success...");
 		}
 	}
 #endif
@@ -828,6 +867,8 @@ static void signal_handler(int signum)
 
 	ecatmaster.deactivate();
 #endif
+
+	dMouse.Deactivate();
 
 	rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
 	exit(signum);
@@ -857,6 +898,8 @@ int main(int argc, char **argv)
 	//cycle_ns = 1000000; // nanosecond -> 1kHz
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
+
+	dMouse.Activate();
 
 #if defined(_RS232_ON_)
 	rt_printf("\n-- Serial Configuration");
@@ -896,8 +939,7 @@ int main(int argc, char **argv)
 #endif
 
 #if defined(_ECAT_ON_)
-	int SlaveNum;
-	for(SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
+	for(int SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
 	{
 		ecat_elmo[SlaveNum].setHomingParam(hominginfo[SlaveNum].HomingOffset,
 				hominginfo[SlaveNum].HomingMethod,

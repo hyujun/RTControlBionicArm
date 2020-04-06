@@ -106,6 +106,11 @@ public:
 		return m_ie;
 	}
 
+	struct mouse_t getMouse(void)
+	{
+		return m_mouse;
+	}
+
 private:
 	map<int, string> m_ev_type;
 	map<int, string> m_ev_rel;
@@ -120,7 +125,7 @@ private:
 
 	//const char *mouse_dev = "/dev/input/event8";
 	//const char *mouse_dev = "/dev/input/event9";
-	const char *mouse_dev = "/dev/input/by-path/pci-0000:00:1a.0-usb-0:1.2:1.1-event-mouse";
+	const char *mouse_dev = "/dev/input/mice";
 	const char *fb_dev    = "/dev/fb0";
 
 };

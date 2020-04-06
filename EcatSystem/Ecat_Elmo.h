@@ -131,11 +131,19 @@ public:
 					std::cout << "ElMO_POS: " << slave_position << " " << ", ELMO_STATE: " << device_state_str_[state_] << std::endl;
 #endif
 			}
+
 			if ((state_ == STATE_OPERATION_ENABLED) && (last_state_ == STATE_OPERATION_ENABLED)){
 				initialized_ = true;
 			}
 			else {
-				initialized_ = false;
+				if(this->mode_of_operation_display_ == MODE_HOMING)
+				{
+					initialized_ = true;
+				}
+				else
+				{
+					initialized_ = false;
+				}
 			}
 			if ((state_ == STATE_HOMING_NOT_START) && (last_state_ == STATE_HOMING_NOT_START)){
 				homing_ready_ = true;
@@ -186,7 +194,7 @@ public:
     int8_t   mode_of_operation_         = MODE_CYCLIC_SYNC_TORQUE; 	/**<write (use enum ModeOfOperation for convenience)*/
 
     int32_t  position_                  = 0; 		/**<read*/
-    int32_t  velocity_			= 0;		/**<read*/
+    int32_t  velocity_					= 0;		/**<read*/
     int16_t  torque_                    = 0; 		/**<read*/
     uint16_t status_word_               = 0; 		/**<read*/
     int8_t   mode_of_operation_display_ = 0; 		/**<read*/
@@ -228,21 +236,21 @@ private:
      */
     enum DeviceState
     {
-        STATE_UNDEFINED 			= 0,
-        STATE_START 				= 1,
+        STATE_UNDEFINED 					= 0,
+        STATE_START 						= 1,
         STATE_NOT_READY_TO_SWITCH_ON		= 3,
-        STATE_SWITCH_ON_DISABLED		= 4,
-        STATE_READY_TO_SWITCH_ON		= 5,
-        STATE_SWITCH_ON				= 6,
-        STATE_OPERATION_ENABLED			= 7,
-        STATE_QUICK_STOP_ACTIVE			= 8,
-        STATE_FAULT_REACTION_ACTIVE		= 9,
-        STATE_FAULT				= 10,
-		STATE_HOMING_PROGRESS			= 11,
-		STATE_HOMING_NOT_START			= 12,
+        STATE_SWITCH_ON_DISABLED			= 4,
+        STATE_READY_TO_SWITCH_ON			= 5,
+        STATE_SWITCH_ON						= 6,
+        STATE_OPERATION_ENABLED				= 7,
+        STATE_QUICK_STOP_ACTIVE				= 8,
+        STATE_FAULT_REACTION_ACTIVE			= 9,
+        STATE_FAULT							= 10,
+		STATE_HOMING_PROGRESS				= 11,
+		STATE_HOMING_NOT_START				= 12,
 		STATE_HOMING_ATTAINED_NOT_REACHED 	= 13,
-		STATE_HOMING_COMPLITE			= 14,
-		STATE_HOMING_ERROR			= 15,
+		STATE_HOMING_COMPLITE				= 14,
+		STATE_HOMING_ERROR					= 15,
 		STATE_HOMING_UNDIFINED
     };
 
@@ -258,7 +266,7 @@ private:
 	 {STATE_FAULT,                  		"Fault"},
 	 {STATE_HOMING_PROGRESS,        		"Homing Progress"},
 	 {STATE_HOMING_NOT_START,       		"Homing Not Start"},
-	 {STATE_HOMING_ATTAINED_NOT_REACHED, 		"Homing Attained not reached"},
+	 {STATE_HOMING_ATTAINED_NOT_REACHED, 	"Homing Attained not reached"},
 	 {STATE_HOMING_COMPLITE,        		"Homing Finished"},
 	 {STATE_HOMING_ERROR,           		"Homing Error"},
 	 {STATE_HOMING_UNDIFINED,       		"Homing Undefined"}

@@ -178,17 +178,17 @@ void devMouseObject::print_event(void)
 	switch (m_ie.type)
 	{
 	case EV_SYN:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			m_ie.time.tv_sec, m_ie.time.tv_usec, m_ev_type.find(m_ie.type)->second.c_str(),
 			m_ev_syn.find(m_ie.code)->second.c_str(), m_ie.value);
 		break;
 	case EV_REL:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			m_ie.time.tv_sec, m_ie.time.tv_usec, m_ev_type.find(m_ie.type)->second.c_str(),
 			m_ev_rel.find(m_ie.code)->second.c_str(), m_ie.value);
 		break;
 	case EV_KEY:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			m_ie.time.tv_sec, m_ie.time.tv_usec, m_ev_type.find(m_ie.type)->second.c_str(),
 			m_ev_key.find(m_ie.code)->second.c_str(), m_ie.value);
 		break;
@@ -202,17 +202,17 @@ void devMouseObject::print_event(struct input_event *ie)
 	switch (ie->type)
 	{
 	case EV_SYN:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			ie->time.tv_sec, ie->time.tv_usec, m_ev_type.find(ie->type)->second.c_str(),
 			m_ev_syn.find(ie->code)->second.c_str(), ie->value);
 		break;
 	case EV_REL:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			ie->time.tv_sec, ie->time.tv_usec, m_ev_type.find(ie->type)->second.c_str(),
 			m_ev_rel.find(ie->code)->second.c_str(), ie->value);
 		break;
 	case EV_KEY:
-		fprintf(stderr, "time:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d\n",
+		fprintf(stderr, "\ntime:%ld.%06ld\ttype:%s\tcode:%s\tvalue:%d",
 			ie->time.tv_sec, ie->time.tv_usec, m_ev_type.find(ie->type)->second.c_str(),
 			m_ev_key.find(ie->code)->second.c_str(), ie->value);
 		break;
@@ -223,7 +223,7 @@ void devMouseObject::print_event(struct input_event *ie)
 
 void devMouseObject::print_mouse_state(void)
 {
-	fprintf(stderr, "\033[1;1H\033[2Kcurrent(%d, %d) pressed(%d, %d) released(%d, %d)",
+	fprintf(stderr, "\n\033[1;1H\033[2Kcurrent(%d, %d) pressed(%d, %d) released(%d, %d)",
 			m_mouse.current.x,m_mouse.current.y,
 			m_mouse.pressed.x, m_mouse.pressed.y,
 			m_mouse.released.x, m_mouse.released.y);
@@ -231,7 +231,7 @@ void devMouseObject::print_mouse_state(void)
 
 void devMouseObject::print_mouse_state(struct mouse_t *mouse)
 {
-	fprintf(stderr, "\033[1;1H\033[2Kcurrent(%d, %d) pressed(%d, %d) released(%d, %d)",
+	fprintf(stderr, "\n\033[1;1H\033[2Kcurrent(%d, %d) pressed(%d, %d) released(%d, %d)",
 		mouse->current.x, mouse->current.y,
 		mouse->pressed.x, mouse->pressed.y,
 		mouse->released.x, mouse->released.y);
@@ -277,10 +277,10 @@ void devMouseObject::button(struct input_event *ie, struct mouse_t *mouse)
 int main(int argc, char *argv[])
 {
 	int fd;
-	const char *dev;
 	struct input_event ie;
 	struct mouse_t mouse;
 	struct fb_t fb;
+	const char *dev;
 
 	dev = (argc > 1) ? argv[1]: mouse_dev;
 
