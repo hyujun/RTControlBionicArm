@@ -60,6 +60,8 @@ private:
 	double _omega=0;
 	double _amp=0;
 
+	int motion_cycle=0;
+
 };
 
 } /* namespace hyuCtrl */

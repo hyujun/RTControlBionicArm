@@ -61,23 +61,13 @@ Controller::Controller(SerialManipulator *pManipulator)
 
 	GainWeightFactor.resize(m_Jnum);
 
-	GainWeightFactor(0) = 20.0;
-	GainWeightFactor(1) = 23.0;
+	GainWeightFactor(0) = 0.7;
+	GainWeightFactor(1) = 0.7;
 
-	GainWeightFactor(2) = 11.5;
-	GainWeightFactor(3) = 20.5; //8
-	GainWeightFactor(4) = 11.0;
-	GainWeightFactor(5) = 9.0;
-	GainWeightFactor(6) = 5.5;
-	GainWeightFactor(7) = 5.5;
-	GainWeightFactor(8) = 5.5;
-
-	GainWeightFactor(9) = 11.5;
-	GainWeightFactor(10) = 11.5; //8
-	GainWeightFactor(11) = 11.5;
-	GainWeightFactor(12) = 9.0;
-	GainWeightFactor(13) = 5.5;
-	GainWeightFactor(14) = 5.5;
+	GainWeightFactor(2) = 0.5;
+	GainWeightFactor(3) = 0.2;
+	GainWeightFactor(4) = 0.09;
+	GainWeightFactor(5) = 0.1;
 
 
 	Kp = GainWeightFactor*m_KpBase;
@@ -142,7 +132,7 @@ void Controller::PDController(double *p_q, double *p_qdot, double *p_dq, double 
 	e_dev = dqdot - qdot;
 
 	ToqOut.setZero();
-	ToqOut.noalias() += e.cwiseProduct(Kp) + e_dev.cwiseProduct(Kd);
+	ToqOut = Kp.cwiseProduct(e) + Kd.cwiseProduct(e_dev);
 
 	Map<VectorXd>(p_Toq, this->m_Jnum) = ToqOut;
 	return;
@@ -164,7 +154,7 @@ void Controller::PDGravController( double *p_q, double *p_qdot, double *p_dq, do
 	FrictionCompensator(qdot, dqdot);
 
 	ToqOut.setZero();
-	//ToqOut = Kp.cwiseProduct(e) + Kd.cwiseProduct(e_dev) + G;
+	ToqOut = Kp.cwiseProduct(e) + Kd.cwiseProduct(e_dev) + G;
 
 	ToqOut = G + FrictionTorque;
 

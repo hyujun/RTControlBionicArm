@@ -6,7 +6,7 @@
 #include "RTClient.h"
 
 //Modify this number to indicate the actual number of motor on the network
-#define ELMO_TOTAL 3
+#define ELMO_TOTAL 5
 #define BIONIC_ARM_DOF 6
 /****************************************************************************/
 hyuEcat::Master ecatmaster;
@@ -58,6 +58,7 @@ RT_TASK tcpip_task;
 RT_TASK serial_task;
 RT_TASK can_task;
 RT_TASK can_rev_task;
+RT_TASK devmouse_task;
 
 RT_QUEUE msg_can;
 RT_QUEUE msg_plot;
@@ -70,10 +71,13 @@ unsigned long worst_time=0;
 /****************************************************************************/
 static double ActualPos_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double ActualVel_Rad[BIONIC_ARM_DOF] = {0.0,};
+static double TargetPos_Rad[BIONIC_ARM_DOF] = {0.0,};
+static double TargetVel_Rad[BIONIC_ARM_DOF] = {0.0,};
+static double TargetAcc_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
 int TrajFlag[BIONIC_ARM_DOF] = {0,};
 //int j_homing = ELMO_TOTAL;
-int j_homing = 3;
+int j_homing = 5;
 int HomingFlag = 0;
 
 static int isSlaveInit(void)
@@ -112,17 +116,21 @@ static int isElmoHoming(void)
 	VectorXd CurrentPos(num_traj);
 	VectorXd CurrentVel(num_traj);
 	VectorXd CurrentAcc(num_traj);
-	double TargetDuration = 10.0;
+	double TargetDuration = 5.0;
 
 	CurrentPos.setZero();
 	CurrentVel.setZero();
 	//TargetInitPos << hominginfo[0].HomingOffset, hominginfo[1].HomingOffset,
 	//		-hominginfo[2].HomingOffset, hominginfo[3].HomingOffset, hominginfo[4].HomingOffset;
 
-	TargetInitPos << ActualPos[0], ActualPos[1], ActualPos[2], ActualPos[3], ActualPos[4];
+	for(int i=0; i<ELMO_TOTAL; i++)
+	{
+		TargetInitPos(i) = ActualPos[i];
+	}
 
 	TargetInitVel.setZero();
 	TargetFinalPos.setZero();
+	TargetFinalPos(3) = (20.0/360.0) * 4096.0*52.0;
 
 	if(j_homing == 0)
 	{
@@ -144,10 +152,10 @@ static int isElmoHoming(void)
 		{
 			ecat_elmo[j_homing-1].mode_of_operation_ = ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION;
 			ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];
-			if(ecat_elmo[j_homing-1].mode_of_operation_display_ == ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION && !traj5th.isReady())
+			if(ecat_elmo[j_homing-1].mode_of_operation_display_ == ecat_elmo[j_homing-1].MODE_CYCLIC_SYNC_POSITION)
 			{
-				//rt_printf("\nTargetInitPos:%0.1f, TargetInitVel:%0.1f, TargetFinalPos:%0.1f\n",
-				//		TargetInitPos(j_homing-1), TargetInitVel(j_homing-1), TargetFinalPos(j_homing-1));
+				rt_printf("\nTargetInitPos:%0.1f, TargetInitVel:%0.1f, TargetFinalPos:%0.1f\n",
+						TargetInitPos(j_homing-1), TargetInitVel(j_homing-1), TargetFinalPos(j_homing-1));
 				ecat_elmo[j_homing-1].target_position_ = ActualPos[j_homing-1];    //Keep the end of motion
 				traj5th.SetPoly5th(double_gt, TargetInitPos, TargetInitVel, TargetFinalPos, TargetDuration, num_traj); //make trajectory to go to the 90 deg position
 				TrajFlag[j_homing-1] = 2;
@@ -157,7 +165,7 @@ static int isElmoHoming(void)
 		{
 			traj5th.Poly5th(double_gt, CurrentPos, CurrentVel, CurrentAcc);
 			TargetPos[j_homing-1] = (int32_t)(round(CurrentPos(j_homing-1)));
-			ecat_elmo[j_homing-1].target_position_ = TargetPos[j_homing-1];
+			ecat_elmo[j_homing-1].writePosition(TargetPos[j_homing-1]);
 			if( ActualPos[j_homing-1] == (int32_t)(TargetFinalPos(j_homing-1)) )
 				TrajFlag[j_homing-1] = 3;
 		}
@@ -178,10 +186,6 @@ int NumChain;
 // RTArm_task
 void RTRArm_run(void *arg)
 {
-	int fd  = dMouse.getMousefd();;
-	struct input_event ie = dMouse.getInputEvent();;
-	struct mouse_t mouse = dMouse.getMouse();;
-	struct fb_t fb;
 
 #if defined(_PLOT_ON_)
 	int sampling_time 	= 20;	// Data is sampled every 10 cycles.
@@ -195,21 +199,21 @@ void RTRArm_run(void *arg)
 	RTIME p1 = 0;
 	RTIME p3 = 0;
 
-
 	short MaxTor = 1200;
 
 	int reset_counter=0;
 	int k=0;
 
-	//uint16_t ControlMotion = SYSTEM_BEGIN;
-	//uint16_t JointState = SYSTEM_BEGIN;
+	uint16_t ControlMotion = SYSTEM_BEGIN;
+	uint16_t JointState = SYSTEM_BEGIN;
 
 	VectorXd finPos(BIONIC_ARM_DOF);
 	finPos.setZero();
+	finPos(3) = 20.0;
 
 	SerialManipulator BionicArm;
-	//HYUControl::Controller Control(&BionicArm);
-	//HYUControl::Motion motion(&BionicArm);
+	HYUControl::Controller Control(&BionicArm);
+	HYUControl::Motion motion(&BionicArm);
 
 	BionicArm.UpdateManipulatorParam();
 
@@ -245,8 +249,8 @@ void RTRArm_run(void *arg)
 
 			if(HomingFlag == 0)
 			{
-				isElmoHoming();
-				//HomingFlag = 1;
+				//isElmoHoming();
+				HomingFlag = 1;
 			}
 			else
 			{
@@ -255,10 +259,10 @@ void RTRArm_run(void *arg)
 				//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
 				//BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
 
-				//BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
-				//motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
+				BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
+				motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
 
-				//Control.InvDynController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, TargetToq, float_dt );
+				Control.PDController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq, float_dt );
 
 				BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
@@ -274,20 +278,6 @@ void RTRArm_run(void *arg)
 					{
 						ecat_elmo[j].writeTorque(0);
 					}
-				}
-
-				if (read(fd, &ie, sizeof(struct input_event)))
-				{
-					//print_event(&ie);
-					dMouse.print_mouse_state(&mouse);
-					dMouse.fb_draw(&fb, &mouse.current, CURSOR_COLOR);
-
-					/*
-					if (event_handler[ie.type] == EV_REL)
-						cursor(&ie, &mouse);
-					elseif(event_handler[ie.type] == EV_KEY)
-						button(&ie, &mouse);
-					*/
 				}
 			}
 		}
@@ -373,7 +363,7 @@ unsigned short port[4] = {0, 0, 0, 0};
 float Temp[2] = {0, 0};
 float Pos[2] = {0, 0};
 int L_force[2] = {0, 0};
-
+static unsigned int can_id = 1;
 void can_task_proc(void *arg)
 {
 	CAN_FRAME txframe, rxframe;
@@ -384,8 +374,6 @@ void can_task_proc(void *arg)
 
 	int CanDevFlag=0;
 	int CanReadyCounter = 0;
-	int can_id = 1;
-	int res = -1;
 
 	ssize_t len;
 	void *msg;
@@ -407,11 +395,16 @@ void can_task_proc(void *arg)
 
 		if(system_ready)
 		{
+			port[0] = 20; //flex
+			port[1] = 25; //extend
+			port[2] = 0;
+			port[3] = 0;
+
 			while(1)
 			{
 				if(CanDevFlag == 0)
 				{
-					memset(txframe.data, 0, sizeof(txframe.data));
+					memset(&txframe, 0, sizeof(struct can_frame));
 					txframe.can_id = 0x600 | can_id;
 					txframe.can_dlc = 6;
 					txframe.data[0] = 'P';
@@ -443,7 +436,7 @@ void can_task_proc(void *arg)
 					else
 					{
 						CanReadyCounter++;
-						if(CanReadyCounter > 10)
+						if(CanReadyCounter > 5)
 						{
 							CanReadyCounter = 0;
 							CanDevFlag = 0;
@@ -456,7 +449,7 @@ void can_task_proc(void *arg)
 			{
 				if(CanDevFlag == 0)
 				{
-					memset(txframe.data, 0, sizeof(txframe.data));
+					memset(&txframe, 0, sizeof(struct can_frame));
 					txframe.can_id = 0x600 | can_id;
 					txframe.can_dlc = 6;
 					txframe.data[0] = 'P';
@@ -489,7 +482,7 @@ void can_task_proc(void *arg)
 					else
 					{
 						CanReadyCounter++;
-						if(CanReadyCounter > 10)
+						if(CanReadyCounter > 5)
 						{
 							CanReadyCounter = 0;
 							CanDevFlag = 0;
@@ -529,15 +522,14 @@ void can_rev_proc(void *arg)
 	int res = -1;
 
 	can_frame rxframe;
-	unsigned int can_rev_cycle_ns = 5e5;
+	unsigned int can_rev_cycle_ns = 10e5;
 	rt_task_set_periodic(NULL, TM_NOW, can_rev_cycle_ns);
 	while(1)
 	{
 		rt_task_wait_period(NULL);
-		rxframe.can_id=0x0;
-		rxframe.can_dlc = 0;
+		memset(&rxframe, 0, sizeof(struct can_frame));
 		res = SERCAN_read(sercan_fd, &rxframe);
-		if(res == SERCAN_ERR_FREE && rxframe.can_id == 0x581)
+		if(res == SERCAN_ERR_FREE && rxframe.can_id == (0x580 | can_id))
 		{
 			msg = rt_queue_alloc(&msg_can, len);
 			if(msg == NULL)
@@ -615,6 +607,76 @@ void serial_task_proc(void *arg)
 	}
 }
 
+float float_dt_dmouse=0;
+unsigned long dmouse_time=0;
+unsigned long dmouse_worst_time=0;
+unsigned long dmouse_fault_count=0;
+
+void devmouse_task_proc(void *arg)
+{
+
+	dMouse.Activate();
+
+	int fd  = dMouse.getMousefd();;
+	struct input_event ie = dMouse.getInputEvent();;
+	struct mouse_t mouse = dMouse.getMouse();;
+	struct fb_t fb;
+
+	ssize_t nread;
+
+	RTIME now, previous;
+	RTIME p1 = 0;
+	RTIME p3 = 0;
+
+	unsigned int devmouse_cycle_ns = 100e6;
+	rt_task_set_periodic(NULL, TM_NOW, devmouse_cycle_ns);
+	for(;;)
+	{
+		rt_task_wait_period(NULL);
+		previous = rt_timer_read();
+
+		if(system_ready)
+		{
+
+			if ( (nread = read(fd, &ie, sizeof(struct input_event))) > 0)
+			{
+				dMouse.print_event();
+				dMouse.print_mouse_state();
+				//dMouse.fb_draw(&fb, &mouse.current, CURSOR_COLOR);
+
+				/*
+				if (event_handler[ie.type] == EV_REL)
+					cursor(&ie, &mouse);
+				elseif(event_handler[ie.type] == EV_KEY)
+					button(&ie, &mouse);
+				*/
+			}
+
+			now = rt_timer_read();
+			float_dt_dmouse = ((float)(long)(p3 - p1))*1e-3; 		// us
+			dmouse_time = (long) now - previous;
+
+			if ( dmouse_worst_time<dmouse_time )
+				dmouse_worst_time=dmouse_time;
+
+			if( dmouse_time > (unsigned long)devmouse_cycle_ns )
+			{
+				dmouse_fault_count++;
+				dmouse_worst_time=0;
+			}
+		}
+		else
+		{
+			dmouse_worst_time = 0;
+			dmouse_time = 0;
+		}
+
+		p1 = p3;
+		p3 = rt_timer_read();
+
+	}
+}
+
 void print_run(void *arg)
 {
 	long stick=0;
@@ -645,19 +707,25 @@ void print_run(void *arg)
 		{
 			rt_printf("Time=%0.2fs\n", double_gt);
 #if defined(_ECAT_ON_)
-			rt_printf("Eact actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+			rt_printf("# Eact actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
 					ethercat_time/1000, float_dt, worst_time/1000, fault_count);
 #endif
 
 #if defined(_CAN_ON_)
-			rt_printf("CAN actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+			rt_printf("# CAN actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
 					can_time/1000, float_dt_can, can_worst_time/1000, can_fault_count);
 #endif
 
 #if defined(_RS232_ON_)
-			rt_printf("RS232 actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+			rt_printf("# RS232 actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
 					serial_time/1000, float_dt_serial, serial_worst_time/1000, serial_fault_count);
 #endif
+
+#if defined(_DEV_MOUSE_ON_)
+			rt_printf("# dMouse actTask_dt= %lius, desTask_dt=%0.1fus, Worst_dt= %lius, Fault=%d\n",
+					dmouse_time/1000, float_dt_dmouse, dmouse_worst_time/1000, dmouse_fault_count);
+#endif
+
 			for(int j=0; j<ELMO_TOTAL; ++j)
 			{
 				rt_printf("\t \nID: %d,", j+1);
@@ -666,17 +734,17 @@ void print_run(void *arg)
 				//rt_printf(" StatWord: 0x%04X, ",	StatusWord[j]);
 				//rt_printf(" DeviceState: %d, ",	DeviceState[j]);
 				rt_printf(" ModeOfOp: %d,",		ModeOfOperationDisplay[j]);
-				//rt_printf("\n");
+				rt_printf("\n");
 #endif
 				rt_printf("\tActPos(Deg): %0.2lf,", 	ActualPos_Rad[j]*RADtoDEG);
-				//rt_printf("\tTarPos(Deg): %0.2lf,",	TargetPos_Rad[j]*RADtoDEG);
-				rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
-				rt_printf("\tTarPos(inc): %d,", 	TargetPos[j]);
-				//rt_printf("\n");
+				rt_printf("\tTarPos(Deg): %0.2lf,",	TargetPos_Rad[j]*RADtoDEG);
+				//rt_printf("\tActPos(inc): %d,", 	ActualPos[j]);
+				//rt_printf("\tTarPos(inc): %d,", 	TargetPos[j]);
+				rt_printf("\n");
 				rt_printf("\tActVel(Deg/s): %0.1lf,", 	ActualVel_Rad[j]*RADtoDEG);
-				//rt_printf("\tTarVel(Deg/s): %0.1lf,",	TargetVel_Rad[j]*RADtoDEG);
+				rt_printf("\tTarVel(Deg/s): %0.1lf,",	TargetVel_Rad[j]*RADtoDEG);
 				//rt_printf("\tActVel(inc/s): %d,", 	ActualVel[j]);
-				//rt_printf("\n");
+				rt_printf("\n");
 				rt_printf("\tActTor(%): %d,",		ActualTor[j]);
 				rt_printf("\tCtrlTor(Nm): %0.1lf", 	TargetToq[j]);
 				//rt_printf("\tTarTor(%): %d", 		TargetTor[j]);
@@ -697,6 +765,7 @@ void print_run(void *arg)
 			rt_printf("\t \nID: %d,", 1);
 			rt_printf(" Send: %d, Recieved: %d, Send: %c, Recieved: %c", kchr, chr, kchr, chr);
 #endif
+			/*
 			rt_printf("\nForward Kinematics -->");
 			for(int cNum = 0; cNum < NumChain; cNum++)
 			{
@@ -705,7 +774,7 @@ void print_run(void *arg)
 				//rt_printf("\n Manipulability: Task:%0.2lf, Orient:%0.2lf", TaskCondNumber[cNum], OrientCondNumber[cNum]);
 				rt_printf("\n");
 			}
-
+			*/
 			rt_printf("\n\n");
 		}
 		else
@@ -796,12 +865,12 @@ void tcpip_run(void *arg)
 
 	while(1)
 	{
-		  rt_task_wait_period(NULL);
-		  current_Thread = server.currentConnections();
-		  if(current_Thread != 0)
-		  {
+		rt_task_wait_period(NULL);
+		current_Thread = server.currentConnections();
+		if(current_Thread != 0)
+		{
 
-		  }
+		}
 	}
 }
 
@@ -813,6 +882,12 @@ static void signal_handler(int signum)
 	rt_printf("\n-- ConsolPrint RTTask Closing....");
 	rt_task_delete(&print_task);
 	rt_printf("\n-- ConsolPrint RTTask Closing Success....");
+
+#if defined(_DEV_MOUSE_ON_)
+	rt_printf("\n-- devMouse RTTask Closing....");
+	rt_task_delete(&devmouse_task);
+	dMouse.Deactivate();
+#endif
 
 #if defined(_PLOT_ON_)
 	rt_queue_unbind(&msg_plot);
@@ -868,7 +943,7 @@ static void signal_handler(int signum)
 	ecatmaster.deactivate();
 #endif
 
-	dMouse.Deactivate();
+
 
 	rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
 	exit(signum);
@@ -893,19 +968,17 @@ int main(int argc, char **argv)
 	rt_printf("\n-- Now Configure the Devices...");
 
 	// TO DO: Specify the cycle period (cycle_ns) here, or use default value
+	//cycle_ns = 200000; // nanosecond -> 5kHz
 	//cycle_ns = 250000; // nanosecond -> 4kHz
 	cycle_ns = 500000; // nanosecond -> 2kHz
 	//cycle_ns = 1000000; // nanosecond -> 1kHz
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
-	dMouse.Activate();
-
 #if defined(_RS232_ON_)
 	rt_printf("\n-- Serial Configuration");
 	char PortName[30];
 	unsigned int SerialBoud = 115200;
-	//unsigned int SerialBoud = 9600;
 	strcpy(PortName, COM1);
 	serial_fd = tp_open_serial_port(PortName, SerialBoud);
 	if(serial_fd < 0)
@@ -941,10 +1014,8 @@ int main(int argc, char **argv)
 #if defined(_ECAT_ON_)
 	for(int SlaveNum=0; SlaveNum < ELMO_TOTAL; SlaveNum++)
 	{
-		ecat_elmo[SlaveNum].setHomingParam(hominginfo[SlaveNum].HomingOffset,
-				hominginfo[SlaveNum].HomingMethod,
-				hominginfo[SlaveNum].HomingSpeed,
-				hominginfo[SlaveNum].HomingCurrentLimit);
+		ecat_elmo[SlaveNum].setHomingParam(hominginfo[SlaveNum].HomingOffset, hominginfo[SlaveNum].HomingMethod,
+				hominginfo[SlaveNum].HomingSpeed, hominginfo[SlaveNum].HomingCurrentLimit);
 		ecatmaster.addSlaveWithHoming(0, SlaveNum, &ecat_elmo[SlaveNum]);
 	}
 
@@ -987,7 +1058,7 @@ int main(int argc, char **argv)
 #if defined(_CAN_ON_)
 	rt_queue_create(&msg_can, "CAN_QUEUE", sizeof(can_frame)*20, 20, Q_FIFO|Q_SHARED);
 
-	rt_task_create(&can_rev_task, "CAN_RECV_TASK", 0, 98, NULL);
+	rt_task_create(&can_rev_task, "CAN_RECV_TASK", 0, 98, 0);
 	rt_task_start(&can_rev_task, &can_rev_proc, NULL);
 
 	rt_task_create(&can_task, "CAN_PROC_TASK", 0, 97, T_FPU);
@@ -995,12 +1066,17 @@ int main(int argc, char **argv)
 #endif
 
 #if defined(_RS232_ON_)
-	rt_task_create(&serial_task, "SERIAL_PROC_TASK", 0, 95, T_FPU);
+	rt_task_create(&serial_task, "SERIAL_PROC_TASK", 0, 95, 0);
 	rt_task_start(&serial_task, &serial_task_proc, NULL);
 #endif
 
 	rt_task_create(&print_task, "CONSOLE_PROC_Task", 0, 60, T_FPU);
 	rt_task_start(&print_task, &print_run, NULL);
+
+#if defined(_DEV_MOUSE_ON_)
+	rt_task_create(&devmouse_task, "DEVMOUSE_PROC_TASK", 0, 70, 0);
+	rt_task_start(&devmouse_task, &devmouse_task_proc, NULL);
+#endif
 
 #if defined(_TCP_ON_)
 	rt_task_create(&tcpip_task, "TCPIP_PROC_Task", 0, 80, T_FPU);

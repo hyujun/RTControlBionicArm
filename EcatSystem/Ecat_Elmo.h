@@ -60,6 +60,11 @@ public:
     	target_velocity_ = velocity;
     }
 
+    void writePosition(int32_t &position)
+    {
+    	this->target_position_ = position;
+    }
+
 
 
     /**

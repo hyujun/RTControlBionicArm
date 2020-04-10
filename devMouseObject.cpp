@@ -86,7 +86,7 @@ void devMouseObject::loadMouseEvents(void)
 
 }
 
-void devMouseObject::logging(enum loglevel_t loglevel, char *format, ...)
+void devMouseObject::logging(enum loglevel_t loglevel, const char *format, ...)
 {
     va_list arg;
     static const char *loglevel2str[] = {

@@ -4,6 +4,13 @@ SerialManipulator::SerialManipulator()
 {
 	mChainMat.resize(1,6);
 	mChainMat << 1,1,1,1,1,1;
+
+	//mChainMat.resize(1,5);
+	//mChainMat << 1,1,1,1,1;
+
+	//mChainMat.resize(1,3);
+	//mChainMat << 1,1,1;
+
 	this->mDoF_Total = mChainMat.cols();
 	this->mChain_Total = mChainMat.rows();
 

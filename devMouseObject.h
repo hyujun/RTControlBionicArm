@@ -80,7 +80,7 @@ public:
 
 	int Activate();
 	void Deactivate();
-	void logging(enum loglevel_t loglevel, char *format, ...);
+	void logging(enum loglevel_t loglevel, const char *format, ...);
 	int my_ceil(int val, int div);
 	bool fb_init(struct fb_t *fb);
 	void fb_die(struct fb_t *fb);

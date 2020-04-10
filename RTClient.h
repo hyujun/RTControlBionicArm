@@ -58,6 +58,7 @@
 //#define _TCP_ON_
 #define _RS232_ON_
 //#define _PLOT_ON_
+//#define _DEV_MOUSE_ON_
 
 typedef unsigned int UINT32;	/**<typedef uint32_t*/
 typedef int64_t		INT64;		/**<typedef uint64_t*/

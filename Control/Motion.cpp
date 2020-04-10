@@ -50,20 +50,53 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 	}
 	else if( MotionCommand == MOVE_ZERO && MotionProcess == MOVE_ZERO && _StatusWord == TARGET_ACHIEVED )
 	{
-		MotionCommand = MOVE_CUSTOMIZE;
-		//MotionCommand = MOVE_JOB;
+		motion_cycle = 0;
+		//MotionCommand = MOVE_CUSTOMIZE;
+		MotionCommand = MOVE_JOB;
 		//MotionCommand = MOVE_FRICTION;
 		_MotionType = MotionCommand;
 	}
 	else if( MotionCommand == MOVE_JOB && MotionProcess == MOVE_JOB && _StatusWord == TARGET_ACHIEVED )
 	{
-		MotionCommand = MOVE_ZERO;
-		//MotionCommand = MOVE_JOB;
+		if(motion_cycle == 0)
+		{
+			MotionCommand = MOVE_ZERO;
+			//MotionCommand = MOVE_CUSTOMIZE;
+			//MotionCommand = MOVE_JOB;
+		}
+		else
+		{
+			MotionCommand = MOVE_ZERO;
+			//MotionCommand = MOVE_CUSTOMIZE;
+			//MotionCommand = MOVE_JOB;
+		}
+
 		_MotionType = MotionCommand;
 	}
 	else if( MotionCommand == MOVE_CUSTOMIZE && MotionProcess == MOVE_CUSTOMIZE && _StatusWord == TARGET_ACHIEVED )
 	{
-		MotionCommand = MOVE_JOB;
+		if(motion_cycle == 0)
+		{
+			//MotionCommand = MOVE_ZERO;
+			MotionCommand = MOVE_CUSTOMIZE1;
+			//MotionCommand = MOVE_JOB;
+		}
+		else
+		{
+			//MotionCommand = MOVE_ZERO;
+			//MotionCommand = MOVE_CUSTOMIZE;
+			MotionCommand = MOVE_JOB;
+		}
+		_MotionType = MotionCommand;
+	}
+	else if( MotionCommand == MOVE_CUSTOMIZE1 && MotionProcess == MOVE_CUSTOMIZE1 && _StatusWord == TARGET_ACHIEVED )
+	{
+
+		motion_cycle = 1;
+		//MotionCommand = MOVE_ZERO;
+		MotionCommand = MOVE_CUSTOMIZE;
+		//MotionCommand = MOVE_JOB;
+
 		_MotionType = MotionCommand;
 	}
 	else if( MotionCommand == MOVE_JOINT_CYCLIC && MotionProcess == MOVE_JOINT_CYCLIC && (_Time >= MotionInitTime+20.0))
@@ -96,7 +129,7 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 		else
 		{
 			TargetPos.setZero();
-
+			TargetPos(3) = 20.0*DEGtoRAD;
 			_Target = TargetPos;
 
 			TrajectoryTime=5.0;
@@ -120,16 +153,11 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 		else
 		{
 			TargetPos.setZero();
-			TargetPos(1) = -0.0*DEGtoRAD;
-			TargetPos(3) = -15.0*DEGtoRAD;
-			TargetPos(4) = -20.0*DEGtoRAD;
-			TargetPos(6) = -75.0*DEGtoRAD;
-			TargetPos(7) = 45.0*DEGtoRAD;
-
-
-			TargetPos(3+6) = 15.0*DEGtoRAD;
-			TargetPos(6+6) = 75.0*DEGtoRAD;
-			TargetPos(7+6) = -TargetPos(7);
+			TargetPos(0) = 18.0*DEGtoRAD;
+			TargetPos(1) = 1.0*DEGtoRAD;
+			TargetPos(2) = -10.0*DEGtoRAD;
+			TargetPos(3) = 70.5*DEGtoRAD;
+			TargetPos(4) = -24.0*DEGtoRAD;
 
 			_Target = TargetPos;
 
@@ -154,21 +182,11 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 		else
 		{
 			TargetPos.setZero();
-			TargetPos(0) = 20.0*DEGtoRAD;
-			TargetPos(1) = -5.0*DEGtoRAD;
-
-			TargetPos(2) = -20.0*DEGtoRAD;
-			TargetPos(2+6) = -TargetPos(2);
-			TargetPos(3) = -30.0*DEGtoRAD;
-			TargetPos(3+6) = -TargetPos(3);
-			TargetPos(4) = -30.0*DEGtoRAD;
-			TargetPos(4+6) = -TargetPos(4);
-			TargetPos(5) = -45.0*DEGtoRAD;
-			TargetPos(5+6) = -TargetPos(5);
-			TargetPos(6) = -60.0*DEGtoRAD;
-			TargetPos(6+6) = -TargetPos(6);
-			TargetPos(7) = -20.0*DEGtoRAD;
-			TargetPos(7+6) = -TargetPos(7);
+			TargetPos(0) = 30.0*DEGtoRAD;
+			TargetPos(1) = 7.8*DEGtoRAD;
+			TargetPos(2) = -62.44*DEGtoRAD;
+			TargetPos(3) = 40.0*DEGtoRAD;
+			TargetPos(4) = -17.73*DEGtoRAD;
 
 			_Target = TargetPos;
 
@@ -193,21 +211,11 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 		else
 		{
 			TargetPos.setZero();
-			TargetPos(0) = 20.0*DEGtoRAD;
-			TargetPos(1) = -5.0*DEGtoRAD;
-
-			TargetPos(2) = -20.0*DEGtoRAD;
-			TargetPos(2+6) = -TargetPos(2);
-			TargetPos(3) = -30.0*DEGtoRAD;
-			TargetPos(3+6) = -TargetPos(3);
-			TargetPos(4) = -30.0*DEGtoRAD;
-			TargetPos(4+6) = -TargetPos(4);
-			TargetPos(5) = -45.0*DEGtoRAD;
-			TargetPos(5+6) = -TargetPos(5);
-			TargetPos(6) = -60.0*DEGtoRAD;
-			TargetPos(6+6) = -TargetPos(6);
-			TargetPos(7) = -20.0*DEGtoRAD;
-			TargetPos(7+6) = -TargetPos(7);
+			TargetPos(0) = 77.67*DEGtoRAD;
+			TargetPos(1) = 26.27*DEGtoRAD;
+			TargetPos(2) = -60.44*DEGtoRAD;
+			TargetPos(3) = 104.10*DEGtoRAD;
+			TargetPos(4) = -17.73*DEGtoRAD;
 
 			_Target = TargetPos;
 
@@ -234,19 +242,10 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			TargetPos.setZero();
 			TargetPos(0) = 20.0*DEGtoRAD;
 			TargetPos(1) = -5.0*DEGtoRAD;
-
 			TargetPos(2) = -20.0*DEGtoRAD;
-			TargetPos(2+6) = -TargetPos(2);
-			TargetPos(3) = -30.0*DEGtoRAD;
-			TargetPos(3+6) = -TargetPos(3);
+			TargetPos(3) = 10.0*DEGtoRAD;
 			TargetPos(4) = -30.0*DEGtoRAD;
-			TargetPos(4+6) = -TargetPos(4);
-			TargetPos(5) = -45.0*DEGtoRAD;
-			TargetPos(5+6) = -TargetPos(5);
-			TargetPos(6) = -60.0*DEGtoRAD;
-			TargetPos(6+6) = -TargetPos(6);
-			TargetPos(7) = -20.0*DEGtoRAD;
-			TargetPos(7+6) = -TargetPos(7);
+			TargetPos(5) = 0.0;
 
 			_Target = TargetPos;
 
@@ -273,19 +272,10 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			TargetPos.setZero();
 			TargetPos(0) = 20.0*DEGtoRAD;
 			TargetPos(1) = -5.0*DEGtoRAD;
-
 			TargetPos(2) = -20.0*DEGtoRAD;
-			TargetPos(2+6) = -TargetPos(2);
-			TargetPos(3) = -30.0*DEGtoRAD;
-			TargetPos(3+6) = -TargetPos(3);
+			TargetPos(3) = 10.0*DEGtoRAD;
 			TargetPos(4) = -30.0*DEGtoRAD;
-			TargetPos(4+6) = -TargetPos(4);
-			TargetPos(5) = -45.0*DEGtoRAD;
-			TargetPos(5+6) = -TargetPos(5);
-			TargetPos(6) = -60.0*DEGtoRAD;
-			TargetPos(6+6) = -TargetPos(6);
-			TargetPos(7) = -20.0*DEGtoRAD;
-			TargetPos(7+6) = -TargetPos(7);
+			TargetPos(5) = 0.0;
 
 			_Target = TargetPos;
 
@@ -325,10 +315,6 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			dqdot(2) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime)+0.6435);
 			dqddot(2) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime)+0.6435);
 
-			dq(2+6) = -dq(2);
-			dqdot(2+6) = -dqdot(2);
-			dqddot(2+6) = -dqddot(2);
-
 			_T = 7.0;
 			_omega = 2.0*M_PI/_T;
 			_amp = 50;
@@ -336,10 +322,6 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			dq(3) = _amp*M_PI/180.0*sin(_omega*(_Time-MotionInitTime)+0.4115) - 20*M_PI/180.0;
 			dqdot(3) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime)+0.4115);
 			dqddot(3) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime)+0.4115);
-
-			dq(3+6) = -dq(3);
-			dqdot(3+6) = -dqdot(3);
-			dqddot(3+6) = -dqddot(3);
 
 			_T = 7.0;
 			_omega = 2.0*M_PI/_T;
@@ -349,10 +331,6 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			dqdot(4) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime)+0.729);
 			dqddot(4) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime)+0.729);
 
-			dq(4+6) = -dq(4);
-			dqdot(4+6) = -dqdot(4);
-			dqddot(4+6) = -dqddot(4);
-
 			_T = 7.0;
 			_omega = 2.0*M_PI/_T;
 			_amp = 70.0;
@@ -360,34 +338,6 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			dq(5) = _amp*M_PI/180.0*sin(_omega*(_Time-MotionInitTime));
 			dqdot(5) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime));
 			dqddot(5) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime));
-
-			dq(5+6) = -dq(5);
-			dqdot(5+6) = -dqdot(5);
-			dqddot(5+6) = -dqddot(5);
-
-			_T = 7.0;
-			_omega = 2.0*M_PI/_T;
-			_amp = 40.0;
-
-			dq(6) = _amp*M_PI/180.0*sin(_omega*(_Time-MotionInitTime));
-			dqdot(6) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime));
-			dqddot(6) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime));
-
-			dq(6+6) = -dq(6);
-			dqdot(6+6) = -dqdot(6);
-			dqddot(6+6) = -dqddot(6);
-
-			_T = 7.0;
-			_omega = 2.0*M_PI/_T;
-			_amp = 40.0;
-
-			dq(7) = _amp*M_PI/180.0*sin(_omega*(_Time-MotionInitTime));
-			dqdot(7) = _amp*M_PI/180.0*_omega*cos(_omega*(_Time-MotionInitTime));
-			dqddot(7) = -_amp*M_PI/180*pow(_omega,2)*sin(_omega*(_Time-MotionInitTime));
-
-			dq(7+6) = dq(7);
-			dqdot(7+6) = dqdot(7);
-			dqddot(7+6) = dqddot(7);
 
 			MotionProcess = MOVE_JOINT_CYCLIC;
 		}
