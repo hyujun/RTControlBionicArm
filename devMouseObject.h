@@ -111,6 +111,11 @@ public:
 		return m_mouse;
 	}
 
+	struct fb_t getMousefb(void)
+	{
+		return m_fb;
+	}
+
 private:
 	map<int, string> m_ev_type;
 	map<int, string> m_ev_rel;

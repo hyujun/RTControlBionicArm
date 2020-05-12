@@ -2,11 +2,11 @@
 
 SerialManipulator::SerialManipulator()
 {
-	mChainMat.resize(1,6);
-	mChainMat << 1,1,1,1,1,1;
+	//mChainMat.resize(1,6);
+	//mChainMat << 1,1,1,1,1,1;
 
-	//mChainMat.resize(1,5);
-	//mChainMat << 1,1,1,1,1;
+	mChainMat.resize(1,5);
+	mChainMat << 1,1,1,1,1;
 
 	//mChainMat.resize(1,3);
 	//mChainMat << 1,1,1;
@@ -60,22 +60,22 @@ void SerialManipulator::UpdateManipulatorParam(void)
     for(int i=0; i < this->mDoF_Total; ++i)
     {
     	this->w[i] << serial_Kinematic_info[i].w_x, serial_Kinematic_info[i].w_y, serial_Kinematic_info[i].w_z;
-	this->p[i] << serial_Kinematic_info[i].q_x, serial_Kinematic_info[i].q_y, serial_Kinematic_info[i].q_z;
-	this->L[i] << serial_Kinematic_info[i].l_x, serial_Kinematic_info[i].l_y, serial_Kinematic_info[i].l_z;
+		this->p[i] << serial_Kinematic_info[i].q_x, serial_Kinematic_info[i].q_y, serial_Kinematic_info[i].q_z;
+		this->L[i] << serial_Kinematic_info[i].l_x, serial_Kinematic_info[i].l_y, serial_Kinematic_info[i].l_z;
 
-	pKin->UpdateKinematicInfo( this->w[i], this->p[i], this->L[i], i );
+		pKin->UpdateKinematicInfo( this->w[i], this->p[i], this->L[i], i );
 
 
-    	Iner[i] << serial_Dynamic_info[i].Ixx_kgm2, serial_Dynamic_info[i].Ixy_kgm2, serial_Dynamic_info[i].Izx_kgm2,
-    		serial_Dynamic_info[i].Ixy_kgm2, serial_Dynamic_info[i].Iyy_kgm2, serial_Dynamic_info[i].Iyz_kgm2,
+		Iner[i] << serial_Dynamic_info[i].Ixx_kgm2, serial_Dynamic_info[i].Ixy_kgm2, serial_Dynamic_info[i].Izx_kgm2,
+			serial_Dynamic_info[i].Ixy_kgm2, serial_Dynamic_info[i].Iyy_kgm2, serial_Dynamic_info[i].Iyz_kgm2,
 		serial_Dynamic_info[i].Izx_kgm2, serial_Dynamic_info[i].Iyz_kgm2, serial_Dynamic_info[i].Izz_kgm2;
 
 
-    	this->CoM[i] << serial_Dynamic_info[i].CoM_x, serial_Dynamic_info[i].CoM_y, serial_Dynamic_info[i].CoM_z;
-    	mass[i] = serial_Dynamic_info[i].mass_kg;
+		this->CoM[i] << serial_Dynamic_info[i].CoM_x, serial_Dynamic_info[i].CoM_y, serial_Dynamic_info[i].CoM_z;
+		mass[i] = serial_Dynamic_info[i].mass_kg;
 
-    	pCoMKin->UpdateKinematicInfo( this->w[i], this->p[i], this->CoM[i], i );
-    	pDyn->UpdateDynamicInfo( Iner[i], mass[i], CoM[i], i );
+		pCoMKin->UpdateKinematicInfo( this->w[i], this->p[i], this->CoM[i], i );
+		pDyn->UpdateDynamicInfo( Iner[i], mass[i], CoM[i], i );
     }
 }
 

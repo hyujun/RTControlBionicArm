@@ -29,6 +29,8 @@ public:
 	 */
 	bool isReady(void){return m_isReady;};
 
+	int isFinished(void){ return m_isFinished; };
+
 	/**
 	 * @brief set the 5th polynomial trajectory
 	 * @param[in] _StartPos start joint position
@@ -51,6 +53,7 @@ public:
 private:
 
 	int m_isReady;
+	int m_isFinished;
 
 	Eigen::Matrix<double, 6, 6> m_cof;
 	Eigen::MatrixXd StateVec, Coefficient;

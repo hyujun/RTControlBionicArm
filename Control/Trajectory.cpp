@@ -10,7 +10,8 @@
 namespace HYUControl {
 
 Trajectory::Trajectory()
-:m_isReady(0)
+:m_isReady(0),
+ m_isFinished(0)
 {
 
 }
@@ -45,6 +46,7 @@ void Trajectory::SetPoly5th( const double &_CurrentTime, Eigen::VectorXd &_Start
 
 	Coefficient.noalias() += m_cof.inverse()*StateVec;
 
+	m_isFinished=0;
 	m_isReady = 1;
 
 }
@@ -54,6 +56,7 @@ void Trajectory::Poly5th( const double &_CurrentTime, Eigen::VectorXd &_dq, Eige
 	if( (_CurrentTime - TrajInitTime) >= TrajDuration )
 	{
 		m_isReady = 0;
+		m_isFinished=1;
 
 		_dq = StateVec.row(3).transpose(); // Final Position
 		_dqdot = StateVec.row(4).transpose();

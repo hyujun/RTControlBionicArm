@@ -67,7 +67,7 @@ Controller::Controller(SerialManipulator *pManipulator)
 	GainWeightFactor(2) = 0.5;
 	GainWeightFactor(3) = 0.2;
 	GainWeightFactor(4) = 0.09;
-	GainWeightFactor(5) = 0.1;
+	//GainWeightFactor(5) = 0.1;
 
 
 	Kp = GainWeightFactor*m_KpBase;
@@ -84,7 +84,7 @@ Controller::Controller(SerialManipulator *pManipulator)
 
 	KpTask(3) = 0.0001;
 	KpTask(4) = 0.0001;
-	KpTask(5) = 0.0001;
+	//KpTask(5) = 0.0001;
 
 	KpTask.tail(6) = KpTask.head(6);
 
@@ -151,12 +151,15 @@ void Controller::PDGravController( double *p_q, double *p_qdot, double *p_dq, do
 	e = dq - q;
 	e_dev = dqdot - qdot;
 
-	FrictionCompensator(qdot, dqdot);
+	//FrictionCompensator(qdot, dqdot);
 
 	ToqOut.setZero();
+	G(4) = 0.0;
+	//ToqOut = G;
 	ToqOut = Kp.cwiseProduct(e) + Kd.cwiseProduct(e_dev) + G;
 
-	ToqOut = G + FrictionTorque;
+
+	//ToqOut = G + FrictionTorque;
 
 	Map<VectorXd>(p_Toq, this->m_Jnum) = ToqOut;
 	return;

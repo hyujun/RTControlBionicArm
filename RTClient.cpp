@@ -181,6 +181,8 @@ static int isElmoHoming(void)
 Vector3d ForwardPos[2];
 Vector3d ForwardOri[2];
 Vector3d ForwardAxis[2];
+double TaskCondNumber[2];
+double OrientCondNumber[2];
 int NumChain;
 
 // RTArm_task
@@ -249,20 +251,22 @@ void RTRArm_run(void *arg)
 
 			if(HomingFlag == 0)
 			{
-				//isElmoHoming();
-				HomingFlag = 1;
+				isElmoHoming();
+				//HomingFlag = 1;
 			}
 			else
 			{
-				//BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
+				BionicArm.pKin->PrepareJacobian(ActualPos_Rad);
+				BionicArm.pDyn->PrepareDynamics(ActualPos_Rad, ActualVel_Rad);
 
-				//BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
-				//BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
+				BionicArm.pKin->GetManipulability( TaskCondNumber, OrientCondNumber );
+				BionicArm.pKin->GetForwardKinematics( ForwardPos, ForwardOri, NumChain );
 
-				BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
+				//BionicArm.StateMachine( ActualPos_Rad, ActualVel_Rad, finPos, JointState, ControlMotion );
 				motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
 
-				Control.PDController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq, float_dt );
+				//Control.PDController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq, float_dt );
+				Control.PDGravController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq);
 
 				BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
@@ -272,7 +276,7 @@ void RTRArm_run(void *arg)
 
 					if(double_gt >= 1.0)
 					{
-						//ecat_elmo[j].writeTorque(TargetTor[j]);
+						ecat_elmo[j].writeTorque(TargetTor[j]);
 					}
 					else
 					{
@@ -395,8 +399,8 @@ void can_task_proc(void *arg)
 
 		if(system_ready)
 		{
-			port[0] = 20; //flex
-			port[1] = 25; //extend
+			port[0] = 16; //flex
+			port[1] = 16; //extend
 			port[2] = 0;
 			port[3] = 0;
 
@@ -557,7 +561,9 @@ void serial_task_proc(void *arg)
 	RTIME p1 = 0;
 	RTIME p3 = 0;
 
-	unsigned int serial_cycle_ns = 1e6;
+	kchr =  'a';
+
+	unsigned int serial_cycle_ns = 5e6;
 	rt_task_set_periodic(NULL, TM_NOW, serial_cycle_ns);
 	for(;;)
 	{
@@ -566,12 +572,14 @@ void serial_task_proc(void *arg)
 
 		if(system_ready)
 		{
-			kchr = 0;
-			chr = 0;
 			//write
 			if(NRMKkbhit())
 			{
-				kchr =  'a';
+				if(kchr == 'a' && chr == 'f')
+					kchr = 'b';
+				else if(kchr == 'b' && chr == 'f')
+					kchr = 'a';
+
 				write(serial_fd, &kchr, 1);
 			}
 
@@ -620,7 +628,7 @@ void devmouse_task_proc(void *arg)
 	int fd  = dMouse.getMousefd();;
 	struct input_event ie = dMouse.getInputEvent();;
 	struct mouse_t mouse = dMouse.getMouse();;
-	struct fb_t fb;
+	struct fb_t fb = dMouse.getMousefb();
 
 	ssize_t nread;
 
@@ -642,7 +650,7 @@ void devmouse_task_proc(void *arg)
 			{
 				dMouse.print_event();
 				dMouse.print_mouse_state();
-				//dMouse.fb_draw(&fb, &mouse.current, CURSOR_COLOR);
+				dMouse.fb_draw(&fb, &mouse.current, CURSOR_COLOR);
 
 				/*
 				if (event_handler[ie.type] == EV_REL)
@@ -765,16 +773,18 @@ void print_run(void *arg)
 			rt_printf("\t \nID: %d,", 1);
 			rt_printf(" Send: %d, Recieved: %d, Send: %c, Recieved: %c", kchr, chr, kchr, chr);
 #endif
-			/*
+
+
 			rt_printf("\nForward Kinematics -->");
 			for(int cNum = 0; cNum < NumChain; cNum++)
 			{
 				rt_printf("\n Num:%d: x:%0.3lf, y:%0.3lf, z:%0.3lf, u:%0.3lf, v:%0.3lf, w:%0.3lf ",cNum, ForwardPos[cNum](0), ForwardPos[cNum](1), ForwardPos[cNum](2),
 						ForwardOri[cNum](0)*RADtoDEG, ForwardOri[cNum](1)*RADtoDEG, ForwardOri[cNum](2)*RADtoDEG);
-				//rt_printf("\n Manipulability: Task:%0.2lf, Orient:%0.2lf", TaskCondNumber[cNum], OrientCondNumber[cNum]);
+				rt_printf("\n Manipulability: Task:%0.2lf, Orient:%0.2lf", TaskCondNumber[cNum], OrientCondNumber[cNum]);
 				rt_printf("\n");
 			}
-			*/
+
+
 			rt_printf("\n\n");
 		}
 		else

@@ -8,13 +8,12 @@
 #include "devMouseObject.h"
 
 devMouseObject::devMouseObject() {
-	// TODO Auto-generated constructor stub
 	this->loadMouseEvents();
 
 }
 
 devMouseObject::~devMouseObject() {
-	// TODO Auto-generated destructor stub
+
 }
 
 int devMouseObject::Activate()
@@ -40,49 +39,49 @@ void devMouseObject::Deactivate()
 void devMouseObject::loadMouseEvents(void)
 {
 	m_ev_type.clear();
-	m_ev_type.insert(make_pair(EV_SYN, "EV_SYN"));
-	m_ev_type.insert(make_pair(EV_KEY, "EV_KEY"));
-	m_ev_type.insert(make_pair(EV_REL, "EV_REL"));
-	m_ev_type.insert(make_pair(EV_ABS, "EV_ABS"));
-	m_ev_type.insert(make_pair(EV_MSC, "EV_MSC"));
-	m_ev_type.insert(make_pair(EV_SW, "EV_SW"));
-	m_ev_type.insert(make_pair(EV_LED, "EV_LED"));
-	m_ev_type.insert(make_pair(EV_SND, "EV_SND"));
-	m_ev_type.insert(make_pair(EV_REP, "EV_REP"));
-	m_ev_type.insert(make_pair(EV_FF, "EV_FF"));
-	m_ev_type.insert(make_pair(EV_PWR, "EV_PWR"));
+	m_ev_type.insert(make_pair(EV_SYN, 		"EV_SYN"));
+	m_ev_type.insert(make_pair(EV_KEY, 		"EV_KEY"));
+	m_ev_type.insert(make_pair(EV_REL, 		"EV_REL"));
+	m_ev_type.insert(make_pair(EV_ABS, 		"EV_ABS"));
+	m_ev_type.insert(make_pair(EV_MSC, 		"EV_MSC"));
+	m_ev_type.insert(make_pair(EV_SW, 		"EV_SW"));
+	m_ev_type.insert(make_pair(EV_LED,		"EV_LED"));
+	m_ev_type.insert(make_pair(EV_SND, 		"EV_SND"));
+	m_ev_type.insert(make_pair(EV_REP, 		"EV_REP"));
+	m_ev_type.insert(make_pair(EV_FF, 		"EV_FF"));
+	m_ev_type.insert(make_pair(EV_PWR, 		"EV_PWR"));
 	m_ev_type.insert(make_pair(EV_FF_STATUS, "EV_FF_STATUS"));
-	m_ev_type.insert(make_pair(EV_MAX, "EV_MAX"));
+	m_ev_type.insert(make_pair(EV_MAX, 		"EV_MAX"));
 
 	m_ev_syn.clear();
-	m_ev_syn.insert(make_pair(SYN_REPORT, "SYN_REPORT"));
-	m_ev_syn.insert(make_pair(SYN_CONFIG, "SYN_CONFIG"));
-	m_ev_syn.insert(make_pair(SYN_MT_REPORT, "SYN_MT_REPORT"));
-	m_ev_syn.insert(make_pair(SYN_DROPPED, "SYN_DROPPED"));
+	m_ev_syn.insert(make_pair(SYN_REPORT, 		"SYN_REPORT"));
+	m_ev_syn.insert(make_pair(SYN_CONFIG, 		"SYN_CONFIG"));
+	m_ev_syn.insert(make_pair(SYN_MT_REPORT, 	"SYN_MT_REPORT"));
+	m_ev_syn.insert(make_pair(SYN_DROPPED, 		"SYN_DROPPED"));
 
 	m_ev_rel.clear();
-	m_ev_rel.insert(make_pair(REL_X, "REL_X"));
-	m_ev_rel.insert(make_pair(REL_Y, "REL_Y"));
-	m_ev_rel.insert(make_pair(REL_Z, "REL_Z"));
-	m_ev_rel.insert(make_pair(REL_RX, "REL_RX"));
-	m_ev_rel.insert(make_pair(REL_RY, "REL_RY"));
-	m_ev_rel.insert(make_pair(REL_RZ, "REL_RZ"));
-	m_ev_rel.insert(make_pair(REL_HWHEEL, "REL_HWHEEL"));
-	m_ev_rel.insert(make_pair(REL_DIAL, "REL_DIAL"));
-	m_ev_rel.insert(make_pair(REL_WHEEL, "REL_WHEEL"));
-	m_ev_rel.insert(make_pair(REL_MISC, "REL_MISC"));
-	m_ev_rel.insert(make_pair(REL_MAX, "REL_MAX"));
+	m_ev_rel.insert(make_pair(REL_X, 		"REL_X"));
+	m_ev_rel.insert(make_pair(REL_Y, 		"REL_Y"));
+	m_ev_rel.insert(make_pair(REL_Z, 		"REL_Z"));
+	m_ev_rel.insert(make_pair(REL_RX, 		"REL_RX"));
+	m_ev_rel.insert(make_pair(REL_RY, 		"REL_RY"));
+	m_ev_rel.insert(make_pair(REL_RZ, 		"REL_RZ"));
+	m_ev_rel.insert(make_pair(REL_HWHEEL, 	"REL_HWHEEL"));
+	m_ev_rel.insert(make_pair(REL_DIAL, 	"REL_DIAL"));
+	m_ev_rel.insert(make_pair(REL_WHEEL, 	"REL_WHEEL"));
+	m_ev_rel.insert(make_pair(REL_MISC, 	"REL_MISC"));
+	m_ev_rel.insert(make_pair(REL_MAX, 		"REL_MAX"));
 
 	m_ev_key.clear();
-	m_ev_key.insert(make_pair(BTN_LEFT, "BTN_LEFT"));
-	m_ev_key.insert(make_pair(BTN_RIGHT, "BTN_RIGHT"));
-	m_ev_key.insert(make_pair(BTN_MIDDLE, "BTN_MIDDLE"));
-	m_ev_key.insert(make_pair(BTN_SIDE, "BTN_SIDE"));
-	m_ev_key.insert(make_pair(BTN_EXTRA, "BTN_EXTRA"));
-	m_ev_key.insert(make_pair(BTN_FORWARD, "BTN_FORWARD"));
-	m_ev_key.insert(make_pair(BTN_BACK, "BTN_BACK"));
-	m_ev_key.insert(make_pair(BTN_TASK, "BTN_TASK"));
-	m_ev_key.insert(make_pair(KEY_MAX, "KEY_MAX"));
+	m_ev_key.insert(make_pair(BTN_LEFT, 	"BTN_LEFT"));
+	m_ev_key.insert(make_pair(BTN_RIGHT, 	"BTN_RIGHT"));
+	m_ev_key.insert(make_pair(BTN_MIDDLE, 	"BTN_MIDDLE"));
+	m_ev_key.insert(make_pair(BTN_SIDE, 	"BTN_SIDE"));
+	m_ev_key.insert(make_pair(BTN_EXTRA, 	"BTN_EXTRA"));
+	m_ev_key.insert(make_pair(BTN_FORWARD, 	"BTN_FORWARD"));
+	m_ev_key.insert(make_pair(BTN_BACK, 	"BTN_BACK"));
+	m_ev_key.insert(make_pair(BTN_TASK, 	"BTN_TASK"));
+	m_ev_key.insert(make_pair(KEY_MAX, 		"KEY_MAX"));
 
 }
 
@@ -271,8 +270,6 @@ void devMouseObject::button(struct input_event *ie, struct mouse_t *mouse)
 
 /*
  * example
- *
- *
  *
 int main(int argc, char *argv[])
 {
