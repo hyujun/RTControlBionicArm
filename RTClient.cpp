@@ -76,8 +76,7 @@ static double TargetVel_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetAcc_Rad[BIONIC_ARM_DOF] = {0.0,};
 static double TargetToq[BIONIC_ARM_DOF] = {0.0,};
 int TrajFlag[BIONIC_ARM_DOF] = {0,};
-//int j_homing = ELMO_TOTAL;
-int j_homing = 5;
+int j_homing = ELMO_TOTAL;
 int HomingFlag = 0;
 
 static int isSlaveInit(void)
@@ -399,8 +398,8 @@ void can_task_proc(void *arg)
 
 		if(system_ready)
 		{
-			port[0] = 16; //flex
-			port[1] = 16; //extend
+			port[0] = 10; //flex
+			port[1] = 10; //extend
 			port[2] = 0;
 			port[3] = 0;
 
@@ -440,10 +439,11 @@ void can_task_proc(void *arg)
 					else
 					{
 						CanReadyCounter++;
-						if(CanReadyCounter > 5)
+						if(CanReadyCounter > 10)
 						{
 							CanReadyCounter = 0;
 							CanDevFlag = 0;
+							break;
 						}
 					}
 				}
@@ -486,10 +486,11 @@ void can_task_proc(void *arg)
 					else
 					{
 						CanReadyCounter++;
-						if(CanReadyCounter > 5)
+						if(CanReadyCounter > 10)
 						{
 							CanReadyCounter = 0;
 							CanDevFlag = 0;
+							break;
 						}
 					}
 				}
@@ -575,11 +576,6 @@ void serial_task_proc(void *arg)
 			//write
 			if(NRMKkbhit())
 			{
-				if(kchr == 'a' && chr == 'f')
-					kchr = 'b';
-				else if(kchr == 'b' && chr == 'f')
-					kchr = 'a';
-
 				write(serial_fd, &kchr, 1);
 			}
 
@@ -587,7 +583,10 @@ void serial_task_proc(void *arg)
 			nbytes = read(serial_fd, &chr, 1);
 			if(nbytes > 0)
 			{
-
+				if(kchr == 'a' && chr == 'f')
+					kchr = 'b';
+				else if(kchr == 'b' && chr == 'f')
+					kchr = 'a';
 			}
 
 			now = rt_timer_read();
@@ -611,7 +610,6 @@ void serial_task_proc(void *arg)
 
 		p1 = p3;
 		p3 = rt_timer_read();
-
 	}
 }
 
@@ -681,7 +679,6 @@ void devmouse_task_proc(void *arg)
 
 		p1 = p3;
 		p3 = rt_timer_read();
-
 	}
 }
 
@@ -774,7 +771,6 @@ void print_run(void *arg)
 			rt_printf(" Send: %d, Recieved: %d, Send: %c, Recieved: %c", kchr, chr, kchr, chr);
 #endif
 
-
 			rt_printf("\nForward Kinematics -->");
 			for(int cNum = 0; cNum < NumChain; cNum++)
 			{
@@ -783,7 +779,6 @@ void print_run(void *arg)
 				rt_printf("\n Manipulability: Task:%0.2lf, Orient:%0.2lf", TaskCondNumber[cNum], OrientCondNumber[cNum]);
 				rt_printf("\n");
 			}
-
 
 			rt_printf("\n\n");
 		}
@@ -953,8 +948,6 @@ static void signal_handler(int signum)
 	ecatmaster.deactivate();
 #endif
 
-
-
 	rt_printf("\n\n\t !!RT Arm Client System Stopped!! \n");
 	exit(signum);
 }
@@ -1100,6 +1093,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
-
-

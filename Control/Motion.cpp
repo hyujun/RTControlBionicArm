@@ -25,7 +25,7 @@ Motion::Motion(SerialManipulator *_pManipulator)
 	TotalChain = pManipulator->GetTotalChain();
 
 	MotionProcess=0;
-	motion_cycle = 0;
+	motion_cycle = 3;
 
 	dq.resize(TotalDoF);
 	dqdot.resize(TotalDoF);
@@ -63,14 +63,17 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			{
 				MotionCommand = MOVE_CUSTOMIZE4;
 			}
-
 			else if(motion_cycle == 2)
 			{
 				MotionCommand = MOVE_CUSTOMIZE8;
 			}
-
+			else if(motion_cycle == 3)
+			{
+				MotionCommand = MOVE_CUSTOMIZE15;
+			}
 			_MotionType = MotionCommand;
 		}
+
 	else if( MotionCommand == MOVE_JOB && MotionProcess == MOVE_JOB && _StatusWord == TARGET_ACHIEVED )
 	{
 		if(motion_cycle == 0)
@@ -126,6 +129,9 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			motion_cycle = 2;
 			_MotionType = MotionCommand;
 		}
+
+
+
 	else if( MotionCommand == MOVE_CUSTOMIZE8 && MotionProcess == MOVE_CUSTOMIZE8 && _StatusWord == TARGET_ACHIEVED)
 		{
 			MotionCommand = MOVE_CUSTOMIZE9;
@@ -162,6 +168,55 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			motion_cycle = 0;
 			_MotionType = MotionCommand;
 		}
+
+
+	else if( MotionCommand == MOVE_CUSTOMIZE15 && MotionProcess == MOVE_CUSTOMIZE15 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE16;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE16 && MotionProcess == MOVE_CUSTOMIZE16 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE17;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE17 && MotionProcess == MOVE_CUSTOMIZE17 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE18;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE18 && MotionProcess == MOVE_CUSTOMIZE18 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE19;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE19 && MotionProcess == MOVE_CUSTOMIZE19 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE20;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE20 && MotionProcess == MOVE_CUSTOMIZE20 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE21;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE21 && MotionProcess == MOVE_CUSTOMIZE21 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE22;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE22 && MotionProcess == MOVE_CUSTOMIZE22 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_CUSTOMIZE23;
+			_MotionType = MotionCommand;
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE23 && MotionProcess == MOVE_CUSTOMIZE23 && _StatusWord == TARGET_ACHIEVED)
+		{
+			MotionCommand = MOVE_ZERO;
+			_MotionType = MotionCommand;
+		}
+
+
 	else if( MotionCommand == MOVE_JOINT_CYCLIC && MotionProcess == MOVE_JOINT_CYCLIC && (_Time >= MotionInitTime+20.0))
 	{
 		MotionCommand = MOVE_JOB;
@@ -755,6 +810,324 @@ uint16_t Motion::JointMotion(double *_dq, double *_dqdot, double *_dqddot, Vecto
 			_StatusWord = TARGET_MOVING;
 		}
 	}
+	else if( MotionCommand == MOVE_CUSTOMIZE15)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE15;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 3.27*DEGtoRAD;
+				TargetPos(1) = -0.04*DEGtoRAD;
+				TargetPos(2) = 0.01*DEGtoRAD;
+				TargetPos(3) = 92.84*DEGtoRAD;
+				TargetPos(4) = -7.73*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE16)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE16;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 47.66*DEGtoRAD;
+				TargetPos(1) = -0.03*DEGtoRAD;
+				TargetPos(2) = 0.01*DEGtoRAD;
+				TargetPos(3) = 43.99*DEGtoRAD;
+				TargetPos(4) = -7.81*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE17)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE17;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = -44.12*DEGtoRAD;
+				TargetPos(1) = -0.35*DEGtoRAD;
+				TargetPos(2) = 0.01*DEGtoRAD;
+				TargetPos(3) = 119.56*DEGtoRAD;
+				TargetPos(4) = -19.39*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE18)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE18;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 3.27*DEGtoRAD;
+				TargetPos(1) = -0.04*DEGtoRAD;
+				TargetPos(2) = 0.01*DEGtoRAD;
+				TargetPos(3) = 92.84*DEGtoRAD;
+				TargetPos(4) = -7.73*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE19)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE19;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 2.30*DEGtoRAD;
+				TargetPos(1) = 1.35*DEGtoRAD;
+				TargetPos(2) = -49.97*DEGtoRAD;
+				TargetPos(3) = 96.21*DEGtoRAD;
+				TargetPos(4) = -23.07*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE20)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE20;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 2.62*DEGtoRAD;
+				TargetPos(1) = 0.27*DEGtoRAD;
+				TargetPos(2) = 29.66*DEGtoRAD;
+				TargetPos(3) = 93.16*DEGtoRAD;
+				TargetPos(4) = -22.83*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE21)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE21;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 3.27*DEGtoRAD;
+				TargetPos(1) = -0.04*DEGtoRAD;
+				TargetPos(2) = 0.01*DEGtoRAD;
+				TargetPos(3) = 92.84*DEGtoRAD;
+				TargetPos(4) = -7.73*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE22)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE22;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = 120.26*DEGtoRAD;
+				TargetPos(1) = 14.30*DEGtoRAD;
+				TargetPos(2) = -14.70*DEGtoRAD;
+				TargetPos(3) = 59.97*DEGtoRAD;
+				TargetPos(4) = -22.03*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+	else if( MotionCommand == MOVE_CUSTOMIZE23)
+		{
+			if( MotionCommand == MotionCommand_p )
+			{
+				if( JointPoly5th.isReady() == 0 && NewTarget==1 )
+				{
+					JointPoly5th.SetPoly5th(_Time, q, qdot, TargetPos, TrajectoryTime, TotalDoF);
+					NewTarget=0;
+				}
+				else
+				{
+					JointPoly5th.Poly5th(_Time, dq, dqdot, dqddot);
+					if(JointPoly5th.isFinished() == 1)
+						_StatusWord = TARGET_ACHIEVED;
+				}
+
+				MotionProcess = MOVE_CUSTOMIZE23;
+			}
+			else
+			{
+				TargetPos.setZero();
+				TargetPos(0) = -44.55*DEGtoRAD;
+				TargetPos(1) = -0.83*DEGtoRAD;
+				TargetPos(2) = 2.98*DEGtoRAD;
+				TargetPos(3) = 46.08*DEGtoRAD;
+				TargetPos(4) = -23.01*DEGtoRAD;
+
+
+				_Target = TargetPos;
+
+				TrajectoryTime=4;
+				NewTarget=1;
+				_StatusWord = TARGET_MOVING;
+			}
+		}
+
+
+
 	else if( MotionCommand == MOVE_JOINT_CYCLIC )
 	{
 		if( MotionCommand != MotionCommand_p )
