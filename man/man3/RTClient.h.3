@@ -1,0 +1,190 @@
+.TH "RTClient.h" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTClient.h \- Main Client for Bionic Arm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <termios\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <sys/mman\&.h>\fP
+.br
+\fC#include <sys/ioctl\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'NRMKsercan_tp\&.h'\fP
+.br
+\fC#include 'NRMKhw_tp\&.h'\fP
+.br
+\fC#include <native/task\&.h>\fP
+.br
+\fC#include <native/timer\&.h>\fP
+.br
+\fC#include <native/mutex\&.h>\fP
+.br
+\fC#include <native/queue\&.h>\fP
+.br
+\fC#include <rtdk\&.h>\fP
+.br
+\fC#include 'EcatDataSocket\&.h'\fP
+.br
+\fC#include 'EcatControlSocket\&.h'\fP
+.br
+\fC#include 'EcatSystem/RTControlSocket\&.h'\fP
+.br
+\fC#include 'EcatSystem/Ecat_Master\&.h'\fP
+.br
+\fC#include 'EcatSystem/Ecat_Elmo\&.h'\fP
+.br
+\fC#include 'EcatSystem/Ecat_KistFinger\&.h'\fP
+.br
+\fC#include 'EcatSystem/Ecat_KistSensor\&.h'\fP
+.br
+\fC#include 'Control/Controller\&.h'\fP
+.br
+\fC#include 'Control/Motion\&.h'\fP
+.br
+\fC#include 'Control/Trajectory\&.h'\fP
+.br
+\fC#include 'KDL/SerialManipulator\&.h'\fP
+.br
+\fC#include 'Control/KistHand\&.h'\fP
+.br
+\fC#include 'devMouseObject\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBWAKEUP_TIME\fP   (5)"
+.br
+.ti -1c
+.RI "#define \fBNSEC_PER_SEC\fP   1000000000"
+.br
+.ti -1c
+.RI "#define \fB_DEBUG_\fP"
+.br
+.ti -1c
+.RI "#define \fB_ECAT_ON_\fP"
+.br
+.ti -1c
+.RI "#define \fB_USE_DC_MODE_\fP"
+.br
+.ti -1c
+.RI "#define \fB_CAN_ON_\fP"
+.br
+.ti -1c
+.RI "#define \fB_RS232_ON_\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef unsigned int \fBUINT32\fP"
+.br
+.ti -1c
+.RI "typedef int64_t \fBINT64\fP"
+.br
+.ti -1c
+.RI "typedef int32_t \fBINT32\fP"
+.br
+.ti -1c
+.RI "typedef int16_t \fBINT16\fP"
+.br
+.ti -1c
+.RI "typedef uint16_t \fBUINT16\fP"
+.br
+.ti -1c
+.RI "typedef uint8_t \fBUINT8\fP"
+.br
+.ti -1c
+.RI "typedef int8_t \fBINT8\fP"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBcycle_ns\fP = 1000000"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Main Client for Bionic Arm\&. 
+
+
+.PP
+\fBDate\fP
+.RS 4
+2018-11-28\&. 
+.RE
+.PP
+\fBAuthor\fP
+.RS 4
+Junho Park 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0\&.0 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _DEBUG_"
+Debug Print Parameter 
+.SS "#define _ECAT_ON_"
+EtherCAT device enable Parameter 
+.SS "#define _USE_DC_MODE_"
+EtherCAT Distributed Clock mode enable Parameter 
+.SS "#define NSEC_PER_SEC   1000000000"
+Expression of second in nano second 
+.SS "#define WAKEUP_TIME   (5)"
+Initial waiting time 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef int16_t INT16"
+typedef int16_t 
+.SS "typedef int32_t INT32"
+typedef int32_t 
+.SS "typedef int64_t INT64"
+typedef uint64_t 
+.SS "typedef int8_t INT8"
+typedef int8_t 
+.SS "typedef uint16_t UINT16"
+typedef uint16_t 
+.SS "typedef unsigned int UINT32"
+typedef uint32_t 
+.SS "typedef uint8_t UINT8"
+typedef uint8_t 
+.SH "Variable Documentation"
+.PP 
+.SS "unsigned int cycle_ns = 1000000"
+1 ms, Initial Value 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

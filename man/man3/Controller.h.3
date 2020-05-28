@@ -1,0 +1,77 @@
+.TH "Control/Controller.h" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Control/Controller.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <Eigen/Dense>\fP
+.br
+\fC#include '\&.\&./KDL/PropertyDefinition\&.h'\fP
+.br
+\fC#include '\&.\&./KDL/SerialManipulator\&.h'\fP
+.br
+\fC#include '\&.\&./KDL/LieOperator\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBHYUControl::Controller\fP"
+.br
+.RI "control algorithm for manipulator "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBHYUControl\fP"
+.br
+.RI "control and trajecotry namespace for manipulator "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_USE_MATH_DEFINED\fP"
+.br
+.ti -1c
+.RI "#define \fBKpBase\fP   100"
+.br
+.ti -1c
+.RI "#define \fBKdBase\fP   8"
+.br
+.ti -1c
+.RI "#define \fBHinfBase\fP   5"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2019-05-15 
+.RE
+.PP
+\fBAuthor\fP
+.RS 4
+Junho Park 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define HinfBase   5"
+Inital value of H-infinity Gain 
+.SS "#define KdBase   8"
+Inital value of Kd 
+.SS "#define KpBase   100"
+Inital value of Kp 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

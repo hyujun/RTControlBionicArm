@@ -1,0 +1,126 @@
+\hypertarget{classhyu_ctrl_1_1_controller}{}\section{hyu\+Ctrl\+:\+:Controller Class Reference}
+\label{classhyu_ctrl_1_1_controller}\index{hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}}
+
+
+control algorithm for manipulator  
+
+
+
+
+{\ttfamily \#include $<$Controller.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_a90919718c7aeab435cb6808726c75fba}\label{classhyu_ctrl_1_1_controller_a90919718c7aeab435cb6808726c75fba}} 
+\hyperlink{classhyu_ctrl_1_1_controller_a90919718c7aeab435cb6808726c75fba}{Controller} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhyu_ctrl_1_1_controller}{Controller} constructor, Joint\+Num is 6. \end{DoxyCompactList}\item 
+\hyperlink{classhyu_ctrl_1_1_controller_aa3ac4e6fe270eadd7892f2c6da4f57dc}{Controller} (int Joint\+Num)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhyu_ctrl_1_1_controller}{Controller} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_a44b7e4046d6d12fe1ac779bf97a9f765}\label{classhyu_ctrl_1_1_controller_a44b7e4046d6d12fe1ac779bf97a9f765}} 
+void \hyperlink{classhyu_ctrl_1_1_controller_a44b7e4046d6d12fe1ac779bf97a9f765}{Clear\+Error} (void)
+\begin{DoxyCompactList}\small\item\em make error member to be zero(e, e\+\_\+dot, e\+\_\+integral) \end{DoxyCompactList}\item 
+void \hyperlink{classhyu_ctrl_1_1_controller_a3aa87a75981a8f708425210b30a20eb4}{Set\+P\+I\+D\+Gain} (float Kp\+\_\+, float Kd\+\_\+, float Ki\+\_\+, int Joint\+Num)
+\begin{DoxyCompactList}\small\item\em set the P\+ID gains \end{DoxyCompactList}\item 
+void \hyperlink{classhyu_ctrl_1_1_controller_a2c25a1138590d2530ad0af1bb6bcaba6}{P\+D\+Controller} (float $\ast$q, float $\ast$q\+\_\+dot, float $\ast$dq, float $\ast$dq\+\_\+dot, float $\ast$toq)
+\begin{DoxyCompactList}\small\item\em simple pd controller \end{DoxyCompactList}\item 
+void \hyperlink{classhyu_ctrl_1_1_controller_afc428ab49a86e7c159cadb4d0496d97b}{Torque\+Output} (float $\ast$p\+\_\+toq, int maxtoq, int $\ast$p\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em joint input torque saturator \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+control algorithm for manipulator 
+
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_aa3ac4e6fe270eadd7892f2c6da4f57dc}\label{classhyu_ctrl_1_1_controller_aa3ac4e6fe270eadd7892f2c6da4f57dc}} 
+\index{hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}}
+\subsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily hyu\+Ctrl\+::\+Controller\+::\+Controller (\begin{DoxyParamCaption}\item[{int}]{Joint\+Num }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{classhyu_ctrl_1_1_controller}{Controller} constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Joint\+Num} & number of joint \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_a2c25a1138590d2530ad0af1bb6bcaba6}\label{classhyu_ctrl_1_1_controller_a2c25a1138590d2530ad0af1bb6bcaba6}} 
+\index{hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}!P\+D\+Controller@{P\+D\+Controller}}
+\index{P\+D\+Controller@{P\+D\+Controller}!hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}}
+\subsubsection{\texorpdfstring{P\+D\+Controller()}{PDController()}}
+{\footnotesize\ttfamily void hyu\+Ctrl\+::\+Controller\+::\+P\+D\+Controller (\begin{DoxyParamCaption}\item[{float $\ast$}]{q,  }\item[{float $\ast$}]{q\+\_\+dot,  }\item[{float $\ast$}]{dq,  }\item[{float $\ast$}]{dq\+\_\+dot,  }\item[{float $\ast$}]{toq }\end{DoxyParamCaption})}
+
+
+
+simple pd controller 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em q} & current joint position \\
+\hline
+\mbox{\tt in}  & {\em q\+\_\+dot} & current joint velocity \\
+\hline
+\mbox{\tt in}  & {\em dq} & desired joint position \\
+\hline
+\mbox{\tt in}  & {\em dq\+\_\+dot} & desired joint velocity \\
+\hline
+\mbox{\tt in}  & {\em toq} & joint input torque as control input \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_a3aa87a75981a8f708425210b30a20eb4}\label{classhyu_ctrl_1_1_controller_a3aa87a75981a8f708425210b30a20eb4}} 
+\index{hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}!Set\+P\+I\+D\+Gain@{Set\+P\+I\+D\+Gain}}
+\index{Set\+P\+I\+D\+Gain@{Set\+P\+I\+D\+Gain}!hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}}
+\subsubsection{\texorpdfstring{Set\+P\+I\+D\+Gain()}{SetPIDGain()}}
+{\footnotesize\ttfamily void hyu\+Ctrl\+::\+Controller\+::\+Set\+P\+I\+D\+Gain (\begin{DoxyParamCaption}\item[{float}]{Kp\+\_\+,  }\item[{float}]{Kd\+\_\+,  }\item[{float}]{Ki\+\_\+,  }\item[{int}]{Joint\+Num }\end{DoxyParamCaption})}
+
+
+
+set the P\+ID gains 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Kp\+\_\+} & proportional gain \\
+\hline
+\mbox{\tt in}  & {\em Kd\+\_\+} & derivative gain \\
+\hline
+\mbox{\tt in}  & {\em Ki\+\_\+} & integral gain \\
+\hline
+\mbox{\tt in}  & {\em Joint\+Num} & number of joint \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_controller_afc428ab49a86e7c159cadb4d0496d97b}\label{classhyu_ctrl_1_1_controller_afc428ab49a86e7c159cadb4d0496d97b}} 
+\index{hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}!Torque\+Output@{Torque\+Output}}
+\index{Torque\+Output@{Torque\+Output}!hyu\+Ctrl\+::\+Controller@{hyu\+Ctrl\+::\+Controller}}
+\subsubsection{\texorpdfstring{Torque\+Output()}{TorqueOutput()}}
+{\footnotesize\ttfamily void hyu\+Ctrl\+::\+Controller\+::\+Torque\+Output (\begin{DoxyParamCaption}\item[{float $\ast$}]{p\+\_\+toq,  }\item[{int}]{maxtoq,  }\item[{int $\ast$}]{p\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+joint input torque saturator 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p\+\_\+toq} & joint input torque as control input \\
+\hline
+\mbox{\tt in}  & {\em maxtoq} & maximum torque motor can handle \\
+\hline
+\mbox{\tt in}  & {\em p\+\_\+dir} & direction of motor \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Control/\hyperlink{_controller_8h}{Controller.\+h}\item 
+Control/Controller.\+cpp\end{DoxyCompactItemize}

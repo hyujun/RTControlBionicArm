@@ -1,0 +1,121 @@
+.TH "hyuCtrl::Controller" 3 "Wed Sep 25 2019" "Version 1.0.0" "Dual Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuCtrl::Controller \- control algorithm for manipulator  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Controller\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBController\fP ()"
+.br
+.RI "\fBController\fP constructor, JointNum is 6\&. "
+.ti -1c
+.RI "\fBController\fP (int JointNum)"
+.br
+.RI "\fBController\fP constructor\&. "
+.ti -1c
+.RI "void \fBClearError\fP (void)"
+.br
+.RI "make error member to be zero(e, e_dot, e_integral) "
+.ti -1c
+.RI "void \fBSetPIDGain\fP (float Kp_, float Kd_, float Ki_, int JointNum)"
+.br
+.RI "set the PID gains "
+.ti -1c
+.RI "void \fBPDController\fP (float *q, float *q_dot, float *dq, float *dq_dot, float *toq)"
+.br
+.RI "simple pd controller "
+.ti -1c
+.RI "void \fBTorqueOutput\fP (float *p_toq, int maxtoq, int *p_dir)"
+.br
+.RI "joint input torque saturator "
+.in -1c
+.SH "Detailed Description"
+.PP 
+control algorithm for manipulator 
+
+
+.PP
+\fBVersion:\fP
+.RS 4
+1\&.0\&.0 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "hyuCtrl::Controller::Controller (int JointNum)"
+
+.PP
+\fBController\fP constructor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIJointNum\fP number of joint 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void hyuCtrl::Controller::PDController (float * q, float * q_dot, float * dq, float * dq_dot, float * toq)"
+
+.PP
+simple pd controller 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIq\fP current joint position 
+.br
+\fIq_dot\fP current joint velocity 
+.br
+\fIdq\fP desired joint position 
+.br
+\fIdq_dot\fP desired joint velocity 
+.br
+\fItoq\fP joint input torque as control input 
+.RE
+.PP
+
+.SS "void hyuCtrl::Controller::SetPIDGain (float Kp_, float Kd_, float Ki_, int JointNum)"
+
+.PP
+set the PID gains 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIKp_\fP proportional gain 
+.br
+\fIKd_\fP derivative gain 
+.br
+\fIKi_\fP integral gain 
+.br
+\fIJointNum\fP number of joint 
+.RE
+.PP
+
+.SS "void hyuCtrl::Controller::TorqueOutput (float * p_toq, int maxtoq, int * p_dir)"
+
+.PP
+joint input torque saturator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp_toq\fP joint input torque as control input 
+.br
+\fImaxtoq\fP maximum torque motor can handle 
+.br
+\fIp_dir\fP direction of motor 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Dual Arm Ver\&.1 from the source code\&.

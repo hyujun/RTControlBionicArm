@@ -1,0 +1,96 @@
+\hypertarget{class_h_y_u_control_1_1_trajectory}{}\doxysection{H\+Y\+U\+Control\+::Trajectory Class Reference}
+\label{class_h_y_u_control_1_1_trajectory}\index{HYUControl::Trajectory@{HYUControl::Trajectory}}
+
+
+\mbox{\hyperlink{class_h_y_u_control_1_1_trajectory}{Trajectory}} Class is 5th order polynomial trajectory generator interface.  
+
+
+
+
+{\ttfamily \#include $<$Trajectory.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_h_y_u_control_1_1_trajectory_a818921cd7126c8104fc4363c7fccabd4}{is\+Ready}} (void)
+\begin{DoxyCompactList}\small\item\em Confirm the Trajectory\+Class is ready. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_trajectory_a7aac34a6a206fbc74963789ec078d13d}\label{class_h_y_u_control_1_1_trajectory_a7aac34a6a206fbc74963789ec078d13d}} 
+int {\bfseries is\+Finished} (void)
+\item 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_trajectory_abf888790b2bd3f5d7936083a4aed10cc}{Set\+Poly5th}} (const double \&\+\_\+\+Current\+Time, Eigen\+::\+Vector\+Xd \&\+\_\+\+Start\+Pos, Eigen\+::\+Vector\+Xd \&\+\_\+\+Start\+Vel, Eigen\+::\+Vector\+Xd \&\+\_\+\+Final\+Pos, double \&\+\_\+\+Duration, int \&\+\_\+\+Num\+Joint)
+\begin{DoxyCompactList}\small\item\em set the 5th polynomial trajectory \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_trajectory_adb84580c4b6f2c2b255d8fc89851c05d}{Poly5th}} (const double \&\+\_\+\+Current\+Time, Eigen\+::\+Vector\+Xd \&\+\_\+dq, Eigen\+::\+Vector\+Xd \&\+\_\+dqdot, Eigen\+::\+Vector\+Xd \&\+\_\+dqddot)
+\begin{DoxyCompactList}\small\item\em generate the trajecotry for q, qdot, qddot \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_h_y_u_control_1_1_trajectory}{Trajectory}} Class is 5th order polynomial trajectory generator interface. 
+
+\begin{DoxyVersion}{Version}
+1.\+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_trajectory_a818921cd7126c8104fc4363c7fccabd4}\label{class_h_y_u_control_1_1_trajectory_a818921cd7126c8104fc4363c7fccabd4}} 
+\index{HYUControl::Trajectory@{HYUControl::Trajectory}!isReady@{isReady}}
+\index{isReady@{isReady}!HYUControl::Trajectory@{HYUControl::Trajectory}}
+\doxysubsubsection{\texorpdfstring{isReady()}{isReady()}}
+{\footnotesize\ttfamily bool H\+Y\+U\+Control\+::\+Trajectory\+::is\+Ready (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Confirm the Trajectory\+Class is ready. 
+
+\begin{DoxyReturn}{Returns}
+1 \+: ready ~\newline
+0 \+: not ready 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_trajectory_adb84580c4b6f2c2b255d8fc89851c05d}\label{class_h_y_u_control_1_1_trajectory_adb84580c4b6f2c2b255d8fc89851c05d}} 
+\index{HYUControl::Trajectory@{HYUControl::Trajectory}!Poly5th@{Poly5th}}
+\index{Poly5th@{Poly5th}!HYUControl::Trajectory@{HYUControl::Trajectory}}
+\doxysubsubsection{\texorpdfstring{Poly5th()}{Poly5th()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Control\+::\+Trajectory\+::\+Poly5th (\begin{DoxyParamCaption}\item[{const double \&}]{\+\_\+\+Current\+Time,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+dq,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+dqdot,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+dqddot }\end{DoxyParamCaption})}
+
+
+
+generate the trajecotry for q, qdot, qddot 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Current\+Time} & current time in second \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+dq} & returns value for desired q \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+dqdot} & returns value for desired qdot \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+dqddot} & returns value for desired qddot \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_trajectory_abf888790b2bd3f5d7936083a4aed10cc}\label{class_h_y_u_control_1_1_trajectory_abf888790b2bd3f5d7936083a4aed10cc}} 
+\index{HYUControl::Trajectory@{HYUControl::Trajectory}!SetPoly5th@{SetPoly5th}}
+\index{SetPoly5th@{SetPoly5th}!HYUControl::Trajectory@{HYUControl::Trajectory}}
+\doxysubsubsection{\texorpdfstring{SetPoly5th()}{SetPoly5th()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Control\+::\+Trajectory\+::\+Set\+Poly5th (\begin{DoxyParamCaption}\item[{const double \&}]{\+\_\+\+Current\+Time,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+\+Start\+Pos,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+\+Start\+Vel,  }\item[{Eigen\+::\+Vector\+Xd \&}]{\+\_\+\+Final\+Pos,  }\item[{double \&}]{\+\_\+\+Duration,  }\item[{int \&}]{\+\_\+\+Num\+Joint }\end{DoxyParamCaption})}
+
+
+
+set the 5th polynomial trajectory 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Start\+Pos} & start joint position \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Final\+Pos} & final joint position \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Init\+Time} & start time \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Duration} & trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Control/\mbox{\hyperlink{_trajectory_8h}{Trajectory.\+h}}\item 
+Control/Trajectory.\+cpp\end{DoxyCompactItemize}

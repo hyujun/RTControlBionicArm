@@ -1,0 +1,146 @@
+\hypertarget{classhyu_ctrl_1_1_trajectory}{}\section{hyu\+Ctrl\+:\+:Trajectory Class Reference}
+\label{classhyu_ctrl_1_1_trajectory}\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+
+
+\hyperlink{classhyu_ctrl_1_1_trajectory}{Trajectory} Class is 5th order polynomial trajectory generator interface.  
+
+
+
+
+{\ttfamily \#include $<$Trajectory.\+h$>$}
+
+Inheritance diagram for hyu\+Ctrl\+:\+:Trajectory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhyu_ctrl_1_1_trajectory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classhyu_ctrl_1_1_trajectory_ae7ad2c75ec2b482dfb79364e24858f66}{is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Confirm the Trajectory\+Class is ready. \end{DoxyCompactList}\item 
+int \hyperlink{classhyu_ctrl_1_1_trajectory_a0747f722e56a5c51431d973d6ea585c7}{is\+Ready} (int Num\+Joint)
+\begin{DoxyCompactList}\small\item\em Confirm the Trajectory\+Class is ready. \end{DoxyCompactList}\item 
+void \hyperlink{classhyu_ctrl_1_1_trajectory_aa60d7230e70b463cd967e38f37b45821}{Set\+Polynomial5th} (int Num\+Joint, float start\+Pos, float Final\+Pos, float Init\+Time, float Duration)
+\begin{DoxyCompactList}\small\item\em set the 5th polynomial trajectory \end{DoxyCompactList}\item 
+float \hyperlink{classhyu_ctrl_1_1_trajectory_af913157330cd55ac4882bd504dd04c1c}{Polynomial5th} (int Num\+Joint, float Current\+Time, int $\ast$Flag)
+\begin{DoxyCompactList}\small\item\em generate the trajecotry for q \end{DoxyCompactList}\item 
+float \hyperlink{classhyu_ctrl_1_1_trajectory_ac7bf1ad2993f3eb33750518cdbb11678}{Polynomial5th} (int Num\+Joint, float Current\+Time, int $\ast$Flag, float $\ast$q\+\_\+)
+\begin{DoxyCompactList}\small\item\em generate the trajecotry for q, qdot \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classhyu_ctrl_1_1_trajectory}{Trajectory} Class is 5th order polynomial trajectory generator interface. 
+
+\begin{DoxyVersion}{Version}
+1.\+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_trajectory_ae7ad2c75ec2b482dfb79364e24858f66}\label{classhyu_ctrl_1_1_trajectory_ae7ad2c75ec2b482dfb79364e24858f66}} 
+\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}!is\+Ready@{is\+Ready}}
+\index{is\+Ready@{is\+Ready}!hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+\subsubsection{\texorpdfstring{is\+Ready()}{isReady()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool hyu\+Ctrl\+::\+Trajectory\+::is\+Ready (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Confirm the Trajectory\+Class is ready. 
+
+\begin{DoxyReturn}{Returns}
+1 \+: ready ~\newline
+0 \+: not ready 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_trajectory_a0747f722e56a5c51431d973d6ea585c7}\label{classhyu_ctrl_1_1_trajectory_a0747f722e56a5c51431d973d6ea585c7}} 
+\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}!is\+Ready@{is\+Ready}}
+\index{is\+Ready@{is\+Ready}!hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+\subsubsection{\texorpdfstring{is\+Ready()}{isReady()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int hyu\+Ctrl\+::\+Trajectory\+::is\+Ready (\begin{DoxyParamCaption}\item[{int}]{Num\+Joint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Confirm the Trajectory\+Class is ready. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Num\+Joint} & number of joint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 \+: ready ~\newline
+ 0 \+: not ready 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_trajectory_af913157330cd55ac4882bd504dd04c1c}\label{classhyu_ctrl_1_1_trajectory_af913157330cd55ac4882bd504dd04c1c}} 
+\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}!Polynomial5th@{Polynomial5th}}
+\index{Polynomial5th@{Polynomial5th}!hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+\subsubsection{\texorpdfstring{Polynomial5th()}{Polynomial5th()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float hyu\+Ctrl\+::\+Trajectory\+::\+Polynomial5th (\begin{DoxyParamCaption}\item[{int}]{Num\+Joint,  }\item[{float}]{Current\+Time,  }\item[{int $\ast$}]{Flag }\end{DoxyParamCaption})}
+
+
+
+generate the trajecotry for q 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Num\+Joint} & number of joint \\
+\hline
+\mbox{\tt in}  & {\em Current\+Time} & current time in second \\
+\hline
+\mbox{\tt in}  & {\em Flag} & instruction flag for trajectory return q joint position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_trajectory_ac7bf1ad2993f3eb33750518cdbb11678}\label{classhyu_ctrl_1_1_trajectory_ac7bf1ad2993f3eb33750518cdbb11678}} 
+\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}!Polynomial5th@{Polynomial5th}}
+\index{Polynomial5th@{Polynomial5th}!hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+\subsubsection{\texorpdfstring{Polynomial5th()}{Polynomial5th()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float hyu\+Ctrl\+::\+Trajectory\+::\+Polynomial5th (\begin{DoxyParamCaption}\item[{int}]{Num\+Joint,  }\item[{float}]{Current\+Time,  }\item[{int $\ast$}]{Flag,  }\item[{float $\ast$}]{q\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+generate the trajecotry for q, qdot 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Num\+Joint} & number of joint \\
+\hline
+\mbox{\tt in}  & {\em Current\+Time} & current time in second \\
+\hline
+\mbox{\tt in}  & {\em Flag} & instruction flag for trajectory \\
+\hline
+\mbox{\tt in}  & {\em q\+\_\+} & return value for q, qdot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+q joint position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ctrl_1_1_trajectory_aa60d7230e70b463cd967e38f37b45821}\label{classhyu_ctrl_1_1_trajectory_aa60d7230e70b463cd967e38f37b45821}} 
+\index{hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}!Set\+Polynomial5th@{Set\+Polynomial5th}}
+\index{Set\+Polynomial5th@{Set\+Polynomial5th}!hyu\+Ctrl\+::\+Trajectory@{hyu\+Ctrl\+::\+Trajectory}}
+\subsubsection{\texorpdfstring{Set\+Polynomial5th()}{SetPolynomial5th()}}
+{\footnotesize\ttfamily void hyu\+Ctrl\+::\+Trajectory\+::\+Set\+Polynomial5th (\begin{DoxyParamCaption}\item[{int}]{Num\+Joint,  }\item[{float}]{start\+Pos,  }\item[{float}]{Final\+Pos,  }\item[{float}]{Init\+Time,  }\item[{float}]{Duration }\end{DoxyParamCaption})}
+
+
+
+set the 5th polynomial trajectory 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Num\+Joint} & number of joint \\
+\hline
+\mbox{\tt in}  & {\em start\+Pos} & start joint position \\
+\hline
+\mbox{\tt in}  & {\em Final\+Pos} & final joint position \\
+\hline
+\mbox{\tt in}  & {\em Init\+Time} & start time \\
+\hline
+\mbox{\tt in}  & {\em Duration} & trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Control/\hyperlink{_trajectory_8h}{Trajectory.\+h}\item 
+Control/Trajectory.\+cpp\end{DoxyCompactItemize}

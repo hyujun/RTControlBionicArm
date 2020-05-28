@@ -1,0 +1,225 @@
+\hypertarget{classhyu_ecat_1_1_ecat_kist_finger}{}\doxysection{hyu\+Ecat\+::Ecat\+Kist\+Finger Class Reference}
+\label{classhyu_ecat_1_1_ecat_kist_finger}\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+
+
+Modified version of Simple\+C\+AT.  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+\_\+\+Kist\+Finger.\+h$>$}
+
+Inheritance diagram for hyu\+Ecat\+::Ecat\+Kist\+Finger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhyu_ecat_1_1_ecat_kist_finger}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_acb62d8d6a3af2f2ebb091aa9c9db18c8}\label{classhyu_ecat_1_1_ecat_kist_finger_acb62d8d6a3af2f2ebb091aa9c9db18c8}} 
+enum \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_acb62d8d6a3af2f2ebb091aa9c9db18c8}{Mode\+Of\+Operation}} \{ \newline
+{\bfseries M\+O\+D\+E\+\_\+\+N\+O\+\_\+\+M\+O\+DE} = 0, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 1, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+V\+E\+L\+O\+C\+I\+TY} = 3, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+T\+O\+R\+Q\+UE} = 4, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+H\+O\+M\+I\+NG} = 6, 
+{\bfseries M\+O\+D\+E\+\_\+\+I\+N\+T\+E\+R\+P\+O\+L\+A\+T\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 7, 
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 8, 
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+V\+E\+L\+E\+O\+C\+I\+TY} = 9, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+T\+O\+R\+Q\+UE} = 10
+ \}
+\begin{DoxyCompactList}\small\item\em Description of Mode of Operation(\+Predefined in terms of Ci\+A402 Profile) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_ae7c90f6f363a2a5ea154c91e5cd42bbe}{initialized}} () const
+\begin{DoxyCompactList}\small\item\em Check the Elmo is Initialized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a7ff7ba209d29e33b679be41cad280552}\label{classhyu_ecat_1_1_ecat_kist_finger_a7ff7ba209d29e33b679be41cad280552}} 
+void {\bfseries Set\+Velocity\+Target} (int16\+\_\+t $\ast$\+\_\+\+Velocity)
+\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_af322d313c77effabadf958c2d46f8ff8}{Get\+Device\+State}} (void) const
+\begin{DoxyCompactList}\small\item\em Show the statusword in string(int) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a72766dff7bfe0740c07ca538bf9b07cf}{process\+Data}} (size\+\_\+t index, uint8\+\_\+t $\ast$domain\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Define a T\+P\+DO \& R\+P\+DO process. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a4c0bc2e29589e80b978e88b7a9266846}\label{classhyu_ecat_1_1_ecat_kist_finger_a4c0bc2e29589e80b978e88b7a9266846}} 
+std\+::string {\bfseries Get\+Devstr} (void)
+\item 
+virtual const ec\+\_\+sync\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a68ec65462ce1f9d34ad31b5676c5ff87}{syncs}} ()
+\begin{DoxyCompactList}\small\item\em manage the syncs \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a46d189fb67ee7f620cd66a2c8bc93b72}{sync\+Size}} ()
+\begin{DoxyCompactList}\small\item\em size of sync \end{DoxyCompactList}\item 
+virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a70bf0fa4ff0f564ed54abd0e8332b57c}{channels}} ()
+\begin{DoxyCompactList}\small\item\em base method for P\+DO entries \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a6a1e0423dafeef49bdc33530cf7bc3cc}{domains}} (\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&domains) const
+\begin{DoxyCompactList}\small\item\em base method for pdo domains \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a2819251d055b19ea9c4af2bb703d9ac5}\label{classhyu_ecat_1_1_ecat_kist_finger_a2819251d055b19ea9c4af2bb703d9ac5}} 
+int16\+\_\+t {\bfseries command} \mbox{[}4\mbox{]} = \{0,\}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a161e638ca282b03a33d353f6157f1780}\label{classhyu_ecat_1_1_ecat_kist_finger_a161e638ca282b03a33d353f6157f1780}} 
+int16\+\_\+t {\bfseries Motor\+Pos} \mbox{[}4\mbox{]} = \{0,\}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_ab62b35131e66dd55d98004d20638db8b}\label{classhyu_ecat_1_1_ecat_kist_finger_ab62b35131e66dd55d98004d20638db8b}} 
+int16\+\_\+t {\bfseries Motor\+Vel} \mbox{[}4\mbox{]} = \{0,\}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a2d6b2357d140829d71eaf779adc62500}\label{classhyu_ecat_1_1_ecat_kist_finger_a2d6b2357d140829d71eaf779adc62500}} 
+int16\+\_\+t {\bfseries Motor\+Input} \mbox{[}4\mbox{]} = \{0,\}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a0860f2602da756bc873d3663930dc52c}\label{classhyu_ecat_1_1_ecat_kist_finger_a0860f2602da756bc873d3663930dc52c}} 
+int16\+\_\+t {\bfseries Motor\+Torque} \mbox{[}2\mbox{]} = \{0,\}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a1b7280d13295cbf247715913e64efbf3}\label{classhyu_ecat_1_1_ecat_kist_finger_a1b7280d13295cbf247715913e64efbf3}} 
+uint16\+\_\+t {\bfseries Motor\+Status} = 0
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a40f90941d6087c73c80ce2f9476e3fb2}\label{classhyu_ecat_1_1_ecat_kist_finger_a40f90941d6087c73c80ce2f9476e3fb2}} 
+uint16\+\_\+t {\bfseries timer\+\_\+tick} =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Modified version of Simple\+C\+AT. 
+
+Ether\+C\+AT A\+PI for Elmo Gold-\/\+D\+C-\/\+Whitle \begin{DoxyVersion}{Version}
+1.\+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a70bf0fa4ff0f564ed54abd0e8332b57c}\label{classhyu_ecat_1_1_ecat_kist_finger_a70bf0fa4ff0f564ed54abd0e8332b57c}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!channels@{channels}}
+\index{channels@{channels}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{channels()}{channels()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::channels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for P\+DO entries 
+
+\begin{DoxyReturn}{Returns}
+N\+U\+LL 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_ab2f8727118657d501d735b731b89b28a}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a6a1e0423dafeef49bdc33530cf7bc3cc}\label{classhyu_ecat_1_1_ecat_kist_finger_a6a1e0423dafeef49bdc33530cf7bc3cc}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!domains@{domains}}
+\index{domains@{domains}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{domains()}{domains()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::domains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&}]{domains }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for pdo domains 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domains} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a070e7a9505d91cfb9a0f0e3f7e9d3c81}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_af322d313c77effabadf958c2d46f8ff8}\label{classhyu_ecat_1_1_ecat_kist_finger_af322d313c77effabadf958c2d46f8ff8}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!GetDeviceState@{GetDeviceState}}
+\index{GetDeviceState@{GetDeviceState}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{GetDeviceState()}{GetDeviceState()}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::\+Get\+Device\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Show the statusword in string(int) 
+
+\begin{DoxyReturn}{Returns}
+state\+\_\+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_ae7c90f6f363a2a5ea154c91e5cd42bbe}\label{classhyu_ecat_1_1_ecat_kist_finger_ae7c90f6f363a2a5ea154c91e5cd42bbe}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!initialized@{initialized}}
+\index{initialized@{initialized}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{initialized()}{initialized()}}
+{\footnotesize\ttfamily bool hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::initialized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the Elmo is Initialized. 
+
+Returns true if Elmo has reached \char`\"{}operation enabled\char`\"{} state. The transition through the state machine is handled automatically. \begin{DoxyReturn}{Returns}
+mixedboolean Success\+:1, False\+:0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a72766dff7bfe0740c07ca538bf9b07cf}\label{classhyu_ecat_1_1_ecat_kist_finger_a72766dff7bfe0740c07ca538bf9b07cf}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!processData@{processData}}
+\index{processData@{processData}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{processData()}{processData()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::process\+Data (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index,  }\item[{uint8\+\_\+t $\ast$}]{domain\+\_\+address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Define a T\+P\+DO \& R\+P\+DO process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a4ea91e30c9a2da31ef911377b1cddd38}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a68ec65462ce1f9d34ad31b5676c5ff87}\label{classhyu_ecat_1_1_ecat_kist_finger_a68ec65462ce1f9d34ad31b5676c5ff87}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!syncs@{syncs}}
+\index{syncs@{syncs}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{syncs()}{syncs()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+sync\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::syncs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+manage the syncs 
+
+\begin{DoxyReturn}{Returns}
+address of Elmo\+\_\+syncs\mbox{[}0\mbox{]} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a1728261bee14e2072f144afcfacfb2a1}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_kist_finger_a46d189fb67ee7f620cd66a2c8bc93b72}\label{classhyu_ecat_1_1_ecat_kist_finger_a46d189fb67ee7f620cd66a2c8bc93b72}} 
+\index{hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}!syncSize@{syncSize}}
+\index{syncSize@{syncSize}!hyuEcat::EcatKistFinger@{hyuEcat::EcatKistFinger}}
+\doxysubsubsection{\texorpdfstring{syncSize()}{syncSize()}}
+{\footnotesize\ttfamily virtual size\+\_\+t hyu\+Ecat\+::\+Ecat\+Kist\+Finger\+::sync\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+size of sync 
+
+\begin{DoxyReturn}{Returns}
+normalized size of Elmo\+\_\+sync 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a8fdbb57a76a03e69c7babbb44c8f740a}{hyu\+Ecat\+::\+Slave}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ecat\+System/Ecat\+\_\+\+Kist\+Finger.\+h\end{DoxyCompactItemize}

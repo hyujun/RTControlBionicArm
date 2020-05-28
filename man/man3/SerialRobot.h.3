@@ -1,0 +1,79 @@
+.TH "KDL/SerialRobot.h" 3 "Wed Sep 25 2019" "Version 1.0.0" "Dual Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KDL/SerialRobot.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include 'LieDynamics\&.h'\fP
+.br
+\fC#include 'PoEKinematics\&.h'\fP
+.br
+\fC#include 'PropertyDefinition\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrobot\fP"
+.br
+.RI "Serial robot info update\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_CURRENT_ELMO\fP   1200"
+.br
+.ti -1c
+.RI "#define \fBRADtoDEG\fP   180/M_PI"
+.br
+.ti -1c
+.RI "#define \fBDEGtoRAD\fP   M_PI/180"
+.br
+.ti -1c
+.RI "#define \fBsign\fP(a)   (((a)<0) ? \-1 : ((a)>0))"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate:\fP
+.RS 4
+2019-09-17 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Junho Park 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEGtoRAD   M_PI/180"
+constant of degree to radian 
+.SS "#define MAX_CURRENT_ELMO   1200"
+Maximum persentage of ELMO current value 
+.SS "#define RADtoDEG   180/M_PI"
+constant of radian to degree 
+.SS "#define sign(a)   (((a)<0) ? \-1 : ((a)>0))"
+Definition of Signum function 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Dual Arm Ver\&.1 from the source code\&.

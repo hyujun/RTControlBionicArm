@@ -1,0 +1,190 @@
+.TH "NRMKHelper::EcatControlSocket< _NUM_JOINTS >" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NRMKHelper::EcatControlSocket< _NUM_JOINTS > \- Ethernet control Socket\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EcatControlSocket\&.h>\fP
+.PP
+Inherits NRMKSocketBase\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBNUM_JOINTS\fP = _NUM_JOINTS, \fBNUM_BYTES_NUMJOINTS\fP = 1, \fBNUM_BYTES_MODEOP\fP = 1, \fBNUM_BYTES_STATUS\fP = 2, \fBNUM_BYTES_ACTPOS\fP = 4, \fBNUM_BYTES_ACTVEL\fP = 4, \fBNUM_BYTES_ACTTOR\fP = 2, \fBNUM_BYTES_DATA_LENGTH\fP = NUM_BYTES_NUMJOINTS + NUM_JOINTS*(NUM_BYTES_MODEOP+NUM_BYTES_STATUS+NUM_BYTES_ACTPOS+NUM_BYTES_ACTVEL+NUM_BYTES_ACTTOR), \fBNUM_BYTES_TARVAL\fP = 4, \fBNUM_BYTES_MAXVEL\fP = 4, \fBNUM_BYTES_MAXACC\fP = 4, \fBNUM_BYTES_MAXJERK\fP = 4, \fBNUM_BYTES_CMD_LENGTH\fP = NUM_BYTES_NUMJOINTS + NUM_JOINTS*(NUM_BYTES_MODEOP + NUM_BYTES_TARVAL + NUM_BYTES_MAXVEL + NUM_BYTES_MAXACC + NUM_BYTES_MAXJERK) }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsendKey\fP (char key)"
+.br
+.ti -1c
+.RI "void \fBgetKey\fP (char &key)"
+.br
+.RI "get key such as 'a', 'b', \&.\&.\&. "
+.ti -1c
+.RI "int \fBsendMotionData\fP (\fBINT8\fP const *const ModeOp, \fBUINT16\fP const *const Status, \fBINT32\fP const *const ActPos, \fBINT32\fP const *const ActVel, \fBINT16\fP const *const ActTor)"
+.br
+.RI "send motion data "
+.ti -1c
+.RI "int \fBgetMotionData\fP (\fBINT8\fP *ModeOp, float *TarVal, float *MaxVel, float *MaxAcc, float *MaxJerk)"
+.br
+.RI "Get the motion data of client\&. "
+.ti -1c
+.RI "virtual bool \fBhasConnection\fP () const"
+.br
+.RI "confirm the connection "
+.ti -1c
+.RI "void \fBsetConnected\fP ()"
+.br
+.RI "set connection "
+.ti -1c
+.RI "virtual void \fBOnDataReceived\fP (const LPBYTE lpBuffer, DWORD dwCount)"
+.br
+.RI "Data receiver\&. "
+.ti -1c
+.RI "virtual void \fBOnEvent\fP (UINT uEvent, LPVOID lpvData)"
+.br
+.RI "Event detector\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<int _NUM_JOINTS>
+.br
+class NRMKHelper::EcatControlSocket< _NUM_JOINTS >"
+Ethernet control Socket\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<int _NUM_JOINTS> void \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::getKey (char & key)\fC [inline]\fP"
+
+.PP
+get key such as 'a', 'b', \&.\&.\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+key 
+.RE
+.PP
+
+.SS "template<int _NUM_JOINTS> int \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::getMotionData (\fBINT8\fP * ModeOp, float * TarVal, float * MaxVel, float * MaxAcc, float * MaxJerk)\fC [inline]\fP"
+
+.PP
+Get the motion data of client\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIModeOp\fP Mode of opertation 
+.br
+\fITarVal\fP Target velocity 
+.br
+\fIMaxVel\fP Maximum velocity 
+.br
+\fIMaxAcc\fP Maximum acceleration 
+.br
+\fIMaxJerk\fP Maximum Jerk 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+if success 1, else 0 
+.RE
+.PP
+
+.SS "template<int _NUM_JOINTS> virtual bool \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::hasConnection () const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+confirm the connection 
+.PP
+\fBReturns\fP
+.RS 4
+_hasConnection boolean 
+.RE
+.PP
+
+.SS "template<int _NUM_JOINTS> virtual void \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::OnDataReceived (const LPBYTE lpBuffer, DWORD dwCount)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Data receiver\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIlpBuffer\fP 
+.br
+\fIdwCount\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.SS "template<int _NUM_JOINTS> virtual void \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::OnEvent (UINT uEvent, LPVOID lpvData)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Event detector\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIuEvent\fP 
+.br
+\fIlpvData\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+message 
+.RE
+.PP
+
+.SS "template<int _NUM_JOINTS> void \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::sendKey (char key)\fC [inline]\fP"
+sendKey is used to send key input only 
+.SS "template<int _NUM_JOINTS> int \fBNRMKHelper::EcatControlSocket\fP< _NUM_JOINTS >::sendMotionData (\fBINT8\fP const *const ModeOp, \fBUINT16\fP const *const Status, \fBINT32\fP const *const ActPos, \fBINT32\fP const *const ActVel, \fBINT16\fP const *const ActTor)\fC [inline]\fP"
+
+.PP
+send motion data 
+.PP
+\fBParameters\fP
+.RS 4
+\fIModeOp\fP Mode of operation 
+.br
+\fIStatus\fP Status word 
+.br
+\fIActPos\fP Actual position 
+.br
+\fIActVel\fP Actual velocity 
+.br
+\fIActTor\fP Actual torque 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+index 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

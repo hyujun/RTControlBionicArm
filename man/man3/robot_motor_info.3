@@ -1,0 +1,51 @@
+.TH "robot_motor_info" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+robot_motor_info \- motor information  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PropertyDefinition\&.h>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBmotor_harmonic\fP"
+.br
+.ti -1c
+.RI "int \fBenc_size\fP"
+.br
+.ti -1c
+.RI "double \fBmax_current_A\fP"
+.br
+.ti -1c
+.RI "double \fBtorque_const_Nm_A\fP"
+.br
+.ti -1c
+.RI "int \fBOffset\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+motor information 
+.SH "Member Data Documentation"
+.PP 
+.SS "int robot_motor_info::enc_size"
+resolution of encoder 
+.br
+ 
+.SS "double robot_motor_info::max_current_A"
+maximum continuous current of motor 
+.SS "int robot_motor_info::motor_harmonic"
+gear ratio 
+.SS "int robot_motor_info::Offset"
+Absolute Encoder Zero-position Offset 
+.SS "double robot_motor_info::torque_const_Nm_A"
+Torque constant of motor in Nm A 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

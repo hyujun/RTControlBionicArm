@@ -1,0 +1,70 @@
+\hypertarget{class_serial_manipulator}{}\doxysection{Serial\+Manipulator Class Reference}
+\label{class_serial_manipulator}\index{SerialManipulator@{SerialManipulator}}
+
+
+Seria l\+Manipulator info update.  
+
+
+
+
+{\ttfamily \#include $<$Serial\+Manipulator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_af39a57c1060c38c12deaa7f87bea6034}\label{class_serial_manipulator_af39a57c1060c38c12deaa7f87bea6034}} 
+void {\bfseries State\+Machine} (double $\ast$\+\_\+q, double $\ast$\+\_\+qdot, Vector\+Xd \&\+\_\+\+Target, uint16\+\_\+t \&\+\_\+\+State\+Word, uint16\+\_\+t \&\+\_\+\+Control\+Word)
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_a1885689df2a45f69706cfe927b3bbc18}\label{class_serial_manipulator_a1885689df2a45f69706cfe927b3bbc18}} 
+void \mbox{\hyperlink{class_serial_manipulator_a1885689df2a45f69706cfe927b3bbc18}{Update\+Manipulator\+Param}} (void)
+\begin{DoxyCompactList}\small\item\em update robot kinematics \& dynamics information \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_serial_manipulator_afe5a20138505e90b799e662dd7f85d02}\label{class_serial_manipulator_afe5a20138505e90b799e662dd7f85d02}} 
+void \mbox{\hyperlink{class_serial_manipulator_afe5a20138505e90b799e662dd7f85d02}{E\+N\+Cto\+R\+AD}} (int $\ast$\+\_\+enc, double $\ast$\+\_\+rad)
+\begin{DoxyCompactList}\small\item\em convert encoder inc to generalized coordinate joint position q(rad) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_serial_manipulator_a62834bebd141b1ff47163e1cf092bcd6}\label{class_serial_manipulator_a62834bebd141b1ff47163e1cf092bcd6}} 
+void \mbox{\hyperlink{class_serial_manipulator_a62834bebd141b1ff47163e1cf092bcd6}{R\+A\+Dto\+E\+NC}} (int $\ast$\+\_\+enc, double $\ast$\+\_\+rad)
+\begin{DoxyCompactList}\small\item\em convert encoder generalized coordinate joint position q(rad) to encoder inc \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_serial_manipulator_a45ec75c313e7641ad4da9bbdc685323c}\label{class_serial_manipulator_a45ec75c313e7641ad4da9bbdc685323c}} 
+void \mbox{\hyperlink{class_serial_manipulator_a45ec75c313e7641ad4da9bbdc685323c}{Velocity\+Convert}} (int32\+\_\+t $\ast$\+\_\+enc\+\_\+sec, double $\ast$\+\_\+rad\+\_\+sec)
+\begin{DoxyCompactList}\small\item\em convert encoder inc/second to generalized coordinate joint velocity q\+\_\+dot(rad/second) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_serial_manipulator_a79225e755da1f3ec5e9765ed37b4623f}\label{class_serial_manipulator_a79225e755da1f3ec5e9765ed37b4623f}} 
+void {\bfseries Torque\+Convert} (double $\ast$\+\_\+p\+Torque, short $\ast$\+\_\+p\+Output, short \&\+\_\+\+Max\+Output)
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_a57fbab2ca15ddb184f9145805de39b3a}\label{class_serial_manipulator_a57fbab2ca15ddb184f9145805de39b3a}} 
+int {\bfseries Get\+Total\+DoF} (void)
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_abf151fd05d07082ae378541221168f2c}\label{class_serial_manipulator_abf151fd05d07082ae378541221168f2c}} 
+int {\bfseries Get\+Total\+Chain} (void)
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_aa4e6a3e1b76855f791b6ad069ca2439a}\label{class_serial_manipulator_aa4e6a3e1b76855f791b6ad069ca2439a}} 
+double {\bfseries Power\+Comsumption} (int16\+\_\+t $\ast$\+\_\+\+Act\+Current)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_a63699bdfc2a3b6d0a8df121e3c4b9c88}\label{class_serial_manipulator_a63699bdfc2a3b6d0a8df121e3c4b9c88}} 
+\mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics}{H\+Y\+U\+Motion\+Dynamics\+::\+Liedynamics}} $\ast$ {\bfseries p\+Dyn}
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_a81fbafd3c7bb607e83980ea05462439c}\label{class_serial_manipulator_a81fbafd3c7bb607e83980ea05462439c}} 
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} $\ast$ {\bfseries p\+Kin}
+\item 
+\mbox{\Hypertarget{class_serial_manipulator_a63da8217e31e2dcbcb1b68e319ff8ad2}\label{class_serial_manipulator_a63da8217e31e2dcbcb1b68e319ff8ad2}} 
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} $\ast$ {\bfseries p\+Co\+M\+Kin}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Seria l\+Manipulator info update. 
+
+\begin{DoxyDate}{Date}
+2017-\/10-\/23 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+D\+L/\mbox{\hyperlink{_serial_manipulator_8h}{Serial\+Manipulator.\+h}}\item 
+K\+D\+L/Serial\+Manipulator.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+\hypertarget{class_ecat_data_socket}{}\doxysection{Ecat\+Data\+Socket Class Reference}
+\label{class_ecat_data_socket}\index{EcatDataSocket@{EcatDataSocket}}
+
+
+T\+C\+P/\+IP data socket for N\+R\+MK data scope.  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+Data\+Socket.\+h$>$}
+
+Inheritance diagram for Ecat\+Data\+Socket\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ecat_data_socket}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_ecat_data_socket_a739d00a1798912c141256e566656d794}\label{class_ecat_data_socket_a739d00a1798912c141256e566656d794}} 
+enum \{ {\bfseries N\+U\+M\+\_\+\+D\+A\+TA} = \+\_\+\+E\+C\+A\+T\+\_\+\+D\+A\+T\+A\+\_\+\+S\+O\+C\+K\+ET\+::N\+U\+M\+\_\+\+D\+A\+TA
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_ecat_data_socket_a3bdf25c3ee8bd15442f5d26373269f5b}\label{class_ecat_data_socket_a3bdf25c3ee8bd15442f5d26373269f5b}} 
+\mbox{\hyperlink{class_ecat_data_socket_a3bdf25c3ee8bd15442f5d26373269f5b}{Ecat\+Data\+Socket}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_ecat_data_socket}{Ecat\+Data\+Socket}} constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ecat_data_socket_afb7cfe53db90f340e4553bff2d9e3f49}{set\+Period}} (float delT)
+\begin{DoxyCompactList}\small\item\em set up the data period \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ecat_data_socket_abb8dbdcd867a1af4c02a98a9072734b2}\label{class_ecat_data_socket_abb8dbdcd867a1af4c02a98a9072734b2}} 
+void {\bfseries update\+Control\+Data} (double $\ast$\+\_\+\+Actual\+Pos, double $\ast$\+\_\+\+Target\+Pos)
+\item 
+\mbox{\Hypertarget{class_ecat_data_socket_a03bb196cf1da0d2899f639fc1427edd0}\label{class_ecat_data_socket_a03bb196cf1da0d2899f639fc1427edd0}} 
+void {\bfseries update\+Control\+Data} (double $\ast$\+\_\+\+Actual\+Pos, double $\ast$\+\_\+\+Target\+Pos, double $\ast$\+\_\+\+Actual\+Vel, double $\ast$\+\_\+\+Target\+Vel, short $\ast$\+\_\+\+Actual\+Toq, short $\ast$\+\_\+\+Target\+Toq)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+C\+P/\+IP data socket for N\+R\+MK data scope. 
+
+\begin{DoxyVersion}{Version}
+1.\+2.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ecat_data_socket_afb7cfe53db90f340e4553bff2d9e3f49}\label{class_ecat_data_socket_afb7cfe53db90f340e4553bff2d9e3f49}} 
+\index{EcatDataSocket@{EcatDataSocket}!setPeriod@{setPeriod}}
+\index{setPeriod@{setPeriod}!EcatDataSocket@{EcatDataSocket}}
+\doxysubsubsection{\texorpdfstring{setPeriod()}{setPeriod()}}
+{\footnotesize\ttfamily void Ecat\+Data\+Socket\+::set\+Period (\begin{DoxyParamCaption}\item[{float}]{delT }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set up the data period 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em delT} & time in second \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_ecat_data_socket_8h}{Ecat\+Data\+Socket.\+h}}\item 
+Ecat\+Data\+Socket.\+cpp\end{DoxyCompactItemize}

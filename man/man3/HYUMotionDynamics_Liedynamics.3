@@ -1,0 +1,110 @@
+.TH "HYUMotionDynamics::Liedynamics" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUMotionDynamics::Liedynamics \- [Biorobotics Lab] Dynamics Solver using Lie-Group for Tree-type Manipulator  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <LieDynamics\&.h>\fP
+.PP
+Inherits \fBHYUMotionBase::LieOperator\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLiedynamics\fP (const MatrixXi &_ChainMatrix, \fBHYUMotionKinematics::PoEKinematics\fP &_PoEKin, \fBHYUMotionKinematics::PoEKinematics\fP &_CoMKin)"
+.br
+.RI "\fBLiedynamics\fP constructor\&. "
+.ti -1c
+.RI "void \fBUpdateDynamicInfo\fP (Matrix3d _Inertia, double _Mass, Vector3d _CoM, int _LinkNum)"
+.br
+.RI "update dynamic infomation "
+.ti -1c
+.RI "void \fBPrepareDynamics\fP (const double *_q, const double *_qdot)"
+.br
+.RI "Calculate the basis of dynamics\&. "
+.ti -1c
+.RI "void \fBC_Matrix\fP (MatrixXd &_Cmat)"
+.br
+.RI "Coriolis matrix in Motion of Equation\&. "
+.ti -1c
+.RI "void \fBG_Matrix\fP (VectorXd &_G)"
+.br
+.RI "Gravity matrix in Motion of Equation\&. "
+.ti -1c
+.RI "void \fBMG_Mat_Joint\fP (MatrixXd &_M, VectorXd &_G)"
+.br
+.RI "Inertia(n x n) & Gravity(n x 1) matrix in Motion of Equation\&. "
+.ti -1c
+.RI "void \fBMG_Mat_Task\fP (const MatrixXd &_M, const VectorXd &_G, MatrixXd &_Mx, VectorXd &_Gx)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+[Biorobotics Lab] Dynamics Solver using Lie-Group for Tree-type Manipulator 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.2\&.0 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "HYUMotionDynamics::Liedynamics::Liedynamics (const MatrixXi & _ChainMatrix, \fBHYUMotionKinematics::PoEKinematics\fP & _PoEKin, \fBHYUMotionKinematics::PoEKinematics\fP & _CoMKin)"
+
+.PP
+\fBLiedynamics\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_ChainMatrix\fP 
+.br
+\fI_PoEKin\fP 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void HYUMotionDynamics::Liedynamics::PrepareDynamics (const double * _q, const double * _qdot)"
+
+.PP
+Calculate the basis of dynamics\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_q\fP generalized coordinate of joint position 
+.br
+\fI_qdot\fP generalized coordinate of joint velocity 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+ModernRobotics book 
+.RE
+.PP
+
+.SS "void HYUMotionDynamics::Liedynamics::UpdateDynamicInfo (Matrix3d _Inertia, double _Mass, Vector3d _CoM, int _LinkNum)"
+
+.PP
+update dynamic infomation 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_Inertia\fP generalized inertial matrix 
+.br
+\fI_Mass\fP mass value of each link 
+.br
+\fI_LinkNum\fP number of link from base to end-effector 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

@@ -1,0 +1,61 @@
+\hypertarget{_lie_operator_8h}{}\doxysection{K\+D\+L/\+Lie\+Operator.h File Reference}
+\label{_lie_operator_8h}\index{KDL/LieOperator.h@{KDL/LieOperator.h}}
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_h_y_u_motion_base_1_1_lie_operator}{H\+Y\+U\+Motion\+Base\+::\+Lie\+Operator}}
+\begin{DoxyCompactList}\small\item\em Lie-\/algebra operator collection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_h_y_u_motion_base}{H\+Y\+U\+Motion\+Base}}
+\begin{DoxyCompactList}\small\item\em Biorobotics Lab Lie-\/\+Group Operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Matrix$<$ double, 6, 1 $>$ \mbox{\hyperlink{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}{se3}}
+\item 
+typedef Matrix$<$ double, 4, 4 $>$ \mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}}
+\item 
+typedef Matrix$<$ double, 6, 6 $>$ \mbox{\hyperlink{_lie_operator_8h_a9f822ef9ebc3d330ec4a4b0b747c5fee}{Adjoint}}
+\item 
+typedef Matrix$<$ double, 6, 6 $>$ \mbox{\hyperlink{_lie_operator_8h_ae15f1ffae0d82099998ceb7f58bc4266}{adjoint}}
+\item 
+\mbox{\Hypertarget{_lie_operator_8h_a91d934b31786f3ca4ed0a2e7374cc8c8}\label{_lie_operator_8h_a91d934b31786f3ca4ed0a2e7374cc8c8}} 
+typedef Matrix3d {\bfseries S\+O3}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_lie_operator_8h_a9f822ef9ebc3d330ec4a4b0b747c5fee}\label{_lie_operator_8h_a9f822ef9ebc3d330ec4a4b0b747c5fee}} 
+\index{LieOperator.h@{LieOperator.h}!Adjoint@{Adjoint}}
+\index{Adjoint@{Adjoint}!LieOperator.h@{LieOperator.h}}
+\doxysubsubsection{\texorpdfstring{Adjoint}{Adjoint}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 6, 6$>$ \mbox{\hyperlink{_lie_operator_8h_a9f822ef9ebc3d330ec4a4b0b747c5fee}{Adjoint}}}
+
+Size definition of Adjoint operator(twist) \mbox{\Hypertarget{_lie_operator_8h_ae15f1ffae0d82099998ceb7f58bc4266}\label{_lie_operator_8h_ae15f1ffae0d82099998ceb7f58bc4266}} 
+\index{LieOperator.h@{LieOperator.h}!adjoint@{adjoint}}
+\index{adjoint@{adjoint}!LieOperator.h@{LieOperator.h}}
+\doxysubsubsection{\texorpdfstring{adjoint}{adjoint}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 6, 6$>$ \mbox{\hyperlink{_lie_operator_8h_ae15f1ffae0d82099998ceb7f58bc4266}{adjoint}}}
+
+Size definition of adjoint operator(wrench) \mbox{\Hypertarget{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}\label{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}} 
+\index{LieOperator.h@{LieOperator.h}!se3@{se3}}
+\index{se3@{se3}!LieOperator.h@{LieOperator.h}}
+\doxysubsubsection{\texorpdfstring{se3}{se3}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 6, 1$>$ \mbox{\hyperlink{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}{se3}}}
+
+Size definition of se3(vector) \mbox{\Hypertarget{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}\label{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}} 
+\index{LieOperator.h@{LieOperator.h}!SE3@{SE3}}
+\index{SE3@{SE3}!LieOperator.h@{LieOperator.h}}
+\doxysubsubsection{\texorpdfstring{SE3}{SE3}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 4, 4$>$ \mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}}}
+
+Size definition of S\+E3(matrix) 

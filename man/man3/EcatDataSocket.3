@@ -1,0 +1,67 @@
+.TH "EcatDataSocket" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+EcatDataSocket \- TCP/IP data socket for NRMK data scope\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EcatDataSocket\&.h>\fP
+.PP
+Inherits _ECAT_DATA_SOCKET\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBNUM_DATA\fP = _ECAT_DATA_SOCKET::NUM_DATA }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEcatDataSocket\fP ()"
+.br
+.RI "\fBEcatDataSocket\fP constructor\&. "
+.ti -1c
+.RI "void \fBsetPeriod\fP (float delT)"
+.br
+.RI "set up the data period "
+.ti -1c
+.RI "void \fBupdateControlData\fP (double *_ActualPos, double *_TargetPos)"
+.br
+.ti -1c
+.RI "void \fBupdateControlData\fP (double *_ActualPos, double *_TargetPos, double *_ActualVel, double *_TargetVel, short *_ActualToq, short *_TargetToq)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+TCP/IP data socket for NRMK data scope\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.2\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void EcatDataSocket::setPeriod (float delT)\fC [inline]\fP"
+
+.PP
+set up the data period 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdelT\fP time in second 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

@@ -1,0 +1,307 @@
+\hypertarget{classhyu_ecat_1_1_slave}{}\doxysection{hyu\+Ecat\+::Slave Class Reference}
+\label{classhyu_ecat_1_1_slave}\index{hyuEcat::Slave@{hyuEcat::Slave}}
+
+
+Ether\+C\+AT base class for each specific client i.\+e., E\+L\+MO, M\+A\+X\+ON..  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+\_\+\+Slave.\+h$>$}
+
+Inheritance diagram for hyu\+Ecat\+::Slave\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.783440cm]{classhyu_ecat_1_1_slave}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}\label{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}} 
+typedef std\+::map$<$ unsigned int, std\+::vector$<$ unsigned int $>$ $>$ \mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}}
+\begin{DoxyCompactList}\small\item\em base member for P\+DO domain \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhyu_ecat_1_1_slave_ae4a4cfbbd15f75f832793b846ea5ac48}{Slave}} (uint32\+\_\+t vendor\+\_\+id, uint32\+\_\+t product\+\_\+id)
+\begin{DoxyCompactList}\small\item\em the slave class constructor for Ether\+L\+AB A\+PI \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_aa20c36b91297a4d3e200b4596379cf1c}\label{classhyu_ecat_1_1_slave_aa20c36b91297a4d3e200b4596379cf1c}} 
+bool {\bfseries is\+Homing\+Enable} () const
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_affdec65fa863f65e30fb7a524518ba62}\label{classhyu_ecat_1_1_slave_affdec65fa863f65e30fb7a524518ba62}} 
+bool {\bfseries set\+Homing\+Param} (int32\+\_\+t Homing\+Offset, int8\+\_\+t Homing\+Method, uint32\+\_\+t Homing\+Speed, uint16\+\_\+t Homing\+Current\+Limit)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ad4ffc80eea64cadd0857e298cb3a227a}\label{classhyu_ecat_1_1_slave_ad4ffc80eea64cadd0857e298cb3a227a}} 
+int32\+\_\+t {\bfseries get\+Homing\+Offset} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a7c62c0461ad6dda6c403cc2db0bef505}\label{classhyu_ecat_1_1_slave_a7c62c0461ad6dda6c403cc2db0bef505}} 
+int8\+\_\+t {\bfseries get\+Homing\+Method} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a7b0774071fd1c78c6a98d812390ddaa9}\label{classhyu_ecat_1_1_slave_a7b0774071fd1c78c6a98d812390ddaa9}} 
+uint32\+\_\+t {\bfseries get\+Homing\+Speed} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ac14f4559a7782954a87d9e754e8c4cfd}\label{classhyu_ecat_1_1_slave_ac14f4559a7782954a87d9e754e8c4cfd}} 
+uint16\+\_\+t {\bfseries get\+Homing\+Current\+Limit} (void)
+\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_slave_a4ea91e30c9a2da31ef911377b1cddd38}{process\+Data}} (size\+\_\+t index, uint8\+\_\+t $\ast$domain\+\_\+address)
+\begin{DoxyCompactList}\small\item\em base method of P\+DO processdata \end{DoxyCompactList}\item 
+virtual const ec\+\_\+sync\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_slave_a1728261bee14e2072f144afcfacfb2a1}{syncs}} ()
+\begin{DoxyCompactList}\small\item\em base method for Sync \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_slave_a8fdbb57a76a03e69c7babbb44c8f740a}{sync\+Size}} ()
+\begin{DoxyCompactList}\small\item\em base method for Sync size \end{DoxyCompactList}\item 
+virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_slave_ab2f8727118657d501d735b731b89b28a}{channels}} ()
+\begin{DoxyCompactList}\small\item\em base method for P\+DO entries \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_slave_a070e7a9505d91cfb9a0f0e3f7e9d3c81}{domains}} (\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&domains) const
+\begin{DoxyCompactList}\small\item\em base method for pdo domains \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_slave_a632a351f2757374431ae28211f9ce02c}{set\+Slave\+Alias}} (int alias)
+\begin{DoxyCompactList}\small\item\em base method for set the slave alias \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_slave_abdca0a328fe3d45393c3a23e6e6e3dd8}{set\+Slave\+Position}} (int position)
+\begin{DoxyCompactList}\small\item\em base method for set the slave position \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_slave_ac4d675a8f1bc8aef82b3360689ddf021}{get\+Slave\+Alias}} (void)
+\begin{DoxyCompactList}\small\item\em base method for get the slave alias \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_slave_aec9f52b7c38037e1d1b728fda902e775}{get\+Slave\+Position}} (void)
+\begin{DoxyCompactList}\small\item\em base method for get the slave position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_slave_a438ddeb1480a7925326994f5a1f85615}{m\+\_\+vendor\+\_\+id}}
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_slave_afcfc84cbfb9672d277c02f5fe77fae4b}{m\+\_\+product\+\_\+id}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_slave_a047ffc422a39f70af3a636d02e3dcaa3}{slave\+\_\+alias}} =0
+\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_slave_ac337d4752dd7b9fe350468e3c52a92e8}{slave\+\_\+position}} =0
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a7c1eb7189106ea526abdabbaecefbb66}\label{classhyu_ecat_1_1_slave_a7c1eb7189106ea526abdabbaecefbb66}} 
+bool {\bfseries homing\+\_\+flag\+\_\+} = false
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a078a91b58e68c9a438bef5456f4d6c39}\label{classhyu_ecat_1_1_slave_a078a91b58e68c9a438bef5456f4d6c39}} 
+int32\+\_\+t {\bfseries m\+Homing\+Offset} =0
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ab4f3f000ea85316490bdeb599d01c627}\label{classhyu_ecat_1_1_slave_ab4f3f000ea85316490bdeb599d01c627}} 
+int8\+\_\+t {\bfseries m\+Homing\+Method} =0
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a223acc3db9ae27b3f1bfe85aca7fc770}\label{classhyu_ecat_1_1_slave_a223acc3db9ae27b3f1bfe85aca7fc770}} 
+uint32\+\_\+t {\bfseries m\+Homing\+Speed} =0
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a1e924bc78b7b7d005700ae76fe82f1f1}\label{classhyu_ecat_1_1_slave_a1e924bc78b7b7d005700ae76fe82f1f1}} 
+uint16\+\_\+t {\bfseries m\+Homing\+Current\+Limit} =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ether\+C\+AT base class for each specific client i.\+e., E\+L\+MO, M\+A\+X\+ON.. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ae4a4cfbbd15f75f832793b846ea5ac48}\label{classhyu_ecat_1_1_slave_ae4a4cfbbd15f75f832793b846ea5ac48}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!Slave@{Slave}}
+\index{Slave@{Slave}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{Slave()}{Slave()}}
+{\footnotesize\ttfamily hyu\+Ecat\+::\+Slave\+::\+Slave (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{vendor\+\_\+id,  }\item[{uint32\+\_\+t}]{product\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the slave class constructor for Ether\+L\+AB A\+PI 
+
+before use this code, slave configuration S\+H\+O\+U\+LD BE D\+O\+NE using Ether\+L\+AB A\+PI 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em vendor\+\_\+id} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em product\+\_\+id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ab2f8727118657d501d735b731b89b28a}\label{classhyu_ecat_1_1_slave_ab2f8727118657d501d735b731b89b28a}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!channels@{channels}}
+\index{channels@{channels}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{channels()}{channels()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Slave\+::channels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for P\+DO entries 
+
+\begin{DoxyReturn}{Returns}
+N\+U\+LL 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a502579cded9b5e5d7faccd900314aabf}{hyu\+Ecat\+::\+Ecat\+Maxon}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo_ae497e03f6e438976afe697575786b142}{hyu\+Ecat\+::\+Ecat\+Elmo}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_sensor_ab0feee47f8e9a283cc37855906019407}{hyu\+Ecat\+::\+Ecat\+Kist\+Sensor}}, and \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a70bf0fa4ff0f564ed54abd0e8332b57c}{hyu\+Ecat\+::\+Ecat\+Kist\+Finger}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a070e7a9505d91cfb9a0f0e3f7e9d3c81}\label{classhyu_ecat_1_1_slave_a070e7a9505d91cfb9a0f0e3f7e9d3c81}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!domains@{domains}}
+\index{domains@{domains}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{domains()}{domains()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Slave\+::domains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&}]{domains }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for pdo domains 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domains} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a7c232700362fe83a4fe884212f0188fd}{hyu\+Ecat\+::\+Ecat\+Maxon}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo_a7526319a71927765e7acf0abd1caa3e7}{hyu\+Ecat\+::\+Ecat\+Elmo}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_sensor_af0c0e29677e80a3c44a22ddb736a1d1c}{hyu\+Ecat\+::\+Ecat\+Kist\+Sensor}}, and \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a6a1e0423dafeef49bdc33530cf7bc3cc}{hyu\+Ecat\+::\+Ecat\+Kist\+Finger}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_ac4d675a8f1bc8aef82b3360689ddf021}\label{classhyu_ecat_1_1_slave_ac4d675a8f1bc8aef82b3360689ddf021}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!getSlaveAlias@{getSlaveAlias}}
+\index{getSlaveAlias@{getSlaveAlias}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{getSlaveAlias()}{getSlaveAlias()}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Slave\+::get\+Slave\+Alias (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+base method for get the slave alias 
+
+\begin{DoxyReturn}{Returns}
+slave\+\_\+alias 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_aec9f52b7c38037e1d1b728fda902e775}\label{classhyu_ecat_1_1_slave_aec9f52b7c38037e1d1b728fda902e775}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!getSlavePosition@{getSlavePosition}}
+\index{getSlavePosition@{getSlavePosition}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{getSlavePosition()}{getSlavePosition()}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Slave\+::get\+Slave\+Position (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+base method for get the slave position 
+
+\begin{DoxyReturn}{Returns}
+slave\+\_\+position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a4ea91e30c9a2da31ef911377b1cddd38}\label{classhyu_ecat_1_1_slave_a4ea91e30c9a2da31ef911377b1cddd38}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!processData@{processData}}
+\index{processData@{processData}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{processData()}{processData()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Slave\+::process\+Data (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index,  }\item[{uint8\+\_\+t $\ast$}]{domain\+\_\+address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method of P\+DO processdata 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented in \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a652e6a509c63598ac058f365c55c7bcc}{hyu\+Ecat\+::\+Ecat\+Maxon}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo_a4a8885a3668937c1f6de460e24397423}{hyu\+Ecat\+::\+Ecat\+Elmo}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a72766dff7bfe0740c07ca538bf9b07cf}{hyu\+Ecat\+::\+Ecat\+Kist\+Finger}}, and \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_sensor_ac162237f2b69a369dcf55f9105e6b3c2}{hyu\+Ecat\+::\+Ecat\+Kist\+Sensor}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a632a351f2757374431ae28211f9ce02c}\label{classhyu_ecat_1_1_slave_a632a351f2757374431ae28211f9ce02c}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!setSlaveAlias@{setSlaveAlias}}
+\index{setSlaveAlias@{setSlaveAlias}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{setSlaveAlias()}{setSlaveAlias()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Slave\+::set\+Slave\+Alias (\begin{DoxyParamCaption}\item[{int}]{alias }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+base method for set the slave alias 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em alias} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_abdca0a328fe3d45393c3a23e6e6e3dd8}\label{classhyu_ecat_1_1_slave_abdca0a328fe3d45393c3a23e6e6e3dd8}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!setSlavePosition@{setSlavePosition}}
+\index{setSlavePosition@{setSlavePosition}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{setSlavePosition()}{setSlavePosition()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Slave\+::set\+Slave\+Position (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+base method for set the slave position 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a1728261bee14e2072f144afcfacfb2a1}\label{classhyu_ecat_1_1_slave_a1728261bee14e2072f144afcfacfb2a1}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!syncs@{syncs}}
+\index{syncs@{syncs}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{syncs()}{syncs()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+sync\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Slave\+::syncs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for Sync 
+
+\begin{DoxyReturn}{Returns}
+N\+U\+LL 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a21f28e6e9ec8a40079752e3d4847559f}{hyu\+Ecat\+::\+Ecat\+Maxon}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo_a94d12efcc22aa0c1f2ebe5dd93b41664}{hyu\+Ecat\+::\+Ecat\+Elmo}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_sensor_aa3c13852e8822e7bbb0457f2c50588c1}{hyu\+Ecat\+::\+Ecat\+Kist\+Sensor}}, and \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a68ec65462ce1f9d34ad31b5676c5ff87}{hyu\+Ecat\+::\+Ecat\+Kist\+Finger}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_a8fdbb57a76a03e69c7babbb44c8f740a}\label{classhyu_ecat_1_1_slave_a8fdbb57a76a03e69c7babbb44c8f740a}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!syncSize@{syncSize}}
+\index{syncSize@{syncSize}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{syncSize()}{syncSize()}}
+{\footnotesize\ttfamily virtual size\+\_\+t hyu\+Ecat\+::\+Slave\+::sync\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for Sync size 
+
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a8259d62f398c72a9aece2f6edc808e5e}{hyu\+Ecat\+::\+Ecat\+Maxon}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo_aaabe48288bbedd2f6c80534efa55117d}{hyu\+Ecat\+::\+Ecat\+Elmo}}, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_sensor_a99f393cf94e57b8a3e84fe90018474b3}{hyu\+Ecat\+::\+Ecat\+Kist\+Sensor}}, and \mbox{\hyperlink{classhyu_ecat_1_1_ecat_kist_finger_a46d189fb67ee7f620cd66a2c8bc93b72}{hyu\+Ecat\+::\+Ecat\+Kist\+Finger}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_slave_afcfc84cbfb9672d277c02f5fe77fae4b}\label{classhyu_ecat_1_1_slave_afcfc84cbfb9672d277c02f5fe77fae4b}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!m\_product\_id@{m\_product\_id}}
+\index{m\_product\_id@{m\_product\_id}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{m\_product\_id}{m\_product\_id}}
+{\footnotesize\ttfamily const uint32\+\_\+t hyu\+Ecat\+::\+Slave\+::m\+\_\+product\+\_\+id}
+
+product id from slave configuration ~\newline
+ \mbox{\Hypertarget{classhyu_ecat_1_1_slave_a438ddeb1480a7925326994f5a1f85615}\label{classhyu_ecat_1_1_slave_a438ddeb1480a7925326994f5a1f85615}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!m\_vendor\_id@{m\_vendor\_id}}
+\index{m\_vendor\_id@{m\_vendor\_id}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{m\_vendor\_id}{m\_vendor\_id}}
+{\footnotesize\ttfamily const uint32\+\_\+t hyu\+Ecat\+::\+Slave\+::m\+\_\+vendor\+\_\+id}
+
+vendor id from slave configuration ~\newline
+ \mbox{\Hypertarget{classhyu_ecat_1_1_slave_a047ffc422a39f70af3a636d02e3dcaa3}\label{classhyu_ecat_1_1_slave_a047ffc422a39f70af3a636d02e3dcaa3}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!slave\_alias@{slave\_alias}}
+\index{slave\_alias@{slave\_alias}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{slave\_alias}{slave\_alias}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Slave\+::slave\+\_\+alias =0\hspace{0.3cm}{\ttfamily [protected]}}
+
+slave alias from slave configuration \mbox{\Hypertarget{classhyu_ecat_1_1_slave_ac337d4752dd7b9fe350468e3c52a92e8}\label{classhyu_ecat_1_1_slave_ac337d4752dd7b9fe350468e3c52a92e8}} 
+\index{hyuEcat::Slave@{hyuEcat::Slave}!slave\_position@{slave\_position}}
+\index{slave\_position@{slave\_position}!hyuEcat::Slave@{hyuEcat::Slave}}
+\doxysubsubsection{\texorpdfstring{slave\_position}{slave\_position}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Slave\+::slave\+\_\+position =0\hspace{0.3cm}{\ttfamily [protected]}}
+
+slave position from slave configuration ~\newline
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ecat\+System/\mbox{\hyperlink{_ecat___slave_8h}{Ecat\+\_\+\+Slave.\+h}}\end{DoxyCompactItemize}

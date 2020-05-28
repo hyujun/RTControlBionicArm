@@ -1,0 +1,207 @@
+.TH "hyuEcat::EcatKistFinger" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuEcat::EcatKistFinger \- Modified version of SimpleCAT\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Ecat_KistFinger\&.h>\fP
+.PP
+Inherits \fBhyuEcat::Slave\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBModeOfOperation\fP { \fBMODE_NO_MODE\fP = 0, \fBMODE_PROFILED_POSITION\fP = 1, \fBMODE_PROFILED_VELOCITY\fP = 3, \fBMODE_PROFILED_TORQUE\fP = 4, \fBMODE_HOMING\fP = 6, \fBMODE_INTERPOLATED_POSITION\fP = 7, \fBMODE_CYCLIC_SYNC_POSITION\fP = 8, \fBMODE_CYCLIC_SYNC_VELEOCITY\fP = 9, \fBMODE_CYCLIC_SYNC_TORQUE\fP = 10 }"
+.br
+.RI "Description of Mode of Operation(Predefined in terms of CiA402 Profile) "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBinitialized\fP () const"
+.br
+.RI "Check the Elmo is Initialized\&. "
+.ti -1c
+.RI "void \fBSetVelocityTarget\fP (int16_t *_Velocity)"
+.br
+.ti -1c
+.RI "int \fBGetDeviceState\fP (void) const"
+.br
+.RI "Show the statusword in string(int) "
+.ti -1c
+.RI "virtual void \fBprocessData\fP (size_t index, uint8_t *domain_address)"
+.br
+.RI "Define a TPDO & RPDO process\&. "
+.ti -1c
+.RI "std::string \fBGetDevstr\fP (void)"
+.br
+.ti -1c
+.RI "virtual const ec_sync_info_t * \fBsyncs\fP ()"
+.br
+.RI "manage the syncs "
+.ti -1c
+.RI "virtual size_t \fBsyncSize\fP ()"
+.br
+.RI "size of sync "
+.ti -1c
+.RI "virtual const ec_pdo_entry_info_t * \fBchannels\fP ()"
+.br
+.RI "base method for PDO entries "
+.ti -1c
+.RI "virtual void \fBdomains\fP (\fBDomainMap\fP &domains) const"
+.br
+.RI "base method for pdo domains "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int16_t \fBcommand\fP [4] = {0,}"
+.br
+.ti -1c
+.RI "int16_t \fBMotorPos\fP [4] = {0,}"
+.br
+.ti -1c
+.RI "int16_t \fBMotorVel\fP [4] = {0,}"
+.br
+.ti -1c
+.RI "int16_t \fBMotorInput\fP [4] = {0,}"
+.br
+.ti -1c
+.RI "int16_t \fBMotorTorque\fP [2] = {0,}"
+.br
+.ti -1c
+.RI "uint16_t \fBMotorStatus\fP = 0"
+.br
+.ti -1c
+.RI "uint16_t \fBtimer_tick\fP =0"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Modified version of SimpleCAT\&. 
+
+EtherCAT API for Elmo Gold-DC-Whitle 
+.PP
+\fBVersion\fP
+.RS 4
+1\&.1\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const ec_pdo_entry_info_t* hyuEcat::EcatKistFinger::channels ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for PDO entries 
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual void hyuEcat::EcatKistFinger::domains (\fBDomainMap\fP & domains) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for pdo domains 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomains\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "int hyuEcat::EcatKistFinger::GetDeviceState (void) const\fC [inline]\fP"
+
+.PP
+Show the statusword in string(int) 
+.PP
+\fBReturns\fP
+.RS 4
+state_ 
+.RE
+.PP
+
+.SS "bool hyuEcat::EcatKistFinger::initialized () const\fC [inline]\fP"
+
+.PP
+Check the Elmo is Initialized\&. Returns true if Elmo has reached 'operation enabled' state\&. The transition through the state machine is handled automatically\&. 
+.PP
+\fBReturns\fP
+.RS 4
+mixedboolean Success:1, False:0 
+.RE
+.PP
+
+.SS "virtual void hyuEcat::EcatKistFinger::processData (size_t index, uint8_t * domain_address)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Define a TPDO & RPDO process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIdomain_address\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual const ec_sync_info_t* hyuEcat::EcatKistFinger::syncs ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+manage the syncs 
+.PP
+\fBReturns\fP
+.RS 4
+address of Elmo_syncs[0] 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual size_t hyuEcat::EcatKistFinger::syncSize ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+size of sync 
+.PP
+\fBReturns\fP
+.RS 4
+normalized size of Elmo_sync 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

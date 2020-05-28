@@ -1,0 +1,73 @@
+.TH "devMouseObject" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+devMouseObject
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBloadMouseEvents\fP (void)"
+.br
+.ti -1c
+.RI "int \fBActivate\fP ()"
+.br
+.ti -1c
+.RI "void \fBDeactivate\fP ()"
+.br
+.ti -1c
+.RI "void \fBlogging\fP (enum loglevel_t loglevel, const char *format,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "int \fBmy_ceil\fP (int val, int div)"
+.br
+.ti -1c
+.RI "bool \fBfb_init\fP (struct \fBfb_t\fP *fb)"
+.br
+.ti -1c
+.RI "void \fBfb_die\fP (struct \fBfb_t\fP *fb)"
+.br
+.ti -1c
+.RI "void \fBfb_draw\fP (struct \fBfb_t\fP *fb, struct \fBcursor_t\fP *cursor, uint32_t color)"
+.br
+.ti -1c
+.RI "void \fBinit_mouse\fP (struct \fBmouse_t\fP *mouse)"
+.br
+.ti -1c
+.RI "void \fBprint_event\fP (void)"
+.br
+.ti -1c
+.RI "void \fBprint_event\fP (struct input_event *ie)"
+.br
+.ti -1c
+.RI "void \fBprint_mouse_state\fP (void)"
+.br
+.ti -1c
+.RI "void \fBprint_mouse_state\fP (struct \fBmouse_t\fP *mouse)"
+.br
+.ti -1c
+.RI "void \fBcursor\fP (struct input_event *ie, struct \fBmouse_t\fP *mouse)"
+.br
+.ti -1c
+.RI "void \fBbutton\fP (struct input_event *ie, struct \fBmouse_t\fP *mouse)"
+.br
+.ti -1c
+.RI "int \fBgetMousefd\fP (void)"
+.br
+.ti -1c
+.RI "struct input_event \fBgetInputEvent\fP (void)"
+.br
+.ti -1c
+.RI "struct \fBmouse_t\fP \fBgetMouse\fP (void)"
+.br
+.ti -1c
+.RI "struct \fBfb_t\fP \fBgetMousefb\fP (void)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

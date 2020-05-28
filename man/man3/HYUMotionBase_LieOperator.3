@@ -1,0 +1,242 @@
+.TH "HYUMotionBase::LieOperator" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUMotionBase::LieOperator \- Lie-algebra operator collection\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <LieOperator\&.h>\fP
+.PP
+Inherited by \fBHYUControl::Controller\fP, \fBHYUMotionDynamics::Liedynamics\fP, and \fBHYUMotionKinematics::PoEKinematics\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSE3\fP \fBinverse_SE3\fP (const \fBSE3\fP &_SE3)"
+.br
+.RI "Inverse of Homogeneous Transform Matrix SE(3) "
+.ti -1c
+.RI "void \fBinverse_SE3\fP (const \fBSE3\fP &_SE3, \fBSE3\fP &_TargetSE3)"
+.br
+.ti -1c
+.RI "Matrix3d \fBSkewMatrix\fP (const Vector3d &_Vec3)"
+.br
+.RI "Vector to Skew-Symmetric Matrix SO(3) "
+.ti -1c
+.RI "void \fBSkewMatrix\fP (const Vector3d &_Vec3, Matrix3d &_TargetMat)"
+.br
+.ti -1c
+.RI "Vector3d \fBInvSkewMatrix\fP (const Matrix3d &_Mat3)"
+.br
+.ti -1c
+.RI "Matrix3d \fBSkewMatrixSquare\fP (const Vector3d &_Vec3)"
+.br
+.RI "Square of skew-symmetric matrix\&. "
+.ti -1c
+.RI "void \fBSkewMatrixSquare\fP (const Vector3d &_Vec3, Matrix3d &_TargetMat)"
+.br
+.ti -1c
+.RI "\fBAdjoint\fP \fBAdjointMatrix\fP (const \fBSE3\fP &_SE3)"
+.br
+.RI "Make SE(3) to Adjoint-Operator(twist) "
+.ti -1c
+.RI "void \fBAdjointMatrix\fP (const \fBSE3\fP &_SE3, \fBAdjoint\fP &_TargetAdjoint)"
+.br
+.ti -1c
+.RI "\fBAdjoint\fP \fBAdjointDualMatrix\fP (const \fBSE3\fP &_SE3)"
+.br
+.RI "Make SE(3) to Dual-Adjoint-Operator(twist) "
+.ti -1c
+.RI "void \fBAdjointDualMatrix\fP (const \fBSE3\fP &_SE3, \fBAdjoint\fP &_TargetAdjoint)"
+.br
+.ti -1c
+.RI "\fBadjoint\fP \fBadjointMatrix\fP (const \fBse3\fP &_se3)"
+.br
+.RI "Make se(3) to adjoint-Operator(wrench) "
+.ti -1c
+.RI "void \fBadjointMatrix\fP (const \fBse3\fP &_se3, \fBadjoint\fP &_Targetadjoint)"
+.br
+.ti -1c
+.RI "\fBadjoint\fP \fBadjointDualMatrix\fP (const \fBse3\fP &_se3)"
+.br
+.RI "Make se(3) to dual adjoint-Operator(wrench) "
+.ti -1c
+.RI "void \fBadjointDualMatrix\fP (const \fBse3\fP &_se3, \fBadjoint\fP &_Targetadjoint)"
+.br
+.ti -1c
+.RI "SO3 \fBExpSO3Matrix\fP (const Vector3d &_omega, const double &_theta)"
+.br
+.ti -1c
+.RI "void \fBLogSO3\fP (const SO3 &_RotMat, Vector3d &_omega, double &_theta)"
+.br
+.ti -1c
+.RI "Matrix3d \fBGmapMatrix\fP (const Vector3d &_omega, const double &_theta)"
+.br
+.ti -1c
+.RI "Matrix3d \fBGinvmapMatrix\fP (const Vector3d &_omega, const double &_theta)"
+.br
+.ti -1c
+.RI "void \fBinvExpdExpMapMatrix\fP (const Vector3d &_omega, const double &_theta, MatrixXd &_dexp)"
+.br
+.ti -1c
+.RI "void \fBinvExpdExpInvMapMatrix\fP (const Vector3d &_omega, const double &_theta, MatrixXd &_dexpinv)"
+.br
+.ti -1c
+.RI "\fBSE3\fP \fBSE3Matrix\fP (const \fBse3\fP &_Twist, const double &_q)"
+.br
+.RI "Make Homogeneous transformation matrix\&. "
+.ti -1c
+.RI "void \fBSE3Matrix\fP (const \fBse3\fP &_Twist, const double &_q, \fBSE3\fP &_TargetSE3)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Lie-algebra operator collection\&. 
+
+
+.PP
+\fBSee also\fP
+.RS 4
+ModernRobotics book 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAdjoint\fP HYUMotionBase::LieOperator::AdjointDualMatrix (const \fBSE3\fP & _SE3)"
+
+.PP
+Make SE(3) to Dual-Adjoint-Operator(twist) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_SE3\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+dual-Adjoint matrix (twist) 
+.RE
+.PP
+
+.SS "\fBadjoint\fP HYUMotionBase::LieOperator::adjointDualMatrix (const \fBse3\fP & _se3)"
+
+.PP
+Make se(3) to dual adjoint-Operator(wrench) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_se3\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+dual adjoint matrix (wrench) 
+.RE
+.PP
+
+.SS "\fBAdjoint\fP HYUMotionBase::LieOperator::AdjointMatrix (const \fBSE3\fP & _SE3)"
+
+.PP
+Make SE(3) to Adjoint-Operator(twist) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_SE3\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Adjoint Matrix(twist) 
+.RE
+.PP
+
+.SS "\fBadjoint\fP HYUMotionBase::LieOperator::adjointMatrix (const \fBse3\fP & _se3)"
+
+.PP
+Make se(3) to adjoint-Operator(wrench) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_se3\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+adjoint matrix (wrench) 
+.RE
+.PP
+
+.SS "\fBSE3\fP HYUMotionBase::LieOperator::inverse_SE3 (const \fBSE3\fP & _SE3)"
+
+.PP
+Inverse of Homogeneous Transform Matrix SE(3) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_SE3\fP Homogeneous Transform Matrix SE(3) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+SE3 
+.RE
+.PP
+
+.SS "\fBSE3\fP HYUMotionBase::LieOperator::SE3Matrix (const \fBse3\fP & _Twist, const double & _q)"
+
+.PP
+Make Homogeneous transformation matrix\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_Twist\fP 
+.br
+\fI_q\fP generalized coordinate joint position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Homogeneous transformation matrix SE(3) 
+.RE
+.PP
+
+.SS "Matrix3d HYUMotionBase::LieOperator::SkewMatrix (const Vector3d & _Vec3)"
+
+.PP
+Vector to Skew-Symmetric Matrix SO(3) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_Vec3\fP vector 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+SO(3) skew-symmetric matrix 
+.RE
+.PP
+
+.SS "Matrix3d HYUMotionBase::LieOperator::SkewMatrixSquare (const Vector3d & _Vec3)"
+
+.PP
+Square of skew-symmetric matrix\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_Vec3\fP vector 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+SO(3) square of skew-symmetric matrix 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

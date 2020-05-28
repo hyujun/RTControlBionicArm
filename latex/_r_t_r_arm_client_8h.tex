@@ -1,0 +1,215 @@
+\hypertarget{_r_t_r_arm_client_8h}{}\section{R\+T\+R\+Arm\+Client.\+h File Reference}
+\label{_r_t_r_arm_client_8h}\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+
+
+Main Client for Bionic Arm.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}N\+R\+M\+Ksercan\+\_\+tp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}N\+R\+M\+Khw\+\_\+tp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$native/task.\+h$>$}\newline
+{\ttfamily \#include $<$native/timer.\+h$>$}\newline
+{\ttfamily \#include $<$native/mutex.\+h$>$}\newline
+{\ttfamily \#include $<$rtdk.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Ecat\+Data\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+Control\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Master.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Elmo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Maxon.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Trajectory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}K\+D\+L/\+Serial\+Robot.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME}~(5)
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC}~1000000000
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}{\+\_\+\+D\+E\+B\+U\+G\+\_\+}
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_a89468f9c192c46d9d021e8a74762957b}{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_aafb7f8fd63067bc7957a2eb94fc260c2}{\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}
+\item 
+\#define \hyperlink{_r_t_r_arm_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \hyperlink{_r_t_r_arm_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}{U\+I\+N\+T32}
+\item 
+typedef int32\+\_\+t \hyperlink{_r_t_r_arm_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}
+\item 
+typedef int16\+\_\+t \hyperlink{_r_t_r_arm_client_8h_aca6c48234f001fdbd6597515a4cc088d}{I\+N\+T16}
+\item 
+typedef uint16\+\_\+t \hyperlink{_r_t_r_arm_client_8h_acbc04026a2008f7c2fccf01718291c20}{U\+I\+N\+T16}
+\item 
+typedef uint8\+\_\+t \hyperlink{_r_t_r_arm_client_8h_af3037cbae2cdbc45fb75983c08b87935}{U\+I\+N\+T8}
+\item 
+typedef int8\+\_\+t \hyperlink{_r_t_r_arm_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_a604f44d1f67bf2a0069a3c3259314d67}\label{_r_t_r_arm_client_8h_a604f44d1f67bf2a0069a3c3259314d67}} 
+void \hyperlink{_r_t_r_arm_client_8h_a604f44d1f67bf2a0069a3c3259314d67}{save\+Log\+Data} (void)
+\begin{DoxyCompactList}\small\item\em T\+C\+P/\+IP Logging data. \end{DoxyCompactList}\item 
+void \hyperlink{_r_t_r_arm_client_8h_a450e1ace9b6c391d59d502d75080479f}{tca\+\_\+task\+\_\+proc} (void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em RT Process for T\+CA \& S\+MA (C\+AN) \end{DoxyCompactList}\item 
+void \hyperlink{_r_t_r_arm_client_8h_af675374954cdabdf63d036fe3c12d348}{signal\+\_\+handler} (int signum)
+\begin{DoxyCompactList}\small\item\em Client Signal Handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{_r_t_r_arm_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}{cycle\+\_\+ns} = 1000000
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main Client for Bionic Arm. 
+
+\begin{DoxyDate}{Date}
+2018-\/11-\/28. 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_aafb7f8fd63067bc7957a2eb94fc260c2}\label{_r_t_r_arm_client_8h_aafb7f8fd63067bc7957a2eb94fc260c2}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+@{\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}}
+\index{\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+@{\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}{\_CAN\_ON\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}
+
+C\+AN device enable Parameter \mbox{\Hypertarget{_r_t_r_arm_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}\label{_r_t_r_arm_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!\+\_\+\+D\+E\+B\+U\+G\+\_\+@{\+\_\+\+D\+E\+B\+U\+G\+\_\+}}
+\index{\+\_\+\+D\+E\+B\+U\+G\+\_\+@{\+\_\+\+D\+E\+B\+U\+G\+\_\+}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+D\+E\+B\+U\+G\+\_\+}{\_DEBUG\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+D\+E\+B\+U\+G\+\_\+}
+
+Debug Print Parameter \mbox{\Hypertarget{_r_t_r_arm_client_8h_a89468f9c192c46d9d021e8a74762957b}\label{_r_t_r_arm_client_8h_a89468f9c192c46d9d021e8a74762957b}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+@{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}}
+\index{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+@{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}{\_ECAT\_ON\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}
+
+Ether\+C\+AT device enable Parameter \mbox{\Hypertarget{_r_t_r_arm_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}\label{_r_t_r_arm_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+@{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}}
+\index{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+@{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}{\_USE\_DC\_MODE\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}
+
+Ether\+C\+AT Distributed Clock mode enable Parameter \mbox{\Hypertarget{_r_t_r_arm_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}\label{_r_t_r_arm_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC}}
+\index{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC}{NSEC\_PER\_SEC}}
+{\footnotesize\ttfamily \#define N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC~1000000000}
+
+Expression of second in nano second \mbox{\Hypertarget{_r_t_r_arm_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}\label{_r_t_r_arm_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME@{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME}}
+\index{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME@{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME}{WAKEUP\_TIME}}
+{\footnotesize\ttfamily \#define W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME~(5)}
+
+Initial waiting time 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_aca6c48234f001fdbd6597515a4cc088d}\label{_r_t_r_arm_client_8h_aca6c48234f001fdbd6597515a4cc088d}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!I\+N\+T16@{I\+N\+T16}}
+\index{I\+N\+T16@{I\+N\+T16}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+T16}{INT16}}
+{\footnotesize\ttfamily typedef int16\+\_\+t I\+N\+T16}
+
+typedef int16\+\_\+t \mbox{\Hypertarget{_r_t_r_arm_client_8h_a2c951cf9402cd61f04b43789471dbe7c}\label{_r_t_r_arm_client_8h_a2c951cf9402cd61f04b43789471dbe7c}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!I\+N\+T32@{I\+N\+T32}}
+\index{I\+N\+T32@{I\+N\+T32}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+T32}{INT32}}
+{\footnotesize\ttfamily typedef int32\+\_\+t I\+N\+T32}
+
+typedef int32\+\_\+t \mbox{\Hypertarget{_r_t_r_arm_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}\label{_r_t_r_arm_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!I\+N\+T8@{I\+N\+T8}}
+\index{I\+N\+T8@{I\+N\+T8}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+T8}{INT8}}
+{\footnotesize\ttfamily typedef int8\+\_\+t I\+N\+T8}
+
+typedef int8\+\_\+t \mbox{\Hypertarget{_r_t_r_arm_client_8h_acbc04026a2008f7c2fccf01718291c20}\label{_r_t_r_arm_client_8h_acbc04026a2008f7c2fccf01718291c20}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!U\+I\+N\+T16@{U\+I\+N\+T16}}
+\index{U\+I\+N\+T16@{U\+I\+N\+T16}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{U\+I\+N\+T16}{UINT16}}
+{\footnotesize\ttfamily typedef uint16\+\_\+t U\+I\+N\+T16}
+
+typedef uint16\+\_\+t \mbox{\Hypertarget{_r_t_r_arm_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}\label{_r_t_r_arm_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!U\+I\+N\+T32@{U\+I\+N\+T32}}
+\index{U\+I\+N\+T32@{U\+I\+N\+T32}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{U\+I\+N\+T32}{UINT32}}
+{\footnotesize\ttfamily typedef unsigned int U\+I\+N\+T32}
+
+typedef uint32\+\_\+t \mbox{\Hypertarget{_r_t_r_arm_client_8h_af3037cbae2cdbc45fb75983c08b87935}\label{_r_t_r_arm_client_8h_af3037cbae2cdbc45fb75983c08b87935}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!U\+I\+N\+T8@{U\+I\+N\+T8}}
+\index{U\+I\+N\+T8@{U\+I\+N\+T8}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{U\+I\+N\+T8}{UINT8}}
+{\footnotesize\ttfamily typedef uint8\+\_\+t U\+I\+N\+T8}
+
+typedef uint8\+\_\+t 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_af675374954cdabdf63d036fe3c12d348}\label{_r_t_r_arm_client_8h_af675374954cdabdf63d036fe3c12d348}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!signal\+\_\+handler@{signal\+\_\+handler}}
+\index{signal\+\_\+handler@{signal\+\_\+handler}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{signal\+\_\+handler()}{signal\_handler()}}
+{\footnotesize\ttfamily void signal\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{signum }\end{DoxyParamCaption})}
+
+
+
+Client Signal Handler. 
+
+Operate when the C\+T\+R\+L+C 
+\begin{DoxyParams}{Parameters}
+{\em signum} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T(\+S\+U\+C\+C\+E\+S\+S) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_a450e1ace9b6c391d59d502d75080479f}\label{_r_t_r_arm_client_8h_a450e1ace9b6c391d59d502d75080479f}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!tca\+\_\+task\+\_\+proc@{tca\+\_\+task\+\_\+proc}}
+\index{tca\+\_\+task\+\_\+proc@{tca\+\_\+task\+\_\+proc}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{tca\+\_\+task\+\_\+proc()}{tca\_task\_proc()}}
+{\footnotesize\ttfamily void tca\+\_\+task\+\_\+proc (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+RT Process for T\+CA \& S\+MA (C\+AN) 
+
+S\+MA \& T\+CA operating R\+T\+T\+A\+SK \begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{_r_t_r_arm_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}\label{_r_t_r_arm_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}} 
+\index{R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}!cycle\+\_\+ns@{cycle\+\_\+ns}}
+\index{cycle\+\_\+ns@{cycle\+\_\+ns}!R\+T\+R\+Arm\+Client.\+h@{R\+T\+R\+Arm\+Client.\+h}}
+\subsubsection{\texorpdfstring{cycle\+\_\+ns}{cycle\_ns}}
+{\footnotesize\ttfamily unsigned int cycle\+\_\+ns = 1000000}
+
+1 ms, Initial Value 

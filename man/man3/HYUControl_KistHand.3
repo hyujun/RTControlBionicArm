@@ -1,0 +1,44 @@
+.TH "HYUControl::KistHand" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUControl::KistHand
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdigit\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBHandEnctoRad\fP (int *_enc, double *_rad)"
+.br
+.ti -1c
+.RI "void \fBHandVelocityConvert\fP (int *_enc_s, double *_rad_s)"
+.br
+.ti -1c
+.RI "void \fBHandControl\fP (int _Motion, double *_inc_enc, int32_t *_inc_command_vel, double _Time)"
+.br
+.ti -1c
+.RI "void \fBForKinematics_Thumb\fP (\fBdigit\fP *pThumb)"
+.br
+.ti -1c
+.RI "void \fBForKinematics_Fingers\fP (\fBdigit\fP *pFinger, int Pos)"
+.br
+.ti -1c
+.RI "void \fBInvKinematics_Fingers\fP (\fBdigit\fP *pFinger, int Pos)"
+.br
+.ti -1c
+.RI "void \fBInvKinematics_Thumb\fP (\fBdigit\fP *pThumb)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

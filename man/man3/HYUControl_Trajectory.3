@@ -1,0 +1,95 @@
+.TH "HYUControl::Trajectory" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUControl::Trajectory \- \fBTrajectory\fP Class is 5th order polynomial trajectory generator interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Trajectory\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisReady\fP (void)"
+.br
+.RI "Confirm the TrajectoryClass is ready\&. "
+.ti -1c
+.RI "int \fBisFinished\fP (void)"
+.br
+.ti -1c
+.RI "void \fBSetPoly5th\fP (const double &_CurrentTime, Eigen::VectorXd &_StartPos, Eigen::VectorXd &_StartVel, Eigen::VectorXd &_FinalPos, double &_Duration, int &_NumJoint)"
+.br
+.RI "set the 5th polynomial trajectory "
+.ti -1c
+.RI "void \fBPoly5th\fP (const double &_CurrentTime, Eigen::VectorXd &_dq, Eigen::VectorXd &_dqdot, Eigen::VectorXd &_dqddot)"
+.br
+.RI "generate the trajecotry for q, qdot, qddot "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTrajectory\fP Class is 5th order polynomial trajectory generator interface\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.1\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool HYUControl::Trajectory::isReady (void)\fC [inline]\fP"
+
+.PP
+Confirm the TrajectoryClass is ready\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 : ready 
+.br
+0 : not ready 
+.RE
+.PP
+
+.SS "void HYUControl::Trajectory::Poly5th (const double & _CurrentTime, Eigen::VectorXd & _dq, Eigen::VectorXd & _dqdot, Eigen::VectorXd & _dqddot)"
+
+.PP
+generate the trajecotry for q, qdot, qddot 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_CurrentTime\fP current time in second 
+.br
+\fI_dq\fP returns value for desired q 
+.br
+\fI_dqdot\fP returns value for desired qdot 
+.br
+\fI_dqddot\fP returns value for desired qddot 
+.RE
+.PP
+
+.SS "void HYUControl::Trajectory::SetPoly5th (const double & _CurrentTime, Eigen::VectorXd & _StartPos, Eigen::VectorXd & _StartVel, Eigen::VectorXd & _FinalPos, double & _Duration, int & _NumJoint)"
+
+.PP
+set the 5th polynomial trajectory 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_StartPos\fP start joint position 
+.br
+\fI_FinalPos\fP final joint position 
+.br
+\fI_InitTime\fP start time 
+.br
+\fI_Duration\fP trajectory time 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

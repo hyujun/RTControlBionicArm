@@ -1,0 +1,74 @@
+.TH "robot_dynamic_info" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+robot_dynamic_info \- Dynamic Information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PropertyDefinition\&.h>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "double \fBmass_kg\fP"
+.br
+.ti -1c
+.RI "double \fBIxx_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBIyy_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBIzz_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBIxy_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBIyz_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBIzx_kgm2\fP"
+.br
+.ti -1c
+.RI "double \fBCoM_x\fP"
+.br
+.ti -1c
+.RI "double \fBCoM_y\fP"
+.br
+.ti -1c
+.RI "double \fBCoM_z\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Dynamic Information\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "double robot_dynamic_info::CoM_x"
+x direction CoM in m 
+.SS "double robot_dynamic_info::CoM_y"
+y direction CoM in m 
+.SS "double robot_dynamic_info::CoM_z"
+z direction CoM in m 
+.SS "double robot_dynamic_info::Ixx_kgm2"
+xx direction inertia in kgm^2 
+.SS "double robot_dynamic_info::Ixy_kgm2"
+yy direction inertia in kgm^2 
+.SS "double robot_dynamic_info::Iyy_kgm2"
+xy direction inertia in kgm^2 
+.SS "double robot_dynamic_info::Iyz_kgm2"
+yz direction inertia in kgm^2 
+.SS "double robot_dynamic_info::Izx_kgm2"
+zz direction inertia in kgm^2 
+.SS "double robot_dynamic_info::Izz_kgm2"
+xz direction inertia in kgm^2 
+.SS "double robot_dynamic_info::mass_kg"
+mass of each link in kg 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

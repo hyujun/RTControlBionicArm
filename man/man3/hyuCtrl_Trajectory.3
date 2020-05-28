@@ -1,0 +1,142 @@
+.TH "hyuCtrl::Trajectory" 3 "Wed Sep 25 2019" "Version 1.0.0" "Dual Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuCtrl::Trajectory \- \fBTrajectory\fP Class is 5th order polynomial trajectory generator interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Trajectory\&.h>\fP
+.PP
+Inherited by \fBhyuCtrl::Motion\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisReady\fP (void)"
+.br
+.RI "Confirm the TrajectoryClass is ready\&. "
+.ti -1c
+.RI "int \fBisReady\fP (int NumJoint)"
+.br
+.RI "Confirm the TrajectoryClass is ready\&. "
+.ti -1c
+.RI "void \fBSetPolynomial5th\fP (int NumJoint, float startPos, float FinalPos, float InitTime, float Duration)"
+.br
+.RI "set the 5th polynomial trajectory "
+.ti -1c
+.RI "float \fBPolynomial5th\fP (int NumJoint, float CurrentTime, int *Flag)"
+.br
+.RI "generate the trajecotry for q "
+.ti -1c
+.RI "float \fBPolynomial5th\fP (int NumJoint, float CurrentTime, int *Flag, float *q_)"
+.br
+.RI "generate the trajecotry for q, qdot "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTrajectory\fP Class is 5th order polynomial trajectory generator interface\&. 
+
+
+.PP
+\fBVersion:\fP
+.RS 4
+1\&.1\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool hyuCtrl::Trajectory::isReady (void)\fC [inline]\fP"
+
+.PP
+Confirm the TrajectoryClass is ready\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+1 : ready 
+.br
+0 : not ready 
+.RE
+.PP
+
+.SS "int hyuCtrl::Trajectory::isReady (int NumJoint)\fC [inline]\fP"
+
+.PP
+Confirm the TrajectoryClass is ready\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fINumJoint\fP number of joint 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 : ready 
+.br
+ 0 : not ready 
+.RE
+.PP
+
+.SS "float hyuCtrl::Trajectory::Polynomial5th (int NumJoint, float CurrentTime, int * Flag)"
+
+.PP
+generate the trajecotry for q 
+.PP
+\fBParameters:\fP
+.RS 4
+\fINumJoint\fP number of joint 
+.br
+\fICurrentTime\fP current time in second 
+.br
+\fIFlag\fP instruction flag for trajectory return q joint position 
+.RE
+.PP
+
+.SS "float hyuCtrl::Trajectory::Polynomial5th (int NumJoint, float CurrentTime, int * Flag, float * q_)"
+
+.PP
+generate the trajecotry for q, qdot 
+.PP
+\fBParameters:\fP
+.RS 4
+\fINumJoint\fP number of joint 
+.br
+\fICurrentTime\fP current time in second 
+.br
+\fIFlag\fP instruction flag for trajectory 
+.br
+\fIq_\fP return value for q, qdot 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+q joint position 
+.RE
+.PP
+
+.SS "void hyuCtrl::Trajectory::SetPolynomial5th (int NumJoint, float startPos, float FinalPos, float InitTime, float Duration)"
+
+.PP
+set the 5th polynomial trajectory 
+.PP
+\fBParameters:\fP
+.RS 4
+\fINumJoint\fP number of joint 
+.br
+\fIstartPos\fP start joint position 
+.br
+\fIFinalPos\fP final joint position 
+.br
+\fIInitTime\fP start time 
+.br
+\fIDuration\fP trajectory time 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Dual Arm Ver\&.1 from the source code\&.

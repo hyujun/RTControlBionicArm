@@ -1,0 +1,279 @@
+.TH "hyuEcat::Slave" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuEcat::Slave \- EtherCAT base class for each specific client i\&.e\&., ELMO, MAXON\&.\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Ecat_Slave\&.h>\fP
+.PP
+Inherited by \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistFinger\fP, \fBhyuEcat::EcatKistSensor\fP, and \fBhyuEcat::EcatMaxon\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::map< unsigned int, std::vector< unsigned int > > \fBDomainMap\fP"
+.br
+.RI "base member for PDO domain "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSlave\fP (uint32_t vendor_id, uint32_t product_id)"
+.br
+.RI "the slave class constructor for EtherLAB API "
+.ti -1c
+.RI "bool \fBisHomingEnable\fP () const"
+.br
+.ti -1c
+.RI "bool \fBsetHomingParam\fP (int32_t HomingOffset, int8_t HomingMethod, uint32_t HomingSpeed, uint16_t HomingCurrentLimit)"
+.br
+.ti -1c
+.RI "int32_t \fBgetHomingOffset\fP (void)"
+.br
+.ti -1c
+.RI "int8_t \fBgetHomingMethod\fP (void)"
+.br
+.ti -1c
+.RI "uint32_t \fBgetHomingSpeed\fP (void)"
+.br
+.ti -1c
+.RI "uint16_t \fBgetHomingCurrentLimit\fP (void)"
+.br
+.ti -1c
+.RI "virtual void \fBprocessData\fP (size_t index, uint8_t *domain_address)"
+.br
+.RI "base method of PDO processdata "
+.ti -1c
+.RI "virtual const ec_sync_info_t * \fBsyncs\fP ()"
+.br
+.RI "base method for Sync "
+.ti -1c
+.RI "virtual size_t \fBsyncSize\fP ()"
+.br
+.RI "base method for Sync size "
+.ti -1c
+.RI "virtual const ec_pdo_entry_info_t * \fBchannels\fP ()"
+.br
+.RI "base method for PDO entries "
+.ti -1c
+.RI "virtual void \fBdomains\fP (\fBDomainMap\fP &domains) const"
+.br
+.RI "base method for pdo domains "
+.ti -1c
+.RI "void \fBsetSlaveAlias\fP (int alias)"
+.br
+.RI "base method for set the slave alias "
+.ti -1c
+.RI "void \fBsetSlavePosition\fP (int position)"
+.br
+.RI "base method for set the slave position "
+.ti -1c
+.RI "int \fBgetSlaveAlias\fP (void)"
+.br
+.RI "base method for get the slave alias "
+.ti -1c
+.RI "int \fBgetSlavePosition\fP (void)"
+.br
+.RI "base method for get the slave position "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const uint32_t \fBm_vendor_id\fP"
+.br
+.ti -1c
+.RI "const uint32_t \fBm_product_id\fP"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBslave_alias\fP =0"
+.br
+.ti -1c
+.RI "int \fBslave_position\fP =0"
+.br
+.ti -1c
+.RI "bool \fBhoming_flag_\fP = false"
+.br
+.ti -1c
+.RI "int32_t \fBmHomingOffset\fP =0"
+.br
+.ti -1c
+.RI "int8_t \fBmHomingMethod\fP =0"
+.br
+.ti -1c
+.RI "uint32_t \fBmHomingSpeed\fP =0"
+.br
+.ti -1c
+.RI "uint16_t \fBmHomingCurrentLimit\fP =0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+EtherCAT base class for each specific client i\&.e\&., ELMO, MAXON\&.\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "hyuEcat::Slave::Slave (uint32_t vendor_id, uint32_t product_id)\fC [inline]\fP"
+
+.PP
+the slave class constructor for EtherLAB API before use this code, slave configuration SHOULD BE DONE using EtherLAB API 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvendor_id\fP 
+.br
+\fIproduct_id\fP 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const ec_pdo_entry_info_t* hyuEcat::Slave::channels ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for PDO entries 
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBhyuEcat::EcatMaxon\fP, \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistSensor\fP, and \fBhyuEcat::EcatKistFinger\fP\&.
+.SS "virtual void hyuEcat::Slave::domains (\fBDomainMap\fP & domains) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for pdo domains 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomains\fP 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBhyuEcat::EcatMaxon\fP, \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistSensor\fP, and \fBhyuEcat::EcatKistFinger\fP\&.
+.SS "int hyuEcat::Slave::getSlaveAlias (void)\fC [inline]\fP"
+
+.PP
+base method for get the slave alias 
+.PP
+\fBReturns\fP
+.RS 4
+slave_alias 
+.RE
+.PP
+
+.SS "int hyuEcat::Slave::getSlavePosition (void)\fC [inline]\fP"
+
+.PP
+base method for get the slave position 
+.PP
+\fBReturns\fP
+.RS 4
+slave_position 
+.RE
+.PP
+
+.SS "virtual void hyuEcat::Slave::processData (size_t index, uint8_t * domain_address)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method of PDO processdata 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIdomain_address\fP 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBhyuEcat::EcatMaxon\fP, \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistFinger\fP, and \fBhyuEcat::EcatKistSensor\fP\&.
+.SS "void hyuEcat::Slave::setSlaveAlias (int alias)\fC [inline]\fP"
+
+.PP
+base method for set the slave alias 
+.PP
+\fBParameters\fP
+.RS 4
+\fIalias\fP 
+.RE
+.PP
+
+.SS "void hyuEcat::Slave::setSlavePosition (int position)\fC [inline]\fP"
+
+.PP
+base method for set the slave position 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP 
+.RE
+.PP
+
+.SS "virtual const ec_sync_info_t* hyuEcat::Slave::syncs ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for Sync 
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBhyuEcat::EcatMaxon\fP, \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistSensor\fP, and \fBhyuEcat::EcatKistFinger\fP\&.
+.SS "virtual size_t hyuEcat::Slave::syncSize ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for Sync size 
+.PP
+\fBReturns\fP
+.RS 4
+0 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBhyuEcat::EcatMaxon\fP, \fBhyuEcat::EcatElmo\fP, \fBhyuEcat::EcatKistSensor\fP, and \fBhyuEcat::EcatKistFinger\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const uint32_t hyuEcat::Slave::m_product_id"
+product id from slave configuration 
+.br
+ 
+.SS "const uint32_t hyuEcat::Slave::m_vendor_id"
+vendor id from slave configuration 
+.br
+ 
+.SS "int hyuEcat::Slave::slave_alias =0\fC [protected]\fP"
+slave alias from slave configuration 
+.SS "int hyuEcat::Slave::slave_position =0\fC [protected]\fP"
+slave position from slave configuration 
+.br
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

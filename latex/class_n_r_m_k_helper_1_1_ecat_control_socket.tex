@@ -1,0 +1,215 @@
+\hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket}{}\doxysection{N\+R\+M\+K\+Helper\+::Ecat\+Control\+Socket$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$ Class Template Reference}
+\label{class_n_r_m_k_helper_1_1_ecat_control_socket}\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+
+
+Ethernet control Socket.  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+Control\+Socket.\+h$>$}
+
+Inheritance diagram for N\+R\+M\+K\+Helper\+::Ecat\+Control\+Socket$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_n_r_m_k_helper_1_1_ecat_control_socket}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a2d059f939daca77f57b3cdc1c748e4fe}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a2d059f939daca77f57b3cdc1c748e4fe}} 
+enum \{ \newline
+{\bfseries N\+U\+M\+\_\+\+J\+O\+I\+N\+TS} = \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+N\+U\+M\+J\+O\+I\+N\+TS} = 1, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E\+OP} = 1, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+S\+T\+A\+T\+US} = 2, 
+\newline
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+P\+OS} = 4, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+V\+EL} = 4, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+T\+OR} = 2, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+D\+A\+T\+A\+\_\+\+L\+E\+N\+G\+TH} = N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+N\+U\+M\+J\+O\+I\+N\+TS + N\+U\+M\+\_\+\+J\+O\+I\+N\+T\+S$\ast$(N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E\+O\+P+\+N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+S\+T\+A\+T\+U\+S+\+N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+P\+O\+S+\+N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+V\+E\+L+\+N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+A\+C\+T\+T\+OR), 
+\newline
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+T\+A\+R\+V\+AL} = 4, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+V\+EL} = 4, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+A\+CC} = 4, 
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+J\+E\+RK} = 4, 
+\newline
+{\bfseries N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+C\+M\+D\+\_\+\+L\+E\+N\+G\+TH} = N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+N\+U\+M\+J\+O\+I\+N\+TS + N\+U\+M\+\_\+\+J\+O\+I\+N\+T\+S$\ast$(N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E\+OP + N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+T\+A\+R\+V\+AL + N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+V\+EL + N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+A\+CC + N\+U\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+A\+X\+J\+E\+RK)
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a3ecc6cbe06125fc66dd4e0e9f2b70f16}{send\+Key}} (char key)
+\item 
+void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a75170611b3e70666df3304123cf0d8c4}{get\+Key}} (char \&key)
+\begin{DoxyCompactList}\small\item\em get key such as \textquotesingle{}a\textquotesingle{}, \textquotesingle{}b\textquotesingle{}, ... \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a4a371433f4bcbb11988b61c786467df9}{send\+Motion\+Data}} (\mbox{\hyperlink{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}} const $\ast$const Mode\+Op, \mbox{\hyperlink{_r_t_client_8h_acbc04026a2008f7c2fccf01718291c20}{U\+I\+N\+T16}} const $\ast$const Status, \mbox{\hyperlink{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}} const $\ast$const Act\+Pos, \mbox{\hyperlink{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}} const $\ast$const Act\+Vel, \mbox{\hyperlink{_r_t_client_8h_aca6c48234f001fdbd6597515a4cc088d}{I\+N\+T16}} const $\ast$const Act\+Tor)
+\begin{DoxyCompactList}\small\item\em send motion data \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_af43d02dc880cc8abba08c233869005fc}{get\+Motion\+Data}} (\mbox{\hyperlink{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}} $\ast$Mode\+Op, float $\ast$Tar\+Val, float $\ast$Max\+Vel, float $\ast$Max\+Acc, float $\ast$Max\+Jerk)
+\begin{DoxyCompactList}\small\item\em Get the motion data of client. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_ab8391e0e0eadeb11e39952c8567ce791}{has\+Connection}} () const
+\begin{DoxyCompactList}\small\item\em confirm the connection \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a13da7d537838dc7a29665ee520904b9e}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a13da7d537838dc7a29665ee520904b9e}} 
+void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a13da7d537838dc7a29665ee520904b9e}{set\+Connected}} ()
+\begin{DoxyCompactList}\small\item\em set connection \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a0b30fe00a12c659ad9d5215814d77eb7}{On\+Data\+Received}} (const L\+P\+B\+Y\+TE lp\+Buffer, D\+W\+O\+RD dw\+Count)
+\begin{DoxyCompactList}\small\item\em Data receiver. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket_a77ea241267d92906a422f9c54a44e081}{On\+Event}} (U\+I\+NT u\+Event, L\+P\+V\+O\+ID lpv\+Data)
+\begin{DoxyCompactList}\small\item\em Event detector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$\newline
+class N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+T\+S $>$}
+
+Ethernet control Socket. 
+
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a75170611b3e70666df3304123cf0d8c4}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a75170611b3e70666df3304123cf0d8c4}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!getKey@{getKey}}
+\index{getKey@{getKey}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{getKey()}{getKey()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::get\+Key (\begin{DoxyParamCaption}\item[{char \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get key such as \textquotesingle{}a\textquotesingle{}, \textquotesingle{}b\textquotesingle{}, ... 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_af43d02dc880cc8abba08c233869005fc}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_af43d02dc880cc8abba08c233869005fc}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!getMotionData@{getMotionData}}
+\index{getMotionData@{getMotionData}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{getMotionData()}{getMotionData()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+int \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::get\+Motion\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}} $\ast$}]{Mode\+Op,  }\item[{float $\ast$}]{Tar\+Val,  }\item[{float $\ast$}]{Max\+Vel,  }\item[{float $\ast$}]{Max\+Acc,  }\item[{float $\ast$}]{Max\+Jerk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the motion data of client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Mode\+Op} & Mode of opertation \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tar\+Val} & Target velocity \\
+\hline
+\mbox{\texttt{ in}}  & {\em Max\+Vel} & Maximum velocity \\
+\hline
+\mbox{\texttt{ in}}  & {\em Max\+Acc} & Maximum acceleration \\
+\hline
+\mbox{\texttt{ in}}  & {\em Max\+Jerk} & Maximum Jerk \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if success 1, else 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_ab8391e0e0eadeb11e39952c8567ce791}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_ab8391e0e0eadeb11e39952c8567ce791}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!hasConnection@{hasConnection}}
+\index{hasConnection@{hasConnection}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{hasConnection()}{hasConnection()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+virtual bool \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::has\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+confirm the connection 
+
+\begin{DoxyReturn}{Returns}
+\+\_\+has\+Connection boolean 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a0b30fe00a12c659ad9d5215814d77eb7}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a0b30fe00a12c659ad9d5215814d77eb7}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!OnDataReceived@{OnDataReceived}}
+\index{OnDataReceived@{OnDataReceived}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{OnDataReceived()}{OnDataReceived()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+virtual void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::On\+Data\+Received (\begin{DoxyParamCaption}\item[{const L\+P\+B\+Y\+TE}]{lp\+Buffer,  }\item[{D\+W\+O\+RD}]{dw\+Count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Data receiver. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em lp\+Buffer} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em dw\+Count} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N\+U\+LL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a77ea241267d92906a422f9c54a44e081}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a77ea241267d92906a422f9c54a44e081}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!OnEvent@{OnEvent}}
+\index{OnEvent@{OnEvent}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{OnEvent()}{OnEvent()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+virtual void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::On\+Event (\begin{DoxyParamCaption}\item[{U\+I\+NT}]{u\+Event,  }\item[{L\+P\+V\+O\+ID}]{lpv\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Event detector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em u\+Event} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em lpv\+Data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+message 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a3ecc6cbe06125fc66dd4e0e9f2b70f16}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a3ecc6cbe06125fc66dd4e0e9f2b70f16}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!sendKey@{sendKey}}
+\index{sendKey@{sendKey}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{sendKey()}{sendKey()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+void \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::send\+Key (\begin{DoxyParamCaption}\item[{char}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+send\+Key is used to send key input only \mbox{\Hypertarget{class_n_r_m_k_helper_1_1_ecat_control_socket_a4a371433f4bcbb11988b61c786467df9}\label{class_n_r_m_k_helper_1_1_ecat_control_socket_a4a371433f4bcbb11988b61c786467df9}} 
+\index{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}!sendMotionData@{sendMotionData}}
+\index{sendMotionData@{sendMotionData}!NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$@{NRMKHelper::EcatControlSocket$<$ \_NUM\_JOINTS $>$}}
+\doxysubsubsection{\texorpdfstring{sendMotionData()}{sendMotionData()}}
+{\footnotesize\ttfamily template$<$int \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS$>$ \\
+int \mbox{\hyperlink{class_n_r_m_k_helper_1_1_ecat_control_socket}{N\+R\+M\+K\+Helper\+::\+Ecat\+Control\+Socket}}$<$ \+\_\+\+N\+U\+M\+\_\+\+J\+O\+I\+N\+TS $>$\+::send\+Motion\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}} const $\ast$const}]{Mode\+Op,  }\item[{\mbox{\hyperlink{_r_t_client_8h_acbc04026a2008f7c2fccf01718291c20}{U\+I\+N\+T16}} const $\ast$const}]{Status,  }\item[{\mbox{\hyperlink{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}} const $\ast$const}]{Act\+Pos,  }\item[{\mbox{\hyperlink{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}} const $\ast$const}]{Act\+Vel,  }\item[{\mbox{\hyperlink{_r_t_client_8h_aca6c48234f001fdbd6597515a4cc088d}{I\+N\+T16}} const $\ast$const}]{Act\+Tor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+send motion data 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Mode\+Op} & Mode of operation \\
+\hline
+\mbox{\texttt{ in}}  & {\em Status} & Status word \\
+\hline
+\mbox{\texttt{ in}}  & {\em Act\+Pos} & Actual position \\
+\hline
+\mbox{\texttt{ in}}  & {\em Act\+Vel} & Actual velocity \\
+\hline
+\mbox{\texttt{ in}}  & {\em Act\+Tor} & Actual torque \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_ecat_control_socket_8h}{Ecat\+Control\+Socket.\+h}}\end{DoxyCompactItemize}

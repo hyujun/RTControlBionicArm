@@ -1,0 +1,64 @@
+\hypertarget{_serial_robot_8h}{}\section{K\+D\+L/\+Serial\+Robot.h File Reference}
+\label{_serial_robot_8h}\index{K\+D\+L/\+Serial\+Robot.\+h@{K\+D\+L/\+Serial\+Robot.\+h}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Lie\+Dynamics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Po\+E\+Kinematics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Property\+Definition.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classrobot}{robot}
+\begin{DoxyCompactList}\small\item\em Serial robot info update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_serial_robot_8h_a9473d762a5c38962cd80263c1df91613}{M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO}~1200
+\item 
+\#define \hyperlink{_serial_robot_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}{R\+A\+Dto\+D\+EG}~180/M\+\_\+\+PI
+\item 
+\#define \hyperlink{_serial_robot_8h_a0f4ee485d0288452ed9d26523d1c95f2}{D\+E\+Gto\+R\+AD}~M\+\_\+\+PI/180
+\item 
+\#define \hyperlink{_serial_robot_8h_a1e471b644e7fd684cd5dbb144e00ee81}{sign}(a)~(((a)$<$0) ? -\/1 \+: ((a)$>$0))
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyDate}{Date}
+2019-\/09-\/17 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_serial_robot_8h_a0f4ee485d0288452ed9d26523d1c95f2}\label{_serial_robot_8h_a0f4ee485d0288452ed9d26523d1c95f2}} 
+\index{Serial\+Robot.\+h@{Serial\+Robot.\+h}!D\+E\+Gto\+R\+AD@{D\+E\+Gto\+R\+AD}}
+\index{D\+E\+Gto\+R\+AD@{D\+E\+Gto\+R\+AD}!Serial\+Robot.\+h@{Serial\+Robot.\+h}}
+\subsubsection{\texorpdfstring{D\+E\+Gto\+R\+AD}{DEGtoRAD}}
+{\footnotesize\ttfamily \#define D\+E\+Gto\+R\+AD~M\+\_\+\+PI/180}
+
+constant of degree to radian \mbox{\Hypertarget{_serial_robot_8h_a9473d762a5c38962cd80263c1df91613}\label{_serial_robot_8h_a9473d762a5c38962cd80263c1df91613}} 
+\index{Serial\+Robot.\+h@{Serial\+Robot.\+h}!M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO@{M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO}}
+\index{M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO@{M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO}!Serial\+Robot.\+h@{Serial\+Robot.\+h}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO}{MAX\_CURRENT\_ELMO}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+E\+L\+MO~1200}
+
+Maximum persentage of E\+L\+MO current value \mbox{\Hypertarget{_serial_robot_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}\label{_serial_robot_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}} 
+\index{Serial\+Robot.\+h@{Serial\+Robot.\+h}!R\+A\+Dto\+D\+EG@{R\+A\+Dto\+D\+EG}}
+\index{R\+A\+Dto\+D\+EG@{R\+A\+Dto\+D\+EG}!Serial\+Robot.\+h@{Serial\+Robot.\+h}}
+\subsubsection{\texorpdfstring{R\+A\+Dto\+D\+EG}{RADtoDEG}}
+{\footnotesize\ttfamily \#define R\+A\+Dto\+D\+EG~180/M\+\_\+\+PI}
+
+constant of radian to degree \mbox{\Hypertarget{_serial_robot_8h_a1e471b644e7fd684cd5dbb144e00ee81}\label{_serial_robot_8h_a1e471b644e7fd684cd5dbb144e00ee81}} 
+\index{Serial\+Robot.\+h@{Serial\+Robot.\+h}!sign@{sign}}
+\index{sign@{sign}!Serial\+Robot.\+h@{Serial\+Robot.\+h}}
+\subsubsection{\texorpdfstring{sign}{sign}}
+{\footnotesize\ttfamily \#define sign(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~(((a)$<$0) ? -\/1 \+: ((a)$>$0))}
+
+Definition of Signum function 

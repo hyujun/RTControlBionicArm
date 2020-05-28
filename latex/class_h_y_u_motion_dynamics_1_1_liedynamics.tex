@@ -1,0 +1,114 @@
+\hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics}{}\doxysection{H\+Y\+U\+Motion\+Dynamics\+::Liedynamics Class Reference}
+\label{class_h_y_u_motion_dynamics_1_1_liedynamics}\index{HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}}
+
+
+\mbox{[}Biorobotics Lab\mbox{]} Dynamics Solver using Lie-\/\+Group for Tree-\/type Manipulator  
+
+
+
+
+{\ttfamily \#include $<$Lie\+Dynamics.\+h$>$}
+
+Inheritance diagram for H\+Y\+U\+Motion\+Dynamics\+::Liedynamics\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_h_y_u_motion_dynamics_1_1_liedynamics}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_aef6778b792fc854f4ff172fc12cbb833}{Liedynamics}} (const Matrix\+Xi \&\+\_\+\+Chain\+Matrix, \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} \&\+\_\+\+Po\+E\+Kin, \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} \&\+\_\+\+Co\+M\+Kin)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics}{Liedynamics}} constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_ae26535a23536ae5931d704543a9f1c14}{Update\+Dynamic\+Info}} (Matrix3d \+\_\+\+Inertia, double \+\_\+\+Mass, Vector3d \+\_\+\+CoM, int \+\_\+\+Link\+Num)
+\begin{DoxyCompactList}\small\item\em update dynamic infomation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_a9cb6ebbf99a2ebd87801a06c3d065d63}{Prepare\+Dynamics}} (const double $\ast$\+\_\+q, const double $\ast$\+\_\+qdot)
+\begin{DoxyCompactList}\small\item\em Calculate the basis of dynamics. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_acd949f00923fb52b1096ce496d026821}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_acd949f00923fb52b1096ce496d026821}} 
+void \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_acd949f00923fb52b1096ce496d026821}{C\+\_\+\+Matrix}} (Matrix\+Xd \&\+\_\+\+Cmat)
+\begin{DoxyCompactList}\small\item\em Coriolis matrix in Motion of Equation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_a657a6d0ee2964545c0063d3589a14493}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_a657a6d0ee2964545c0063d3589a14493}} 
+void \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_a657a6d0ee2964545c0063d3589a14493}{G\+\_\+\+Matrix}} (Vector\+Xd \&\+\_\+G)
+\begin{DoxyCompactList}\small\item\em Gravity matrix in Motion of Equation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_ab4123147757a218892b1fb55988ecc22}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_ab4123147757a218892b1fb55988ecc22}} 
+void \mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics_ab4123147757a218892b1fb55988ecc22}{M\+G\+\_\+\+Mat\+\_\+\+Joint}} (Matrix\+Xd \&\+\_\+M, Vector\+Xd \&\+\_\+G)
+\begin{DoxyCompactList}\small\item\em Inertia(n x n) \& Gravity(n x 1) matrix in Motion of Equation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_a81369804c87dca43b959a29c664c027f}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_a81369804c87dca43b959a29c664c027f}} 
+void {\bfseries M\+G\+\_\+\+Mat\+\_\+\+Task} (const Matrix\+Xd \&\+\_\+M, const Vector\+Xd \&\+\_\+G, Matrix\+Xd \&\+\_\+\+Mx, Vector\+Xd \&\+\_\+\+Gx)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{[}Biorobotics Lab\mbox{]} Dynamics Solver using Lie-\/\+Group for Tree-\/type Manipulator 
+
+\begin{DoxyVersion}{Version}
+1.\+2.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_aef6778b792fc854f4ff172fc12cbb833}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_aef6778b792fc854f4ff172fc12cbb833}} 
+\index{HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}!Liedynamics@{Liedynamics}}
+\index{Liedynamics@{Liedynamics}!HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}}
+\doxysubsubsection{\texorpdfstring{Liedynamics()}{Liedynamics()}}
+{\footnotesize\ttfamily H\+Y\+U\+Motion\+Dynamics\+::\+Liedynamics\+::\+Liedynamics (\begin{DoxyParamCaption}\item[{const Matrix\+Xi \&}]{\+\_\+\+Chain\+Matrix,  }\item[{\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} \&}]{\+\_\+\+Po\+E\+Kin,  }\item[{\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics}} \&}]{\+\_\+\+Co\+M\+Kin }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics}{Liedynamics}} constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Chain\+Matrix} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Po\+E\+Kin} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_a9cb6ebbf99a2ebd87801a06c3d065d63}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_a9cb6ebbf99a2ebd87801a06c3d065d63}} 
+\index{HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}!PrepareDynamics@{PrepareDynamics}}
+\index{PrepareDynamics@{PrepareDynamics}!HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}}
+\doxysubsubsection{\texorpdfstring{PrepareDynamics()}{PrepareDynamics()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Dynamics\+::\+Liedynamics\+::\+Prepare\+Dynamics (\begin{DoxyParamCaption}\item[{const double $\ast$}]{\+\_\+q,  }\item[{const double $\ast$}]{\+\_\+qdot }\end{DoxyParamCaption})}
+
+
+
+Calculate the basis of dynamics. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+q} & generalized coordinate of joint position \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+qdot} & generalized coordinate of joint velocity \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Modern\+Robotics book 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_h_y_u_motion_dynamics_1_1_liedynamics_ae26535a23536ae5931d704543a9f1c14}\label{class_h_y_u_motion_dynamics_1_1_liedynamics_ae26535a23536ae5931d704543a9f1c14}} 
+\index{HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}!UpdateDynamicInfo@{UpdateDynamicInfo}}
+\index{UpdateDynamicInfo@{UpdateDynamicInfo}!HYUMotionDynamics::Liedynamics@{HYUMotionDynamics::Liedynamics}}
+\doxysubsubsection{\texorpdfstring{UpdateDynamicInfo()}{UpdateDynamicInfo()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Dynamics\+::\+Liedynamics\+::\+Update\+Dynamic\+Info (\begin{DoxyParamCaption}\item[{Matrix3d}]{\+\_\+\+Inertia,  }\item[{double}]{\+\_\+\+Mass,  }\item[{Vector3d}]{\+\_\+\+CoM,  }\item[{int}]{\+\_\+\+Link\+Num }\end{DoxyParamCaption})}
+
+
+
+update dynamic infomation 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Inertia} & generalized inertial matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Mass} & mass value of each link \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+\+Link\+Num} & number of link from base to end-\/effector \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+D\+L/\mbox{\hyperlink{_lie_dynamics_8h}{Lie\+Dynamics.\+h}}\item 
+K\+D\+L/Lie\+Dynamics.\+cpp\end{DoxyCompactItemize}

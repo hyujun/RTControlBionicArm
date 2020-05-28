@@ -1,0 +1,52 @@
+\hypertarget{classrobot}{}\section{robot Class Reference}
+\label{classrobot}\index{robot@{robot}}
+
+
+Serial robot info update.  
+
+
+
+
+{\ttfamily \#include $<$Serial\+Robot.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrobot_a7589b6397660143db4687161971dcd4d}\label{classrobot_a7589b6397660143db4687161971dcd4d}} 
+void \hyperlink{classrobot_a7589b6397660143db4687161971dcd4d}{robot\+\_\+update} (void)
+\begin{DoxyCompactList}\small\item\em update robot kinematics \& dynamics information \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrobot_a3be6dbd4c20dcc49e05f9dcea9331677}\label{classrobot_a3be6dbd4c20dcc49e05f9dcea9331677}} 
+void \hyperlink{classrobot_a3be6dbd4c20dcc49e05f9dcea9331677}{E\+N\+Cto\+R\+AD} (int $\ast$\+\_\+enc, double $\ast$\+\_\+rad)
+\begin{DoxyCompactList}\small\item\em convert encoder inc to generalized coordinate joint position q(rad) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrobot_a8ac23a0972a5986615b9a4b6cbeb364d}\label{classrobot_a8ac23a0972a5986615b9a4b6cbeb364d}} 
+void \hyperlink{classrobot_a8ac23a0972a5986615b9a4b6cbeb364d}{R\+A\+Dto\+E\+NC} (int $\ast$\+\_\+enc, double $\ast$\+\_\+rad)
+\begin{DoxyCompactList}\small\item\em convert encoder generalized coordinate joint position q(rad) to encoder inc \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrobot_a9991d1ecabeabfc4e3c1236bc17283d2}\label{classrobot_a9991d1ecabeabfc4e3c1236bc17283d2}} 
+void \hyperlink{classrobot_a9991d1ecabeabfc4e3c1236bc17283d2}{Velocity\+Convert} (int $\ast$\+\_\+enc\+\_\+sec, double $\ast$\+\_\+rad\+\_\+sec)
+\begin{DoxyCompactList}\small\item\em convert encoder inc/second to generalized coordinate joint velocity q\+\_\+dot(rad/second) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrobot_a31d1beabf077c87e163c6071254811b0}\label{classrobot_a31d1beabf077c87e163c6071254811b0}} 
+\hyperlink{class_h_y_u_motion_dynamics_1_1_liedynamics}{H\+Y\+U\+Motion\+Dynamics\+::\+Liedynamics} $\ast$ {\bfseries dyn}
+\item 
+\mbox{\Hypertarget{classrobot_ac1d6d63d56a5a96b13fb2c36e202bc00}\label{classrobot_ac1d6d63d56a5a96b13fb2c36e202bc00}} 
+\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics} $\ast$ {\bfseries kin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Serial robot info update. 
+
+\begin{DoxyDate}{Date}
+2017-\/10-\/23 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+D\+L/\hyperlink{_serial_robot_8h}{Serial\+Robot.\+h}\item 
+K\+D\+L/Serial\+Robot.\+cpp\end{DoxyCompactItemize}

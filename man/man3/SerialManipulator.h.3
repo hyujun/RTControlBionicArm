@@ -1,0 +1,148 @@
+.TH "KDL/SerialManipulator.h" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KDL/SerialManipulator.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'LieDynamics\&.h'\fP
+.br
+\fC#include 'PoEKinematics\&.h'\fP
+.br
+\fC#include 'PropertyDefinition\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBSerialManipulator\fP"
+.br
+.RI "Seria lManipulator info update\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_USE_MATH_DEFINES\fP"
+.br
+.ti -1c
+.RI "#define \fBRADtoDEG\fP   180/M_PI"
+.br
+.ti -1c
+.RI "#define \fBDEGtoRAD\fP   M_PI/180"
+.br
+.ti -1c
+.RI "#define \fBsign\fP(a)   (((a)<0) ? \-1 : ((a)>0))"
+.br
+.ti -1c
+.RI "#define \fBMOVE_ZERO\fP   0x0001"
+.br
+.ti -1c
+.RI "#define \fBMOVE_JOB\fP   0x0002"
+.br
+.ti -1c
+.RI "#define \fBMOVE_JOINT_CYCLIC\fP   0x0003"
+.br
+.ti -1c
+.RI "#define \fBMOVE_TASK_CYCLIC\fP   0x0004"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CLIK_JOINT\fP   0x0005"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE\fP   0x0006"
+.br
+.ti -1c
+.RI "#define \fBMOVE_FRICTION\fP   0x0007"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE1\fP   0x0008"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE2\fP   0x0009"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE3\fP   0x000a"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE4\fP   0x000b"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE5\fP   0x000c"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE6\fP   0x000d"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE7\fP   0x000e"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE8\fP   0x000f"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE9\fP   0x0100"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE10\fP   0x0101"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE11\fP   0x0102"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE12\fP   0x0103"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE13\fP   0x0104"
+.br
+.ti -1c
+.RI "#define \fBMOVE_CUSTOMIZE14\fP   0x0105"
+.br
+.ti -1c
+.RI "#define \fBTARGET_MOVING\fP   0x0010"
+.br
+.ti -1c
+.RI "#define \fBTARGET_ACHIEVED\fP   0x0050"
+.br
+.ti -1c
+.RI "#define \fBTARGET_ZERO\fP   0x0020"
+.br
+.ti -1c
+.RI "#define \fBTARGET_JOB\fP   0x0030"
+.br
+.ti -1c
+.RI "#define \fBTARGET_CUSTOMIZE\fP   0x0040"
+.br
+.ti -1c
+.RI "#define \fBSYSTEM_BEGIN\fP   0xffff"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2019-09-17 
+.RE
+.PP
+\fBAuthor\fP
+.RS 4
+Junho Park 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEGtoRAD   M_PI/180"
+constant of degree to radian 
+.SS "#define RADtoDEG   180/M_PI"
+constant of radian to degree 
+.SS "#define sign(a)   (((a)<0) ? \-1 : ((a)>0))"
+Definition of Signum function 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

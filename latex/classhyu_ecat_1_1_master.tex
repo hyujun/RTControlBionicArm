@@ -1,0 +1,265 @@
+\hypertarget{classhyu_ecat_1_1_master}{}\doxysection{hyu\+Ecat\+::Master Class Reference}
+\label{classhyu_ecat_1_1_master}\index{hyuEcat::Master@{hyuEcat::Master}}
+
+
+Ether\+C\+AT \mbox{\hyperlink{classhyu_ecat_1_1_master}{Master}} Client of Ether\+L\+AB A\+PI.  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+\_\+\+Master.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhyu_ecat_1_1_master_ae0e126f6adbd91cad7fdab9424569cc4}{Master}} (const int master=0)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classhyu_ecat_1_1_master}{Master}} class constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a61224ee0a6dd6d272b663f6bd26c6253}{S\+D\+Oread}} (uint16\+\_\+t position, uint16\+\_\+t index, uint8\+\_\+t subindex, uint8\+\_\+t $\ast$data)
+\begin{DoxyCompactList}\small\item\em Read S\+DO Object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a9c4a4107155233c165765f4936fe6082}{S\+D\+Owrite}} (uint16\+\_\+t position, uint16\+\_\+t index, uint8\+\_\+t subindex, uint8\+\_\+t $\ast$data)
+\begin{DoxyCompactList}\small\item\em Write S\+DO Object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a02dda679c879912c632a7caf427fa129}{add\+Slave}} (uint16\+\_\+t alias, uint16\+\_\+t position, \mbox{\hyperlink{classhyu_ecat_1_1_slave}{Slave}} $\ast$slave)
+\begin{DoxyCompactList}\small\item\em Add Ether\+C\+AT slaves to Ether\+C\+AT master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a498edbd0c441663671d9e0357c71c856}{add\+Slave\+With\+Homing}} (uint16\+\_\+t alias, uint16\+\_\+t position, \mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo}{Ecat\+Elmo}} $\ast$slave)
+\begin{DoxyCompactList}\small\item\em Add Ether\+C\+AT Elmo slaves to Ether\+C\+AT master. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a011ba5dca5cf894968797b3103a6bf3c}\label{classhyu_ecat_1_1_master_a011ba5dca5cf894968797b3103a6bf3c}} 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a011ba5dca5cf894968797b3103a6bf3c}{activate}} (void)
+\begin{DoxyCompactList}\small\item\em Start Activate the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a649a9f4c7c35a1a5fcc9e68be4dabcff}{activate\+With\+DC}} (uint8\+\_\+t Ref\+Position, uint32\+\_\+t Sync\+Cycle\+Nano)
+\begin{DoxyCompactList}\small\item\em Start Activate the client with Distributed Clock Mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_ab6d7953e6001c38a02e531587ba62b3a}{Sync\+Ecat\+Master}} (uint64\+\_\+t Ref\+Time)
+\begin{DoxyCompactList}\small\item\em synchronize master with each client \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_af5b83fd435f4161a200399c0273cb927}\label{classhyu_ecat_1_1_master_af5b83fd435f4161a200399c0273cb927}} 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_af5b83fd435f4161a200399c0273cb927}{deactivate}} (void)
+\begin{DoxyCompactList}\small\item\em deactivate the client \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a18d8acc1d5c4bd9daf553bf0a47453ce}{update}} (unsigned int domain=0)
+\begin{DoxyCompactList}\small\item\em T\+P\+DO, R\+P\+DO process execute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_a66a71fd726df6ef072eb2c0ef67f57f8}{Tx\+Update}} (unsigned int domain=0)
+\begin{DoxyCompactList}\small\item\em R\+P\+DO process execute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_master_ab217fa062df645dabb5be028345f351e}{Rx\+Update}} (unsigned int domain=0)
+\begin{DoxyCompactList}\small\item\em T\+P\+DO process execute. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_aad0f748cb19488c9d8dbb704cc72fc27}\label{classhyu_ecat_1_1_master_aad0f748cb19488c9d8dbb704cc72fc27}} 
+std\+::string {\bfseries Get\+Ecat\+Master\+Link\+State} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_aefe075092a9d46656efdfaad476bcf84}\label{classhyu_ecat_1_1_master_aefe075092a9d46656efdfaad476bcf84}} 
+unsigned int {\bfseries Get\+Ecat\+Master\+State} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_ab77e744c1609b09fa4a5776a88930666}\label{classhyu_ecat_1_1_master_ab77e744c1609b09fa4a5776a88930666}} 
+unsigned int {\bfseries Get\+Connected\+Slaves} (void)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a2a145e40e7b03e5256fa32ebe4ac18be}\label{classhyu_ecat_1_1_master_a2a145e40e7b03e5256fa32ebe4ac18be}} 
+unsigned int {\bfseries Get\+Slave\+State} (int \+\_\+pos)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_af8f31136ad6edaa43f121bd452f5c18c}\label{classhyu_ecat_1_1_master_af8f31136ad6edaa43f121bd452f5c18c}} 
+std\+::string {\bfseries Get\+Slave\+Connected} (int \+\_\+pos)
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a1dd409cbebf04d49e52ea9327dd9668c}\label{classhyu_ecat_1_1_master_a1dd409cbebf04d49e52ea9327dd9668c}} 
+std\+::string {\bfseries Get\+Slave\+N\+MT} (int \+\_\+pos)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ether\+C\+AT \mbox{\hyperlink{classhyu_ecat_1_1_master}{Master}} Client of Ether\+L\+AB A\+PI. 
+
+\begin{DoxyVersion}{Version}
+1.\+2.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_ae0e126f6adbd91cad7fdab9424569cc4}\label{classhyu_ecat_1_1_master_ae0e126f6adbd91cad7fdab9424569cc4}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!Master@{Master}}
+\index{Master@{Master}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{Master()}{Master()}}
+{\footnotesize\ttfamily hyu\+Ecat\+::\+Master\+::\+Master (\begin{DoxyParamCaption}\item[{const int}]{master = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classhyu_ecat_1_1_master}{Master}} class constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em master} & do not need to set the value \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a649a9f4c7c35a1a5fcc9e68be4dabcff}\label{classhyu_ecat_1_1_master_a649a9f4c7c35a1a5fcc9e68be4dabcff}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!activateWithDC@{activateWithDC}}
+\index{activateWithDC@{activateWithDC}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{activateWithDC()}{activateWithDC()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::activate\+With\+DC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Ref\+Position,  }\item[{uint32\+\_\+t}]{Sync\+Cycle\+Nano }\end{DoxyParamCaption})}
+
+
+
+Start Activate the client with Distributed Clock Mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Ref\+Position} & reference client\textquotesingle{}s position \\
+\hline
+\mbox{\texttt{ in}}  & {\em Sync\+Cycle\+Nano} & Control Cycle time in nano seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a02dda679c879912c632a7caf427fa129}\label{classhyu_ecat_1_1_master_a02dda679c879912c632a7caf427fa129}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!addSlave@{addSlave}}
+\index{addSlave@{addSlave}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{addSlave()}{addSlave()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::add\+Slave (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{alias,  }\item[{uint16\+\_\+t}]{position,  }\item[{\mbox{\hyperlink{classhyu_ecat_1_1_slave}{Slave}} $\ast$}]{slave }\end{DoxyParamCaption})}
+
+
+
+Add Ether\+C\+AT slaves to Ether\+C\+AT master. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em alias} & alias of client \\
+\hline
+\mbox{\texttt{ in}}  & {\em position} & position of client \\
+\hline
+\mbox{\texttt{ in}}  & {\em slave} & info of client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a498edbd0c441663671d9e0357c71c856}\label{classhyu_ecat_1_1_master_a498edbd0c441663671d9e0357c71c856}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!addSlaveWithHoming@{addSlaveWithHoming}}
+\index{addSlaveWithHoming@{addSlaveWithHoming}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{addSlaveWithHoming()}{addSlaveWithHoming()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::add\+Slave\+With\+Homing (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{alias,  }\item[{uint16\+\_\+t}]{position,  }\item[{\mbox{\hyperlink{classhyu_ecat_1_1_ecat_elmo}{Ecat\+Elmo}} $\ast$}]{slave }\end{DoxyParamCaption})}
+
+
+
+Add Ether\+C\+AT Elmo slaves to Ether\+C\+AT master. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em alias} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em position} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em slave} & info of Elmo client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_ab217fa062df645dabb5be028345f351e}\label{classhyu_ecat_1_1_master_ab217fa062df645dabb5be028345f351e}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!RxUpdate@{RxUpdate}}
+\index{RxUpdate@{RxUpdate}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{RxUpdate()}{RxUpdate()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::\+Rx\+Update (\begin{DoxyParamCaption}\item[{unsigned int}]{domain = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+T\+P\+DO process execute. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domain} & initial value = 0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a61224ee0a6dd6d272b663f6bd26c6253}\label{classhyu_ecat_1_1_master_a61224ee0a6dd6d272b663f6bd26c6253}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!SDOread@{SDOread}}
+\index{SDOread@{SDOread}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{SDOread()}{SDOread()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::\+S\+D\+Oread (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position,  }\item[{uint16\+\_\+t}]{index,  }\item[{uint8\+\_\+t}]{subindex,  }\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Read S\+DO Object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em subindex} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em $\ast$data} & address of data maximum 4 bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Ci\+A-\/402 document 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a9c4a4107155233c165765f4936fe6082}\label{classhyu_ecat_1_1_master_a9c4a4107155233c165765f4936fe6082}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!SDOwrite@{SDOwrite}}
+\index{SDOwrite@{SDOwrite}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{SDOwrite()}{SDOwrite()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::\+S\+D\+Owrite (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position,  }\item[{uint16\+\_\+t}]{index,  }\item[{uint8\+\_\+t}]{subindex,  }\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Write S\+DO Object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em subindex} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em $\ast$data} & address of data maximum 4 bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Ci\+A-\/402 document 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_ab6d7953e6001c38a02e531587ba62b3a}\label{classhyu_ecat_1_1_master_ab6d7953e6001c38a02e531587ba62b3a}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!SyncEcatMaster@{SyncEcatMaster}}
+\index{SyncEcatMaster@{SyncEcatMaster}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{SyncEcatMaster()}{SyncEcatMaster()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::\+Sync\+Ecat\+Master (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{Ref\+Time }\end{DoxyParamCaption})}
+
+
+
+synchronize master with each client 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Ref\+Time} & current time ex) rt\+\_\+timer\+\_\+read() \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a66a71fd726df6ef072eb2c0ef67f57f8}\label{classhyu_ecat_1_1_master_a66a71fd726df6ef072eb2c0ef67f57f8}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!TxUpdate@{TxUpdate}}
+\index{TxUpdate@{TxUpdate}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{TxUpdate()}{TxUpdate()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::\+Tx\+Update (\begin{DoxyParamCaption}\item[{unsigned int}]{domain = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+R\+P\+DO process execute. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domain} & initial value = 0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classhyu_ecat_1_1_master_a18d8acc1d5c4bd9daf553bf0a47453ce}\label{classhyu_ecat_1_1_master_a18d8acc1d5c4bd9daf553bf0a47453ce}} 
+\index{hyuEcat::Master@{hyuEcat::Master}!update@{update}}
+\index{update@{update}!hyuEcat::Master@{hyuEcat::Master}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Master\+::update (\begin{DoxyParamCaption}\item[{unsigned int}]{domain = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+T\+P\+DO, R\+P\+DO process execute. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domain} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Ecat\+System/\mbox{\hyperlink{_ecat___master_8h}{Ecat\+\_\+\+Master.\+h}}\item 
+Ecat\+System/Ecat\+\_\+\+Master.\+cpp\end{DoxyCompactItemize}

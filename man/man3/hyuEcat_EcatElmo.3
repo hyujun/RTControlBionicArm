@@ -1,0 +1,279 @@
+.TH "hyuEcat::EcatElmo" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuEcat::EcatElmo \- Modified version of SimpleCAT\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Ecat_Elmo\&.h>\fP
+.PP
+Inherits \fBhyuEcat::Slave\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBModeOfOperation\fP { \fBMODE_NO_MODE\fP = 0, \fBMODE_PROFILED_POSITION\fP = 1, \fBMODE_PROFILED_VELOCITY\fP = 3, \fBMODE_PROFILED_TORQUE\fP = 4, \fBMODE_HOMING\fP = 6, \fBMODE_INTERPOLATED_POSITION\fP = 7, \fBMODE_CYCLIC_SYNC_POSITION\fP = 8, \fBMODE_CYCLIC_SYNC_VELEOCITY\fP = 9, \fBMODE_CYCLIC_SYNC_TORQUE\fP = 10 }"
+.br
+.RI "Description of Mode of Operation(Predefined in terms of CiA402 Profile) "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBinitialized\fP () const"
+.br
+.RI "Check the Elmo is Initialized\&. "
+.ti -1c
+.RI "bool \fBisHoming\fP () const"
+.br
+.RI "Check the Elmo acheived Homing\&. "
+.ti -1c
+.RI "int \fBElmo_DeviceState\fP (void) const"
+.br
+.RI "Show the statusword in string(int) "
+.ti -1c
+.RI "void \fBwriteTorque\fP (int16_t torque)"
+.br
+.RI "Write Output Torque in 1000 percentage\&. "
+.ti -1c
+.RI "void \fBwriteVelocity\fP (int32_t velocity)"
+.br
+.ti -1c
+.RI "void \fBwritePosition\fP (int32_t &position)"
+.br
+.ti -1c
+.RI "virtual void \fBprocessData\fP (size_t index, uint8_t *domain_address)"
+.br
+.RI "Define a TPDO & RPDO process\&. "
+.ti -1c
+.RI "std::string \fBGetDevState\fP (void)"
+.br
+.ti -1c
+.RI "virtual const ec_sync_info_t * \fBsyncs\fP ()"
+.br
+.RI "manage the syncs "
+.ti -1c
+.RI "virtual size_t \fBsyncSize\fP ()"
+.br
+.RI "size of sync "
+.ti -1c
+.RI "virtual const ec_pdo_entry_info_t * \fBchannels\fP ()"
+.br
+.RI "base method for PDO entries "
+.ti -1c
+.RI "virtual void \fBdomains\fP (\fBDomainMap\fP &domains) const"
+.br
+.RI "base method for pdo domains "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int32_t \fBtarget_position_\fP = 0"
+.br
+.ti -1c
+.RI "int32_t \fBtarget_velocity_\fP = 0"
+.br
+.ti -1c
+.RI "int16_t \fBtarget_torque_\fP = 0"
+.br
+.ti -1c
+.RI "uint16_t \fBmax_torque_\fP = 1300"
+.br
+.ti -1c
+.RI "uint16_t \fBcontrol_word_\fP = 0"
+.br
+.ti -1c
+.RI "int8_t \fBmode_of_operation_\fP = MODE_CYCLIC_SYNC_TORQUE"
+.br
+.ti -1c
+.RI "int32_t \fBposition_\fP = 0"
+.br
+.ti -1c
+.RI "int32_t \fBvelocity_\fP = 0"
+.br
+.ti -1c
+.RI "int16_t \fBtorque_\fP = 0"
+.br
+.ti -1c
+.RI "uint16_t \fBstatus_word_\fP = 0"
+.br
+.ti -1c
+.RI "int8_t \fBmode_of_operation_display_\fP = 0"
+.br
+.ti -1c
+.RI "int8_t \fBdummy\fP =0"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Modified version of SimpleCAT\&. 
+
+EtherCAT API for Elmo Gold-DC-Whitle 
+.PP
+\fBVersion\fP
+.RS 4
+1\&.1\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const ec_pdo_entry_info_t* hyuEcat::EcatElmo::channels ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for PDO entries 
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual void hyuEcat::EcatElmo::domains (\fBDomainMap\fP & domains) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for pdo domains 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomains\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "int hyuEcat::EcatElmo::Elmo_DeviceState (void) const\fC [inline]\fP"
+
+.PP
+Show the statusword in string(int) 
+.PP
+\fBReturns\fP
+.RS 4
+state_ 
+.RE
+.PP
+
+.SS "bool hyuEcat::EcatElmo::initialized () const\fC [inline]\fP"
+
+.PP
+Check the Elmo is Initialized\&. Returns true if Elmo has reached 'operation enabled' state\&. The transition through the state machine is handled automatically\&. 
+.PP
+\fBReturns\fP
+.RS 4
+mixedboolean Success:1, False:0 
+.RE
+.PP
+
+.SS "bool hyuEcat::EcatElmo::isHoming () const\fC [inline]\fP"
+
+.PP
+Check the Elmo acheived Homing\&. Returns true if Elmo has reached 'operation enabled' state\&. The transition through the state machine is handled automatically\&. 
+.PP
+\fBReturns\fP
+.RS 4
+mixedboolean Success:1, False:0 
+.RE
+.PP
+
+.SS "virtual void hyuEcat::EcatElmo::processData (size_t index, uint8_t * domain_address)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Define a TPDO & RPDO process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIdomain_address\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual const ec_sync_info_t* hyuEcat::EcatElmo::syncs ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+manage the syncs 
+.PP
+\fBReturns\fP
+.RS 4
+address of Elmo_syncs[0] 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual size_t hyuEcat::EcatElmo::syncSize ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+size of sync 
+.PP
+\fBReturns\fP
+.RS 4
+normalized size of Elmo_sync 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "void hyuEcat::EcatElmo::writeTorque (int16_t torque)\fC [inline]\fP"
+
+.PP
+Write Output Torque in 1000 percentage\&. User must first set max_torque\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItorque\fP int16_t 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "uint16_t hyuEcat::EcatElmo::control_word_ = 0"
+write 
+.SS "uint16_t hyuEcat::EcatElmo::max_torque_ = 1300"
+write (max current = 1000, as set in Elmo Motion Studio) 
+.SS "int8_t hyuEcat::EcatElmo::mode_of_operation_ = MODE_CYCLIC_SYNC_TORQUE"
+write (use enum ModeOfOperation for convenience) 
+.SS "int8_t hyuEcat::EcatElmo::mode_of_operation_display_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatElmo::position_ = 0"
+read 
+.SS "uint16_t hyuEcat::EcatElmo::status_word_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatElmo::target_position_ = 0"
+write 
+.SS "int16_t hyuEcat::EcatElmo::target_torque_ = 0"
+write (max torque (max current) = 1000) 
+.SS "int32_t hyuEcat::EcatElmo::target_velocity_ = 0"
+write 
+.SS "int16_t hyuEcat::EcatElmo::torque_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatElmo::velocity_ = 0"
+read 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

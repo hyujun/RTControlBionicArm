@@ -1,0 +1,135 @@
+\hypertarget{_serial_manipulator_8h}{}\doxysection{K\+D\+L/\+Serial\+Manipulator.h File Reference}
+\label{_serial_manipulator_8h}\index{KDL/SerialManipulator.h@{KDL/SerialManipulator.h}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Lie\+Dynamics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Po\+E\+Kinematics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Property\+Definition.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_serial_manipulator}{Serial\+Manipulator}}
+\begin{DoxyCompactList}\small\item\em Seria l\+Manipulator info update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a525335710b53cb064ca56b936120431e}\label{_serial_manipulator_8h_a525335710b53cb064ca56b936120431e}} 
+\#define {\bfseries \+\_\+\+U\+S\+E\+\_\+\+M\+A\+T\+H\+\_\+\+D\+E\+F\+I\+N\+ES}
+\item 
+\#define \mbox{\hyperlink{_serial_manipulator_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}{R\+A\+Dto\+D\+EG}}~180/M\+\_\+\+PI
+\item 
+\#define \mbox{\hyperlink{_serial_manipulator_8h_a0f4ee485d0288452ed9d26523d1c95f2}{D\+E\+Gto\+R\+AD}}~M\+\_\+\+PI/180
+\item 
+\#define \mbox{\hyperlink{_serial_manipulator_8h_a1e471b644e7fd684cd5dbb144e00ee81}{sign}}(a)~(((a)$<$0) ? -\/1 \+: ((a)$>$0))
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a5dee991f052f6f7a4f5eb79adbd50f3b}\label{_serial_manipulator_8h_a5dee991f052f6f7a4f5eb79adbd50f3b}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+Z\+E\+RO}~0x0001
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a0e4a063359f736a52d30851aaa00a34b}\label{_serial_manipulator_8h_a0e4a063359f736a52d30851aaa00a34b}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+J\+OB}~0x0002
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a1aa0ef34fe7e968ae9031b9230fe69bf}\label{_serial_manipulator_8h_a1aa0ef34fe7e968ae9031b9230fe69bf}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+J\+O\+I\+N\+T\+\_\+\+C\+Y\+C\+L\+IC}~0x0003
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_ad7baccddd56c6a990570dbd40970c03b}\label{_serial_manipulator_8h_ad7baccddd56c6a990570dbd40970c03b}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+T\+A\+S\+K\+\_\+\+C\+Y\+C\+L\+IC}~0x0004
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_adf0ec9a0d4d85941b6a9fb1e74188a48}\label{_serial_manipulator_8h_adf0ec9a0d4d85941b6a9fb1e74188a48}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+L\+I\+K\+\_\+\+J\+O\+I\+NT}~0x0005
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_ac2aac81f58b5bf71ccf5a2df372dc66f}\label{_serial_manipulator_8h_ac2aac81f58b5bf71ccf5a2df372dc66f}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+ZE}~0x0006
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a4c5d7fc68a8962b72e35cb77b5233546}\label{_serial_manipulator_8h_a4c5d7fc68a8962b72e35cb77b5233546}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+F\+R\+I\+C\+T\+I\+ON}~0x0007
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_aa1d39d8053606d3102b124dec2edee47}\label{_serial_manipulator_8h_aa1d39d8053606d3102b124dec2edee47}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E1}~0x0008
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a9b75abe670e6b063b2cdecfdb29c72cb}\label{_serial_manipulator_8h_a9b75abe670e6b063b2cdecfdb29c72cb}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E2}~0x0009
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_aff29ab9ab3ca311e153c00ec6d4d86f2}\label{_serial_manipulator_8h_aff29ab9ab3ca311e153c00ec6d4d86f2}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E3}~0x000a
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a97b396b8751ecb53ae713a11974e84b5}\label{_serial_manipulator_8h_a97b396b8751ecb53ae713a11974e84b5}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E4}~0x000b
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a832f488bb1bb9076f271a33f2355400c}\label{_serial_manipulator_8h_a832f488bb1bb9076f271a33f2355400c}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E5}~0x000c
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a3e5de0441ab5f44d57fd5c5cd9e780f2}\label{_serial_manipulator_8h_a3e5de0441ab5f44d57fd5c5cd9e780f2}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E6}~0x000d
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a3123628be0222276b51484c3c90f120e}\label{_serial_manipulator_8h_a3123628be0222276b51484c3c90f120e}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E7}~0x000e
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_ab7f9f1a24809b064ce28d4da573de6eb}\label{_serial_manipulator_8h_ab7f9f1a24809b064ce28d4da573de6eb}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E8}~0x000f
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a5c2ae8e47cfbeefc8a24710f17d914b5}\label{_serial_manipulator_8h_a5c2ae8e47cfbeefc8a24710f17d914b5}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E9}~0x0100
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a38ad667803f8690afe7fa787da47be02}\label{_serial_manipulator_8h_a38ad667803f8690afe7fa787da47be02}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E10}~0x0101
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_adfacb997802bf329265c41c5786445bf}\label{_serial_manipulator_8h_adfacb997802bf329265c41c5786445bf}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E11}~0x0102
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a05deffd1f0cc549d6cb5577f2387b51f}\label{_serial_manipulator_8h_a05deffd1f0cc549d6cb5577f2387b51f}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E12}~0x0103
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_ac8228938b5502d4a204f060b6652c6ca}\label{_serial_manipulator_8h_ac8228938b5502d4a204f060b6652c6ca}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E13}~0x0104
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_adc261ee67efe198ce1fd27b56a2bc255}\label{_serial_manipulator_8h_adc261ee67efe198ce1fd27b56a2bc255}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+C\+U\+S\+T\+O\+M\+I\+Z\+E14}~0x0105
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a4f800ba9a43166eaefab583b591a2906}\label{_serial_manipulator_8h_a4f800ba9a43166eaefab583b591a2906}} 
+\#define {\bfseries T\+A\+R\+G\+E\+T\+\_\+\+M\+O\+V\+I\+NG}~0x0010
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a04bd7853934d57fa278f0f19744caedf}\label{_serial_manipulator_8h_a04bd7853934d57fa278f0f19744caedf}} 
+\#define {\bfseries T\+A\+R\+G\+E\+T\+\_\+\+A\+C\+H\+I\+E\+V\+ED}~0x0050
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_aed06570b942ab6ed3a0d58795baa114e}\label{_serial_manipulator_8h_aed06570b942ab6ed3a0d58795baa114e}} 
+\#define {\bfseries T\+A\+R\+G\+E\+T\+\_\+\+Z\+E\+RO}~0x0020
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a40561ff0c39a6e1f013525556a12d9f2}\label{_serial_manipulator_8h_a40561ff0c39a6e1f013525556a12d9f2}} 
+\#define {\bfseries T\+A\+R\+G\+E\+T\+\_\+\+J\+OB}~0x0030
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_a487f70e82ed28bee52878d3e8b254ac2}\label{_serial_manipulator_8h_a487f70e82ed28bee52878d3e8b254ac2}} 
+\#define {\bfseries T\+A\+R\+G\+E\+T\+\_\+\+C\+U\+S\+T\+O\+M\+I\+ZE}~0x0040
+\item 
+\mbox{\Hypertarget{_serial_manipulator_8h_adadacd6c20b5779ce616e8671c770967}\label{_serial_manipulator_8h_adadacd6c20b5779ce616e8671c770967}} 
+\#define {\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+B\+E\+G\+IN}~0xffff
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyDate}{Date}
+2019-\/09-\/17 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_serial_manipulator_8h_a0f4ee485d0288452ed9d26523d1c95f2}\label{_serial_manipulator_8h_a0f4ee485d0288452ed9d26523d1c95f2}} 
+\index{SerialManipulator.h@{SerialManipulator.h}!DEGtoRAD@{DEGtoRAD}}
+\index{DEGtoRAD@{DEGtoRAD}!SerialManipulator.h@{SerialManipulator.h}}
+\doxysubsubsection{\texorpdfstring{DEGtoRAD}{DEGtoRAD}}
+{\footnotesize\ttfamily \#define D\+E\+Gto\+R\+AD~M\+\_\+\+PI/180}
+
+constant of degree to radian \mbox{\Hypertarget{_serial_manipulator_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}\label{_serial_manipulator_8h_a3d3c4a5f51e5070ebd280ba6de92e0d5}} 
+\index{SerialManipulator.h@{SerialManipulator.h}!RADtoDEG@{RADtoDEG}}
+\index{RADtoDEG@{RADtoDEG}!SerialManipulator.h@{SerialManipulator.h}}
+\doxysubsubsection{\texorpdfstring{RADtoDEG}{RADtoDEG}}
+{\footnotesize\ttfamily \#define R\+A\+Dto\+D\+EG~180/M\+\_\+\+PI}
+
+constant of radian to degree \mbox{\Hypertarget{_serial_manipulator_8h_a1e471b644e7fd684cd5dbb144e00ee81}\label{_serial_manipulator_8h_a1e471b644e7fd684cd5dbb144e00ee81}} 
+\index{SerialManipulator.h@{SerialManipulator.h}!sign@{sign}}
+\index{sign@{sign}!SerialManipulator.h@{SerialManipulator.h}}
+\doxysubsubsection{\texorpdfstring{sign}{sign}}
+{\footnotesize\ttfamily \#define sign(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~(((a)$<$0) ? -\/1 \+: ((a)$>$0))}
+
+Definition of Signum function 

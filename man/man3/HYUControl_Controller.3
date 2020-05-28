@@ -1,0 +1,141 @@
+.TH "HYUControl::Controller" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUControl::Controller \- control algorithm for manipulator  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Controller\&.h>\fP
+.PP
+Inherits \fBHYUMotionBase::LieOperator\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBController\fP ()"
+.br
+.RI "\fBController\fP constructor, JointNum is 6\&. "
+.ti -1c
+.RI "\fBController\fP (\fBSerialManipulator\fP *pManipulator)"
+.br
+.RI "\fBController\fP constructor\&. "
+.ti -1c
+.RI "void \fBClearError\fP (void)"
+.br
+.RI "make error member to be zero(e, e_dot, e_integral) "
+.ti -1c
+.RI "void \fBSetPIDGain\fP (double &_Kp, double &_Kd, double &_Ki, int &_JointNum)"
+.br
+.RI "set the PID gains "
+.ti -1c
+.RI "void \fBGetPIDGain\fP (double *_Kp, double *_Kd, double *_Ki, int &_JointNum)"
+.br
+.ti -1c
+.RI "void \fBPDController\fP (double *p_q, double *p_qdot, double *p_dq, double *p_dqdot, double *p_Toq, float &_dt)"
+.br
+.RI "simple pd controller "
+.ti -1c
+.RI "void \fBPDGravController\fP (double *p_q, double *p_qdot, double *p_dq, double *p_dqdot, double *p_Toq)"
+.br
+.ti -1c
+.RI "void \fBInvDynController\fP (double *p_q, double *p_qdot, double *p_dq, double *p_dqdot, double *p_dqddot, double *p_Toq, float &_dt)"
+.br
+.ti -1c
+.RI "void \fBCLIKTaskController\fP (double *_q, double *_qdot, double *_dq, double *_dqdot, const VectorXd *_dx, const VectorXd *_dxdot, const VectorXd &_dqdotNull, double *p_Toq, float &_dt)"
+.br
+.ti -1c
+.RI "void \fBFrictionIdentification\fP (double *p_q, double *p_qdot, double *p_dq, double *p_dqdot, double *p_dqddot, double *p_Toq, double &gt)"
+.br
+.ti -1c
+.RI "void \fBFrictionCompensator\fP (VectorXd &_qdot, VectorXd &_dqdot)"
+.br
+.ti -1c
+.RI "void \fBOutputSaturation\fP (double *pInput, double &_MaxInput)"
+.br
+.RI "joint input torque saturator "
+.in -1c
+.SH "Detailed Description"
+.PP 
+control algorithm for manipulator 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0\&.0 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "HYUControl::Controller::Controller (\fBSerialManipulator\fP * pManipulator)"
+
+.PP
+\fBController\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIJointNum\fP number of joint 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void HYUControl::Controller::OutputSaturation (double * pInput, double & _MaxInput)"
+
+.PP
+joint input torque saturator 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_toq\fP joint input torque as control input 
+.br
+\fImaxtoq\fP maximum torque motor can handle 
+.br
+\fIp_dir\fP direction of motor 
+.RE
+.PP
+
+.SS "void HYUControl::Controller::PDController (double * p_q, double * p_qdot, double * p_dq, double * p_dqdot, double * p_Toq, float & _dt)"
+
+.PP
+simple pd controller 
+.PP
+\fBParameters\fP
+.RS 4
+\fIq\fP current joint position 
+.br
+\fIq_dot\fP current joint velocity 
+.br
+\fIdq\fP desired joint position 
+.br
+\fIdq_dot\fP desired joint velocity 
+.br
+\fItoq\fP joint input torque as control input 
+.RE
+.PP
+
+.SS "void HYUControl::Controller::SetPIDGain (double & _Kp, double & _Kd, double & _Ki, int & _JointNum)"
+
+.PP
+set the PID gains 
+.PP
+\fBParameters\fP
+.RS 4
+\fIKp_\fP proportional gain 
+.br
+\fIKd_\fP derivative gain 
+.br
+\fIKi_\fP integral gain 
+.br
+\fIJointNum\fP number of joint 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

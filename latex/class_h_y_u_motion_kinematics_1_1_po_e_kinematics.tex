@@ -1,0 +1,267 @@
+\hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{}\doxysection{H\+Y\+U\+Motion\+Kinematics\+::Po\+E\+Kinematics Class Reference}
+\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+
+
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} Class for Tree-\/type Manipulator.  
+
+
+
+
+{\ttfamily \#include $<$Po\+E\+Kinematics.\+h$>$}
+
+Inheritance diagram for H\+Y\+U\+Motion\+Kinematics\+::Po\+E\+Kinematics\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aa573356718a6874d88e087b8f8e5f8e0}{Po\+E\+Kinematics}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} class constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a72a32f537ac34d5b4116d23c6f60bcd6}{Po\+E\+Kinematics}} (const Matrix\+Xi \&\+\_\+\+Chain\+Mat)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} class constructor. \end{DoxyCompactList}\item 
+E\+I\+G\+E\+N\+\_\+\+M\+A\+K\+E\+\_\+\+A\+L\+I\+G\+N\+E\+D\+\_\+\+O\+P\+E\+R\+A\+T\+O\+R\+\_\+\+N\+EW void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a35e6d00ef5160c27f8ad1a6db1cf074a}{Update\+Kinematic\+Info}} (Vector3d \+\_\+w, Vector3d \+\_\+p, Vector3d \+\_\+l, int \+\_\+link\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Construct the kinematic infomation. \end{DoxyCompactList}\item 
+Vector3d \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a8cce3e3b631ebedb614d901f1f123bcb}{GetV}} (const Vector3d \&\+\_\+w, const Vector3d \&\+\_\+p)
+\begin{DoxyCompactList}\small\item\em Calculate the joint velocity v. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}} \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a1427ee8f848ec6af5900d2f5c3f26a14}{GetM}} (const Vector3d \&\+\_\+link)
+\begin{DoxyCompactList}\small\item\em Calculate the initial configuration of serial robot. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}{se3}} \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a3fdb2a73bb20d3433c864bf28653257a}{Get\+Twist}} (const Vector3d \&\+\_\+w, const Vector3d \&\+\_\+v)
+\begin{DoxyCompactList}\small\item\em Calculate the Twist of joint. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a4e32f1207ba592ccc4ac521af2e7f245}{H\+Trans\+Matrix}} (const double $\ast$\+\_\+q)
+\begin{DoxyCompactList}\small\item\em Calculate the Homogeneous transformation matrix S\+E(3) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a59d4270137494e34e5d17afd243f538a}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a59d4270137494e34e5d17afd243f538a}} 
+void {\bfseries Prepare\+Jacobian} (const double $\ast$\+\_\+q)
+\item 
+void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_ae1081b71800752a855d50c79b59ebdb5}{Get\+Space\+Jacobian}} (Matrix\+Xd \&\+\_\+\+Space\+Jacobian)
+\begin{DoxyCompactList}\small\item\em calculate the space jacobian \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aff44d4b5d8c4e45b82caf2d947b1e85b}{Get\+Body\+Jacobian}} (Matrix\+Xd \&\+\_\+\+Body\+Jacobian)
+\begin{DoxyCompactList}\small\item\em calculate the body jacobian \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_adcd3d5458ee26f448e57cd865fa2b1f5}{Get\+Analytic\+Jacobian}} (Matrix\+Xd \&\+\_\+\+Analytic\+Jacobian)
+\begin{DoxyCompactList}\small\item\em calcuate the analytic jacobian \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a736a7acc3eda7ed82b483f8bdbf2d126}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a736a7acc3eda7ed82b483f8bdbf2d126}} 
+void {\bfseries Getpinv\+Jacobian} (Matrix\+Xd \&\+\_\+pinv\+Jacobian)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a5d31978440bb8cda994ad9f23dddcc5c}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a5d31978440bb8cda994ad9f23dddcc5c}} 
+void {\bfseries Get\+Scaled\+Trans\+Jacobian} (Matrix\+Xd \&\+\_\+\+Scaled\+Trans\+Jacobian)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a2f240ce8df8a5cd677a4159ae47d23b7}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a2f240ce8df8a5cd677a4159ae47d23b7}} 
+void {\bfseries Get\+Task\+Velocity} (double $\ast$\+\_\+qdot, Vector\+Xd $\ast$\+\_\+\+Task\+Velocity, int \&\+\_\+size)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a68a89d274606cac199597db32623e0ac}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a68a89d274606cac199597db32623e0ac}} 
+void {\bfseries Get\+Manipulability} (double $\ast$\+\_\+\+Task\+Eigen, double $\ast$\+\_\+\+Orient\+Eigen)
+\item 
+void \mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a58d0ef1efd685bbaf081b2593a64133e}{Get\+Forward\+Kinematics}} (Vector3d $\ast$\+\_\+\+Position, Vector3d $\ast$\+\_\+\+Orientation, int \&\+\_\+\+Num\+Chain)
+\begin{DoxyCompactList}\small\item\em forward kinematics of serial robot \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a5d9210500ec43a9311627106467f6063}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a5d9210500ec43a9311627106467f6063}} 
+\mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}} {\bfseries Get\+Forward\+Kinematics\+S\+E3} (const int \&\+\_\+\+End\+Position) const
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aececf1b4255583a159eb9741afe7e53e}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aececf1b4255583a159eb9741afe7e53e}} 
+void {\bfseries Get\+Angle\+Axis} (Vector3d $\ast$\+\_\+\+Axis, double $\ast$\+\_\+\+Angle, int \&\+\_\+\+Num\+Chain)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_abe0c5438ed215382fc137f758f1b097d}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_abe0c5438ed215382fc137f758f1b097d}} 
+void {\bfseries S\+O3to\+Roll\+Pitch\+Yaw} (const Matrix3d \&\+\_\+\+Rot\+Mat, Vector3d \&\+\_\+\+Orientation)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_ac114bcf5a54fce84e29776ba4954b169}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_ac114bcf5a54fce84e29776ba4954b169}} 
+void {\bfseries Roll\+Pitch\+Yawto\+S\+O3} (const double \&\+\_\+\+Roll\+\_\+rad, const double \&\+\_\+\+Pitch\+\_\+rad, const double \&\+\_\+\+Yaw\+\_\+rad, Matrix3d \&\+\_\+\+Rot\+Mat)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a63b98c8f24d5a2e64d295097139162ff}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a63b98c8f24d5a2e64d295097139162ff}} 
+\mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}} {\bfseries Get\+T\+Mat} (int \+\_\+begin, int \+\_\+end)
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_abfea6221badab29c8997de943701d983}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_abfea6221badab29c8997de943701d983}} 
+int {\bfseries Get\+Num\+Chain} (void) const
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a66005e218e231b2e1f380c61e2882472}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a66005e218e231b2e1f380c61e2882472}} 
+\mbox{\hyperlink{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}{se3}} {\bfseries Get\+Twist} (int \+\_\+pos) const
+\item 
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a729c08cb20a560f2a87161d9cc359c46}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a729c08cb20a560f2a87161d9cc359c46}} 
+\mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}} {\bfseries Get\+M\+Mat} (int \+\_\+pos) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} Class for Tree-\/type Manipulator. 
+
+\begin{DoxyVersion}{Version}
+1.\+2.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aa573356718a6874d88e087b8f8e5f8e0}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aa573356718a6874d88e087b8f8e5f8e0}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!PoEKinematics@{PoEKinematics}}
+\index{PoEKinematics@{PoEKinematics}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{PoEKinematics()}{PoEKinematics()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Po\+E\+Kinematics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} class constructor. 
+
+A chain matrix should be defined. \mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a72a32f537ac34d5b4116d23c6f60bcd6}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a72a32f537ac34d5b4116d23c6f60bcd6}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!PoEKinematics@{PoEKinematics}}
+\index{PoEKinematics@{PoEKinematics}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{PoEKinematics()}{PoEKinematics()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Po\+E\+Kinematics (\begin{DoxyParamCaption}\item[{const Matrix\+Xi \&}]{\+\_\+\+Chain\+Mat }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_h_y_u_motion_kinematics_1_1_po_e_kinematics}{Po\+E\+Kinematics}} class constructor. 
+
+A chain matrix should be defined. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_adcd3d5458ee26f448e57cd865fa2b1f5}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_adcd3d5458ee26f448e57cd865fa2b1f5}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetAnalyticJacobian@{GetAnalyticJacobian}}
+\index{GetAnalyticJacobian@{GetAnalyticJacobian}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetAnalyticJacobian()}{GetAnalyticJacobian()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Get\+Analytic\+Jacobian (\begin{DoxyParamCaption}\item[{Matrix\+Xd \&}]{\+\_\+\+Analytic\+Jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+calcuate the analytic jacobian 
+
+\begin{DoxyReturn}{Returns}
+6 x n(\+Do\+F) jacobian matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aff44d4b5d8c4e45b82caf2d947b1e85b}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_aff44d4b5d8c4e45b82caf2d947b1e85b}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetBodyJacobian@{GetBodyJacobian}}
+\index{GetBodyJacobian@{GetBodyJacobian}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetBodyJacobian()}{GetBodyJacobian()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Get\+Body\+Jacobian (\begin{DoxyParamCaption}\item[{Matrix\+Xd \&}]{\+\_\+\+Body\+Jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+calculate the body jacobian 
+
+\begin{DoxyReturn}{Returns}
+6 x n(\+Do\+F) jacobian matrix w.\+r.\+t., end-\/effector coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a58d0ef1efd685bbaf081b2593a64133e}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a58d0ef1efd685bbaf081b2593a64133e}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetForwardKinematics@{GetForwardKinematics}}
+\index{GetForwardKinematics@{GetForwardKinematics}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetForwardKinematics()}{GetForwardKinematics()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Get\+Forward\+Kinematics (\begin{DoxyParamCaption}\item[{Vector3d $\ast$}]{\+\_\+\+Position,  }\item[{Vector3d $\ast$}]{\+\_\+\+Orientation,  }\item[{int \&}]{\+\_\+\+Num\+Chain }\end{DoxyParamCaption})}
+
+
+
+forward kinematics of serial robot 
+
+\begin{DoxyReturn}{Returns}
+end-\/effector position x, y, z. not orientation(\+Working) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a1427ee8f848ec6af5900d2f5c3f26a14}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a1427ee8f848ec6af5900d2f5c3f26a14}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetM@{GetM}}
+\index{GetM@{GetM}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetM()}{GetM()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_lie_operator_8h_a99537c117e68b2674f9f384aa52f3dad}{S\+E3}} H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+GetM (\begin{DoxyParamCaption}\item[{const Vector3d \&}]{\+\_\+link }\end{DoxyParamCaption})}
+
+
+
+Calculate the initial configuration of serial robot. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+link} & total length of robot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\+E(3) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_ae1081b71800752a855d50c79b59ebdb5}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_ae1081b71800752a855d50c79b59ebdb5}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetSpaceJacobian@{GetSpaceJacobian}}
+\index{GetSpaceJacobian@{GetSpaceJacobian}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetSpaceJacobian()}{GetSpaceJacobian()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Get\+Space\+Jacobian (\begin{DoxyParamCaption}\item[{Matrix\+Xd \&}]{\+\_\+\+Space\+Jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+calculate the space jacobian 
+
+\begin{DoxyReturn}{Returns}
+6 x n(\+Do\+F) jacobian matrix w.\+r.\+t, base coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a3fdb2a73bb20d3433c864bf28653257a}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a3fdb2a73bb20d3433c864bf28653257a}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetTwist@{GetTwist}}
+\index{GetTwist@{GetTwist}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetTwist()}{GetTwist()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_lie_operator_8h_a482bdf6bb54e1f6676664de1ee27a49e}{se3}} H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Get\+Twist (\begin{DoxyParamCaption}\item[{const Vector3d \&}]{\+\_\+w,  }\item[{const Vector3d \&}]{\+\_\+v }\end{DoxyParamCaption})}
+
+
+
+Calculate the Twist of joint. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+w} & joint axis with respect to the base coordinate \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+v} & joint velocity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+se3 vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a8cce3e3b631ebedb614d901f1f123bcb}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a8cce3e3b631ebedb614d901f1f123bcb}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!GetV@{GetV}}
+\index{GetV@{GetV}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{GetV()}{GetV()}}
+{\footnotesize\ttfamily Vector3d H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+GetV (\begin{DoxyParamCaption}\item[{const Vector3d \&}]{\+\_\+w,  }\item[{const Vector3d \&}]{\+\_\+p }\end{DoxyParamCaption})}
+
+
+
+Calculate the joint velocity v. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+w} & joint axis with respect to the base coordinate \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+p} & lint position attached to joint coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+v 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a4e32f1207ba592ccc4ac521af2e7f245}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a4e32f1207ba592ccc4ac521af2e7f245}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!HTransMatrix@{HTransMatrix}}
+\index{HTransMatrix@{HTransMatrix}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{HTransMatrix()}{HTransMatrix()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+H\+Trans\+Matrix (\begin{DoxyParamCaption}\item[{const double $\ast$}]{\+\_\+q }\end{DoxyParamCaption})}
+
+
+
+Calculate the Homogeneous transformation matrix S\+E(3) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+q} & generalized coordinate of joint position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a35e6d00ef5160c27f8ad1a6db1cf074a}\label{class_h_y_u_motion_kinematics_1_1_po_e_kinematics_a35e6d00ef5160c27f8ad1a6db1cf074a}} 
+\index{HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}!UpdateKinematicInfo@{UpdateKinematicInfo}}
+\index{UpdateKinematicInfo@{UpdateKinematicInfo}!HYUMotionKinematics::PoEKinematics@{HYUMotionKinematics::PoEKinematics}}
+\doxysubsubsection{\texorpdfstring{UpdateKinematicInfo()}{UpdateKinematicInfo()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Motion\+Kinematics\+::\+Po\+E\+Kinematics\+::\+Update\+Kinematic\+Info (\begin{DoxyParamCaption}\item[{Vector3d}]{\+\_\+w,  }\item[{Vector3d}]{\+\_\+p,  }\item[{Vector3d}]{\+\_\+l,  }\item[{int}]{\+\_\+link\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Construct the kinematic infomation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \+\_\+w} & omega(twist) \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+p} & link position \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+l} & link length \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+link\+\_\+num} & number of link attached to base-\/coordinate \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+D\+L/\mbox{\hyperlink{_po_e_kinematics_8h}{Po\+E\+Kinematics.\+h}}\item 
+K\+D\+L/Po\+E\+Kinematics.\+cpp\end{DoxyCompactItemize}

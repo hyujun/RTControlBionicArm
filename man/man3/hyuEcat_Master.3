@@ -1,0 +1,258 @@
+.TH "hyuEcat::Master" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuEcat::Master \- EtherCAT \fBMaster\fP Client of EtherLAB API\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Ecat_Master\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMaster\fP (const int master=0)"
+.br
+.RI "\fBMaster\fP class constructor\&. "
+.ti -1c
+.RI "void \fBSDOread\fP (uint16_t position, uint16_t index, uint8_t subindex, uint8_t *data)"
+.br
+.RI "Read SDO Object\&. "
+.ti -1c
+.RI "void \fBSDOwrite\fP (uint16_t position, uint16_t index, uint8_t subindex, uint8_t *data)"
+.br
+.RI "Write SDO Object\&. "
+.ti -1c
+.RI "void \fBaddSlave\fP (uint16_t alias, uint16_t position, \fBSlave\fP *slave)"
+.br
+.RI "Add EtherCAT slaves to EtherCAT master\&. "
+.ti -1c
+.RI "void \fBaddSlaveWithHoming\fP (uint16_t alias, uint16_t position, \fBEcatElmo\fP *slave)"
+.br
+.RI "Add EtherCAT Elmo slaves to EtherCAT master\&. "
+.ti -1c
+.RI "void \fBactivate\fP (void)"
+.br
+.RI "Start Activate the client\&. "
+.ti -1c
+.RI "void \fBactivateWithDC\fP (uint8_t RefPosition, uint32_t SyncCycleNano)"
+.br
+.RI "Start Activate the client with Distributed Clock Mode\&. "
+.ti -1c
+.RI "void \fBSyncEcatMaster\fP (uint64_t RefTime)"
+.br
+.RI "synchronize master with each client "
+.ti -1c
+.RI "void \fBdeactivate\fP (void)"
+.br
+.RI "deactivate the client "
+.ti -1c
+.RI "void \fBupdate\fP (unsigned int domain=0)"
+.br
+.RI "TPDO, RPDO process execute\&. "
+.ti -1c
+.RI "void \fBTxUpdate\fP (unsigned int domain=0)"
+.br
+.RI "RPDO process execute\&. "
+.ti -1c
+.RI "void \fBRxUpdate\fP (unsigned int domain=0)"
+.br
+.RI "TPDO process execute\&. "
+.ti -1c
+.RI "std::string \fBGetEcatMasterLinkState\fP (void)"
+.br
+.ti -1c
+.RI "unsigned int \fBGetEcatMasterState\fP (void)"
+.br
+.ti -1c
+.RI "unsigned int \fBGetConnectedSlaves\fP (void)"
+.br
+.ti -1c
+.RI "unsigned int \fBGetSlaveState\fP (int _pos)"
+.br
+.ti -1c
+.RI "std::string \fBGetSlaveConnected\fP (int _pos)"
+.br
+.ti -1c
+.RI "std::string \fBGetSlaveNMT\fP (int _pos)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+EtherCAT \fBMaster\fP Client of EtherLAB API\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.2\&.0 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "hyuEcat::Master::Master (const int master = \fC0\fP)"
+
+.PP
+\fBMaster\fP class constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImaster\fP do not need to set the value 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void hyuEcat::Master::activateWithDC (uint8_t RefPosition, uint32_t SyncCycleNano)"
+
+.PP
+Start Activate the client with Distributed Clock Mode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIRefPosition\fP reference client's position 
+.br
+\fISyncCycleNano\fP Control Cycle time in nano seconds 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::addSlave (uint16_t alias, uint16_t position, \fBSlave\fP * slave)"
+
+.PP
+Add EtherCAT slaves to EtherCAT master\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIalias\fP alias of client 
+.br
+\fIposition\fP position of client 
+.br
+\fIslave\fP info of client 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::addSlaveWithHoming (uint16_t alias, uint16_t position, \fBEcatElmo\fP * slave)"
+
+.PP
+Add EtherCAT Elmo slaves to EtherCAT master\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIalias\fP 
+.br
+\fIposition\fP 
+.br
+\fIslave\fP info of Elmo client 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::RxUpdate (unsigned int domain = \fC0\fP)"
+
+.PP
+TPDO process execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomain\fP initial value = 0 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::SDOread (uint16_t position, uint16_t index, uint8_t subindex, uint8_t * data)"
+
+.PP
+Read SDO Object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP 
+.br
+\fIindex\fP 
+.br
+\fIsubindex\fP 
+.br
+\fI*data\fP address of data maximum 4 bytes 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+CiA-402 document 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::SDOwrite (uint16_t position, uint16_t index, uint8_t subindex, uint8_t * data)"
+
+.PP
+Write SDO Object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP 
+.br
+\fIindex\fP 
+.br
+\fIsubindex\fP 
+.br
+\fI*data\fP address of data maximum 4 bytes 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+CiA-402 document 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::SyncEcatMaster (uint64_t RefTime)"
+
+.PP
+synchronize master with each client 
+.PP
+\fBParameters\fP
+.RS 4
+\fIRefTime\fP current time ex) rt_timer_read() 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::TxUpdate (unsigned int domain = \fC0\fP)"
+
+.PP
+RPDO process execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomain\fP initial value = 0 
+.RE
+.PP
+
+.SS "void hyuEcat::Master::update (unsigned int domain = \fC0\fP)"
+
+.PP
+TPDO, RPDO process execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomain\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

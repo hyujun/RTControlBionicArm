@@ -1,0 +1,183 @@
+\hypertarget{_r_t_client_8h}{}\doxysection{R\+T\+Client.\+h File Reference}
+\label{_r_t_client_8h}\index{RTClient.h@{RTClient.h}}
+
+
+Main Client for Bionic Arm.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}N\+R\+M\+Ksercan\+\_\+tp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}N\+R\+M\+Khw\+\_\+tp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$native/task.\+h$>$}\newline
+{\ttfamily \#include $<$native/timer.\+h$>$}\newline
+{\ttfamily \#include $<$native/mutex.\+h$>$}\newline
+{\ttfamily \#include $<$native/queue.\+h$>$}\newline
+{\ttfamily \#include $<$rtdk.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Ecat\+Data\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+Control\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+R\+T\+Control\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Master.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Elmo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Kist\+Finger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ecat\+System/\+Ecat\+\_\+\+Kist\+Sensor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Motion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Trajectory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}K\+D\+L/\+Serial\+Manipulator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Control/\+Kist\+Hand.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dev\+Mouse\+Object.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_r_t_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}{W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME}}~(5)
+\item 
+\#define \mbox{\hyperlink{_r_t_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}{N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC}}~1000000000
+\item 
+\#define \mbox{\hyperlink{_r_t_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}{\+\_\+\+D\+E\+B\+U\+G\+\_\+}}
+\item 
+\#define \mbox{\hyperlink{_r_t_client_8h_a89468f9c192c46d9d021e8a74762957b}{\+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}}
+\item 
+\#define \mbox{\hyperlink{_r_t_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}{\+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}}
+\item 
+\mbox{\Hypertarget{_r_t_client_8h_aafb7f8fd63067bc7957a2eb94fc260c2}\label{_r_t_client_8h_aafb7f8fd63067bc7957a2eb94fc260c2}} 
+\#define {\bfseries \+\_\+\+C\+A\+N\+\_\+\+O\+N\+\_\+}
+\item 
+\mbox{\Hypertarget{_r_t_client_8h_a88f7a23988f3c7d13fec915262598941}\label{_r_t_client_8h_a88f7a23988f3c7d13fec915262598941}} 
+\#define {\bfseries \+\_\+\+R\+S232\+\_\+\+O\+N\+\_\+}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \mbox{\hyperlink{_r_t_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}{U\+I\+N\+T32}}
+\item 
+typedef int64\+\_\+t \mbox{\hyperlink{_r_t_client_8h_a296e89aa9d3de65d9ba04e7060118260}{I\+N\+T64}}
+\item 
+typedef int32\+\_\+t \mbox{\hyperlink{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}{I\+N\+T32}}
+\item 
+typedef int16\+\_\+t \mbox{\hyperlink{_r_t_client_8h_aca6c48234f001fdbd6597515a4cc088d}{I\+N\+T16}}
+\item 
+typedef uint16\+\_\+t \mbox{\hyperlink{_r_t_client_8h_acbc04026a2008f7c2fccf01718291c20}{U\+I\+N\+T16}}
+\item 
+typedef uint8\+\_\+t \mbox{\hyperlink{_r_t_client_8h_af3037cbae2cdbc45fb75983c08b87935}{U\+I\+N\+T8}}
+\item 
+typedef int8\+\_\+t \mbox{\hyperlink{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}{I\+N\+T8}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{_r_t_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}{cycle\+\_\+ns}} = 1000000
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main Client for Bionic Arm. 
+
+\begin{DoxyDate}{Date}
+2018-\/11-\/28. 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_r_t_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}\label{_r_t_client_8h_a1cb996bb5c8d0991d1456a6e5df88bce}} 
+\index{RTClient.h@{RTClient.h}!\_DEBUG\_@{\_DEBUG\_}}
+\index{\_DEBUG\_@{\_DEBUG\_}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{\_DEBUG\_}{\_DEBUG\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+D\+E\+B\+U\+G\+\_\+}
+
+Debug Print Parameter \mbox{\Hypertarget{_r_t_client_8h_a89468f9c192c46d9d021e8a74762957b}\label{_r_t_client_8h_a89468f9c192c46d9d021e8a74762957b}} 
+\index{RTClient.h@{RTClient.h}!\_ECAT\_ON\_@{\_ECAT\_ON\_}}
+\index{\_ECAT\_ON\_@{\_ECAT\_ON\_}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{\_ECAT\_ON\_}{\_ECAT\_ON\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+E\+C\+A\+T\+\_\+\+O\+N\+\_\+}
+
+Ether\+C\+AT device enable Parameter \mbox{\Hypertarget{_r_t_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}\label{_r_t_client_8h_a499598e08621b38b8c3fe2d2e2a328a4}} 
+\index{RTClient.h@{RTClient.h}!\_USE\_DC\_MODE\_@{\_USE\_DC\_MODE\_}}
+\index{\_USE\_DC\_MODE\_@{\_USE\_DC\_MODE\_}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{\_USE\_DC\_MODE\_}{\_USE\_DC\_MODE\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+U\+S\+E\+\_\+\+D\+C\+\_\+\+M\+O\+D\+E\+\_\+}
+
+Ether\+C\+AT Distributed Clock mode enable Parameter \mbox{\Hypertarget{_r_t_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}\label{_r_t_client_8h_a0501e82515b2bdf36453c4cc80f5e0cc}} 
+\index{RTClient.h@{RTClient.h}!NSEC\_PER\_SEC@{NSEC\_PER\_SEC}}
+\index{NSEC\_PER\_SEC@{NSEC\_PER\_SEC}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{NSEC\_PER\_SEC}{NSEC\_PER\_SEC}}
+{\footnotesize\ttfamily \#define N\+S\+E\+C\+\_\+\+P\+E\+R\+\_\+\+S\+EC~1000000000}
+
+Expression of second in nano second \mbox{\Hypertarget{_r_t_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}\label{_r_t_client_8h_af7a30a22c0422a3c660376aa3fa5b3f1}} 
+\index{RTClient.h@{RTClient.h}!WAKEUP\_TIME@{WAKEUP\_TIME}}
+\index{WAKEUP\_TIME@{WAKEUP\_TIME}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{WAKEUP\_TIME}{WAKEUP\_TIME}}
+{\footnotesize\ttfamily \#define W\+A\+K\+E\+U\+P\+\_\+\+T\+I\+ME~(5)}
+
+Initial waiting time 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_r_t_client_8h_aca6c48234f001fdbd6597515a4cc088d}\label{_r_t_client_8h_aca6c48234f001fdbd6597515a4cc088d}} 
+\index{RTClient.h@{RTClient.h}!INT16@{INT16}}
+\index{INT16@{INT16}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{INT16}{INT16}}
+{\footnotesize\ttfamily typedef int16\+\_\+t I\+N\+T16}
+
+typedef int16\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}\label{_r_t_client_8h_a2c951cf9402cd61f04b43789471dbe7c}} 
+\index{RTClient.h@{RTClient.h}!INT32@{INT32}}
+\index{INT32@{INT32}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{INT32}{INT32}}
+{\footnotesize\ttfamily typedef int32\+\_\+t I\+N\+T32}
+
+typedef int32\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_a296e89aa9d3de65d9ba04e7060118260}\label{_r_t_client_8h_a296e89aa9d3de65d9ba04e7060118260}} 
+\index{RTClient.h@{RTClient.h}!INT64@{INT64}}
+\index{INT64@{INT64}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{INT64}{INT64}}
+{\footnotesize\ttfamily typedef int64\+\_\+t I\+N\+T64}
+
+typedef uint64\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}\label{_r_t_client_8h_a0e16e07c1525c9688ca6fbd34f334ec8}} 
+\index{RTClient.h@{RTClient.h}!INT8@{INT8}}
+\index{INT8@{INT8}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{INT8}{INT8}}
+{\footnotesize\ttfamily typedef int8\+\_\+t I\+N\+T8}
+
+typedef int8\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_acbc04026a2008f7c2fccf01718291c20}\label{_r_t_client_8h_acbc04026a2008f7c2fccf01718291c20}} 
+\index{RTClient.h@{RTClient.h}!UINT16@{UINT16}}
+\index{UINT16@{UINT16}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{UINT16}{UINT16}}
+{\footnotesize\ttfamily typedef uint16\+\_\+t U\+I\+N\+T16}
+
+typedef uint16\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}\label{_r_t_client_8h_ae1e6edbbc26d6fbc71a90190d0266018}} 
+\index{RTClient.h@{RTClient.h}!UINT32@{UINT32}}
+\index{UINT32@{UINT32}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{UINT32}{UINT32}}
+{\footnotesize\ttfamily typedef unsigned int U\+I\+N\+T32}
+
+typedef uint32\+\_\+t \mbox{\Hypertarget{_r_t_client_8h_af3037cbae2cdbc45fb75983c08b87935}\label{_r_t_client_8h_af3037cbae2cdbc45fb75983c08b87935}} 
+\index{RTClient.h@{RTClient.h}!UINT8@{UINT8}}
+\index{UINT8@{UINT8}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{UINT8}{UINT8}}
+{\footnotesize\ttfamily typedef uint8\+\_\+t U\+I\+N\+T8}
+
+typedef uint8\+\_\+t 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_r_t_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}\label{_r_t_client_8h_a3836d5b4fb2b29c5bd87bcdd74e41be9}} 
+\index{RTClient.h@{RTClient.h}!cycle\_ns@{cycle\_ns}}
+\index{cycle\_ns@{cycle\_ns}!RTClient.h@{RTClient.h}}
+\doxysubsubsection{\texorpdfstring{cycle\_ns}{cycle\_ns}}
+{\footnotesize\ttfamily unsigned int cycle\+\_\+ns = 1000000}
+
+1 ms, Initial Value 

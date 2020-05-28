@@ -1,0 +1,150 @@
+\hypertarget{class_h_y_u_control_1_1_controller}{}\doxysection{H\+Y\+U\+Control\+::Controller Class Reference}
+\label{class_h_y_u_control_1_1_controller}\index{HYUControl::Controller@{HYUControl::Controller}}
+
+
+control algorithm for manipulator  
+
+
+
+
+{\ttfamily \#include $<$Controller.\+h$>$}
+
+Inheritance diagram for H\+Y\+U\+Control\+::Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_h_y_u_control_1_1_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a26165c0763a8522097ebbfb4d59d82da}\label{class_h_y_u_control_1_1_controller_a26165c0763a8522097ebbfb4d59d82da}} 
+\mbox{\hyperlink{class_h_y_u_control_1_1_controller_a26165c0763a8522097ebbfb4d59d82da}{Controller}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_h_y_u_control_1_1_controller}{Controller}} constructor, Joint\+Num is 6. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_h_y_u_control_1_1_controller_a8178dd6c9e09ce0a078e2b4c1c896600}{Controller}} (\mbox{\hyperlink{class_serial_manipulator}{Serial\+Manipulator}} $\ast$p\+Manipulator)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_h_y_u_control_1_1_controller}{Controller}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_adf38ea8cd209458bbf13401e9127e9be}\label{class_h_y_u_control_1_1_controller_adf38ea8cd209458bbf13401e9127e9be}} 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_controller_adf38ea8cd209458bbf13401e9127e9be}{Clear\+Error}} (void)
+\begin{DoxyCompactList}\small\item\em make error member to be zero(e, e\+\_\+dot, e\+\_\+integral) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_controller_aa4e9dd8b10649b3f27d2f98c7b840f61}{Set\+P\+I\+D\+Gain}} (double \&\+\_\+\+Kp, double \&\+\_\+\+Kd, double \&\+\_\+\+Ki, int \&\+\_\+\+Joint\+Num)
+\begin{DoxyCompactList}\small\item\em set the P\+ID gains \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_af0a89f58904acf92a0c084fa48fba8a5}\label{class_h_y_u_control_1_1_controller_af0a89f58904acf92a0c084fa48fba8a5}} 
+void {\bfseries Get\+P\+I\+D\+Gain} (double $\ast$\+\_\+\+Kp, double $\ast$\+\_\+\+Kd, double $\ast$\+\_\+\+Ki, int \&\+\_\+\+Joint\+Num)
+\item 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_controller_a229f8dee114f9e434177b9eec534ea51}{P\+D\+Controller}} (double $\ast$p\+\_\+q, double $\ast$p\+\_\+qdot, double $\ast$p\+\_\+dq, double $\ast$p\+\_\+dqdot, double $\ast$p\+\_\+\+Toq, float \&\+\_\+dt)
+\begin{DoxyCompactList}\small\item\em simple pd controller \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a7603c1cef35d531fe4a815e14b318bc6}\label{class_h_y_u_control_1_1_controller_a7603c1cef35d531fe4a815e14b318bc6}} 
+void {\bfseries P\+D\+Grav\+Controller} (double $\ast$p\+\_\+q, double $\ast$p\+\_\+qdot, double $\ast$p\+\_\+dq, double $\ast$p\+\_\+dqdot, double $\ast$p\+\_\+\+Toq)
+\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a44dbed0c301131beae80ccb97c622567}\label{class_h_y_u_control_1_1_controller_a44dbed0c301131beae80ccb97c622567}} 
+void {\bfseries Inv\+Dyn\+Controller} (double $\ast$p\+\_\+q, double $\ast$p\+\_\+qdot, double $\ast$p\+\_\+dq, double $\ast$p\+\_\+dqdot, double $\ast$p\+\_\+dqddot, double $\ast$p\+\_\+\+Toq, float \&\+\_\+dt)
+\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_abdf423a41aef42c0cebbf0e951b20c72}\label{class_h_y_u_control_1_1_controller_abdf423a41aef42c0cebbf0e951b20c72}} 
+void {\bfseries C\+L\+I\+K\+Task\+Controller} (double $\ast$\+\_\+q, double $\ast$\+\_\+qdot, double $\ast$\+\_\+dq, double $\ast$\+\_\+dqdot, const Vector\+Xd $\ast$\+\_\+dx, const Vector\+Xd $\ast$\+\_\+dxdot, const Vector\+Xd \&\+\_\+dqdot\+Null, double $\ast$p\+\_\+\+Toq, float \&\+\_\+dt)
+\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a1ed6d54478ca5acec2c5a822df3ef25a}\label{class_h_y_u_control_1_1_controller_a1ed6d54478ca5acec2c5a822df3ef25a}} 
+void {\bfseries Friction\+Identification} (double $\ast$p\+\_\+q, double $\ast$p\+\_\+qdot, double $\ast$p\+\_\+dq, double $\ast$p\+\_\+dqdot, double $\ast$p\+\_\+dqddot, double $\ast$p\+\_\+\+Toq, double \&gt)
+\item 
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_adec854b6534fb5f2aeae01cc42c319b0}\label{class_h_y_u_control_1_1_controller_adec854b6534fb5f2aeae01cc42c319b0}} 
+void {\bfseries Friction\+Compensator} (Vector\+Xd \&\+\_\+qdot, Vector\+Xd \&\+\_\+dqdot)
+\item 
+void \mbox{\hyperlink{class_h_y_u_control_1_1_controller_a8b51da490100e16b67aa82dea1ce8d8a}{Output\+Saturation}} (double $\ast$p\+Input, double \&\+\_\+\+Max\+Input)
+\begin{DoxyCompactList}\small\item\em joint input torque saturator \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+control algorithm for manipulator 
+
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a8178dd6c9e09ce0a078e2b4c1c896600}\label{class_h_y_u_control_1_1_controller_a8178dd6c9e09ce0a078e2b4c1c896600}} 
+\index{HYUControl::Controller@{HYUControl::Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!HYUControl::Controller@{HYUControl::Controller}}
+\doxysubsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily H\+Y\+U\+Control\+::\+Controller\+::\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serial_manipulator}{Serial\+Manipulator}} $\ast$}]{p\+Manipulator }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_h_y_u_control_1_1_controller}{Controller}} constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Joint\+Num} & number of joint \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a8b51da490100e16b67aa82dea1ce8d8a}\label{class_h_y_u_control_1_1_controller_a8b51da490100e16b67aa82dea1ce8d8a}} 
+\index{HYUControl::Controller@{HYUControl::Controller}!OutputSaturation@{OutputSaturation}}
+\index{OutputSaturation@{OutputSaturation}!HYUControl::Controller@{HYUControl::Controller}}
+\doxysubsubsection{\texorpdfstring{OutputSaturation()}{OutputSaturation()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Control\+::\+Controller\+::\+Output\+Saturation (\begin{DoxyParamCaption}\item[{double $\ast$}]{p\+Input,  }\item[{double \&}]{\+\_\+\+Max\+Input }\end{DoxyParamCaption})}
+
+
+
+joint input torque saturator 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p\+\_\+toq} & joint input torque as control input \\
+\hline
+\mbox{\texttt{ in}}  & {\em maxtoq} & maximum torque motor can handle \\
+\hline
+\mbox{\texttt{ in}}  & {\em p\+\_\+dir} & direction of motor \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_a229f8dee114f9e434177b9eec534ea51}\label{class_h_y_u_control_1_1_controller_a229f8dee114f9e434177b9eec534ea51}} 
+\index{HYUControl::Controller@{HYUControl::Controller}!PDController@{PDController}}
+\index{PDController@{PDController}!HYUControl::Controller@{HYUControl::Controller}}
+\doxysubsubsection{\texorpdfstring{PDController()}{PDController()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Control\+::\+Controller\+::\+P\+D\+Controller (\begin{DoxyParamCaption}\item[{double $\ast$}]{p\+\_\+q,  }\item[{double $\ast$}]{p\+\_\+qdot,  }\item[{double $\ast$}]{p\+\_\+dq,  }\item[{double $\ast$}]{p\+\_\+dqdot,  }\item[{double $\ast$}]{p\+\_\+\+Toq,  }\item[{float \&}]{\+\_\+dt }\end{DoxyParamCaption})}
+
+
+
+simple pd controller 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em q} & current joint position \\
+\hline
+\mbox{\texttt{ in}}  & {\em q\+\_\+dot} & current joint velocity \\
+\hline
+\mbox{\texttt{ in}}  & {\em dq} & desired joint position \\
+\hline
+\mbox{\texttt{ in}}  & {\em dq\+\_\+dot} & desired joint velocity \\
+\hline
+\mbox{\texttt{ in}}  & {\em toq} & joint input torque as control input \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_y_u_control_1_1_controller_aa4e9dd8b10649b3f27d2f98c7b840f61}\label{class_h_y_u_control_1_1_controller_aa4e9dd8b10649b3f27d2f98c7b840f61}} 
+\index{HYUControl::Controller@{HYUControl::Controller}!SetPIDGain@{SetPIDGain}}
+\index{SetPIDGain@{SetPIDGain}!HYUControl::Controller@{HYUControl::Controller}}
+\doxysubsubsection{\texorpdfstring{SetPIDGain()}{SetPIDGain()}}
+{\footnotesize\ttfamily void H\+Y\+U\+Control\+::\+Controller\+::\+Set\+P\+I\+D\+Gain (\begin{DoxyParamCaption}\item[{double \&}]{\+\_\+\+Kp,  }\item[{double \&}]{\+\_\+\+Kd,  }\item[{double \&}]{\+\_\+\+Ki,  }\item[{int \&}]{\+\_\+\+Joint\+Num }\end{DoxyParamCaption})}
+
+
+
+set the P\+ID gains 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Kp\+\_\+} & proportional gain \\
+\hline
+\mbox{\texttt{ in}}  & {\em Kd\+\_\+} & derivative gain \\
+\hline
+\mbox{\texttt{ in}}  & {\em Ki\+\_\+} & integral gain \\
+\hline
+\mbox{\texttt{ in}}  & {\em Joint\+Num} & number of joint \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Control/\mbox{\hyperlink{_controller_8h}{Controller.\+h}}\item 
+Control/Controller.\+cpp\end{DoxyCompactItemize}

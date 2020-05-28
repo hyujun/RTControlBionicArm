@@ -1,0 +1,48 @@
+.TH "Session" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Session
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits TCPServerConnection\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "union \fBData\fP"
+.br
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBSIZE_HEADER\fP = 52, \fBSIZE_COMMAND\fP = 4, \fBSIZE_HEADER_COMMAND\fP = 56, \fBSIZE_DATA_MAX\fP = 200, \fBSIZE_DATA_ASCII_MAX\fP = 32 }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSession\fP (const StreamSocket &socket)"
+.br
+.ti -1c
+.RI "virtual void \fBrun\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBData\fP \fBdata_rev\fP"
+.br
+.ti -1c
+.RI "\fBData\fP \fBdata\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

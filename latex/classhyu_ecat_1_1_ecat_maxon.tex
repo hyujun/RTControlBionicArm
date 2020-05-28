@@ -1,0 +1,404 @@
+\hypertarget{classhyu_ecat_1_1_ecat_maxon}{}\doxysection{hyu\+Ecat\+::Ecat\+Maxon Class Reference}
+\label{classhyu_ecat_1_1_ecat_maxon}\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+
+
+Ether\+C\+AT A\+PI for Maxon Epos4-\/\+Ether\+C\+AT 50/15.  
+
+
+
+
+{\ttfamily \#include $<$Ecat\+\_\+\+Maxon.\+h$>$}
+
+Inheritance diagram for hyu\+Ecat\+::Ecat\+Maxon\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhyu_ecat_1_1_ecat_maxon}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a4c9dfa0966ec6f49b472979b45fad4bf}\label{classhyu_ecat_1_1_ecat_maxon_a4c9dfa0966ec6f49b472979b45fad4bf}} 
+enum \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a4c9dfa0966ec6f49b472979b45fad4bf}{Mode\+Of\+Operation}} \{ \newline
+{\bfseries M\+O\+D\+E\+\_\+\+N\+O\+\_\+\+M\+O\+DE} = 0, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 1, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+V\+E\+L\+O\+C\+I\+TY} = 3, 
+{\bfseries M\+O\+D\+E\+\_\+\+P\+R\+O\+F\+I\+L\+E\+D\+\_\+\+T\+O\+R\+Q\+UE} = 4, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+H\+O\+M\+I\+NG} = 6, 
+{\bfseries M\+O\+D\+E\+\_\+\+I\+N\+T\+E\+R\+P\+O\+L\+A\+T\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 7, 
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+P\+O\+S\+I\+T\+I\+ON} = 8, 
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+V\+E\+L\+E\+O\+C\+I\+TY} = 9, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+T\+O\+R\+Q\+UE} = 10
+ \}
+\begin{DoxyCompactList}\small\item\em Description of Mode of Operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a3e75f2cf63a0eea3078fad1ba38b50d9}\label{classhyu_ecat_1_1_ecat_maxon_a3e75f2cf63a0eea3078fad1ba38b50d9}} 
+\mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a3e75f2cf63a0eea3078fad1ba38b50d9}{Ecat\+Maxon}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon}{Ecat\+Maxon}} constructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_acd3e1d75bec0ebdd3ea75b9388cb8f4a}{initialized}} () const
+\begin{DoxyCompactList}\small\item\em Check the Elmo is Initialized. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a8aefa8c1b26c796e4fea4454fb94f521}{is\+Homing}} () const
+\begin{DoxyCompactList}\small\item\em Check the Elmo acheived Homing. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a761434b6995af09435c13d0887dc82b8}{Maxon\+\_\+\+Device\+State}} (void) const
+\begin{DoxyCompactList}\small\item\em Show the statusword in string(int) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_ae801fc90e779e305063777680681fe4f}{write\+Torque}} (int16\+\_\+t torque)
+\begin{DoxyCompactList}\small\item\em Write Output Torque in 1000 percentage. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a5cf669f3454a7500d01edd7957b24591}{Homing\+Offset}} (int position)
+\begin{DoxyCompactList}\small\item\em Pre-\/defined Parameter for Homing Process. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_ae07afaab1326c9e841963f3241b67561}{Homing\+Method}} (int position)
+\begin{DoxyCompactList}\small\item\em Pre-\/defined Parameter for Homing Process. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a1aa136fcbc0c95be80392991039eb7cc}{Homing\+Speed}} (int position)
+\begin{DoxyCompactList}\small\item\em Pre-\/defined Parameter for Homing Process. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a6f09fafd41922f11c3dc0a590dded6e5}{Homing\+Current\+Limit}} (int position)
+\begin{DoxyCompactList}\small\item\em Pre-\/defined Parameter for Homing Process. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a652e6a509c63598ac058f365c55c7bcc}{process\+Data}} (size\+\_\+t index, uint8\+\_\+t $\ast$domain\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Define a T\+P\+DO \& R\+P\+DO process. \end{DoxyCompactList}\item 
+virtual const ec\+\_\+sync\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a21f28e6e9ec8a40079752e3d4847559f}{syncs}} ()
+\begin{DoxyCompactList}\small\item\em manage the syncs \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a8259d62f398c72a9aece2f6edc808e5e}{sync\+Size}} ()
+\begin{DoxyCompactList}\small\item\em size of sync \end{DoxyCompactList}\item 
+virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t $\ast$ \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a502579cded9b5e5d7faccd900314aabf}{channels}} ()
+\begin{DoxyCompactList}\small\item\em base method for P\+DO entries \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a7c232700362fe83a4fe884212f0188fd}{domains}} (\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&domains) const
+\begin{DoxyCompactList}\small\item\em base method for pdo domains \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a0e97f181874fbcdfcc8a2c0ec9dcec99}{target\+\_\+position\+\_\+}} = 0
+\item 
+int32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_aac5f7611eea8391a7d1d277c5350cfde}{target\+\_\+velocity\+\_\+}} = 0
+\item 
+int16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a8991718f3096d6fa1c24b71493319f56}{target\+\_\+torque\+\_\+}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a9a0d5df045ea9d5521970c6d8d861e91}{max\+\_\+torque\+\_\+}} = 1800
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a65f530f171c3352b2345a31a57fd9c82}{control\+\_\+word\+\_\+}} = 0
+\item 
+int8\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_ae271b4c057cc68aedc30c05aefe608c8}{mode\+\_\+of\+\_\+operation\+\_\+}} = M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+T\+O\+R\+Q\+UE
+\item 
+int32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a04b6576647ff311847db30eb80310aab}{position\+\_\+}} = 0
+\item 
+int32\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_ad9234116bb13a2edb30ff62e8677f3cd}{velocity\+\_\+}} = 0
+\item 
+int16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a6b24fa43871bb3e69ca4fb3d86843247}{torque\+\_\+}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a22b27c32596fcba9837356cc4a48b2d5}{status\+\_\+word\+\_\+}} = 0
+\item 
+int8\+\_\+t \mbox{\hyperlink{classhyu_ecat_1_1_ecat_maxon_a9c0fae730543270f17b150e41fe3b3ea}{mode\+\_\+of\+\_\+operation\+\_\+display\+\_\+}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Ether\+C\+AT A\+PI for Maxon Epos4-\/\+Ether\+C\+AT 50/15. 
+
+\begin{DoxyVersion}{Version}
+1.\+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a502579cded9b5e5d7faccd900314aabf}\label{classhyu_ecat_1_1_ecat_maxon_a502579cded9b5e5d7faccd900314aabf}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!channels@{channels}}
+\index{channels@{channels}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{channels()}{channels()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+pdo\+\_\+entry\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Ecat\+Maxon\+::channels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for P\+DO entries 
+
+\begin{DoxyReturn}{Returns}
+N\+U\+LL 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_ab2f8727118657d501d735b731b89b28a}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a7c232700362fe83a4fe884212f0188fd}\label{classhyu_ecat_1_1_ecat_maxon_a7c232700362fe83a4fe884212f0188fd}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!domains@{domains}}
+\index{domains@{domains}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{domains()}{domains()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Ecat\+Maxon\+::domains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhyu_ecat_1_1_slave_a847937187f25f2ef6808962c99f04bb5}{Domain\+Map}} \&}]{domains }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+base method for pdo domains 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domains} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a070e7a9505d91cfb9a0f0e3f7e9d3c81}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a6f09fafd41922f11c3dc0a590dded6e5}\label{classhyu_ecat_1_1_ecat_maxon_a6f09fafd41922f11c3dc0a590dded6e5}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!HomingCurrentLimit@{HomingCurrentLimit}}
+\index{HomingCurrentLimit@{HomingCurrentLimit}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{HomingCurrentLimit()}{HomingCurrentLimit()}}
+{\footnotesize\ttfamily uint16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::\+Homing\+Current\+Limit (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/defined Parameter for Homing Process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & Client Position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Homing\+Current\+Limit 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_ae07afaab1326c9e841963f3241b67561}\label{classhyu_ecat_1_1_ecat_maxon_ae07afaab1326c9e841963f3241b67561}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!HomingMethod@{HomingMethod}}
+\index{HomingMethod@{HomingMethod}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{HomingMethod()}{HomingMethod()}}
+{\footnotesize\ttfamily int8\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::\+Homing\+Method (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/defined Parameter for Homing Process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & Client Position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Homing\+Method 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a5cf669f3454a7500d01edd7957b24591}\label{classhyu_ecat_1_1_ecat_maxon_a5cf669f3454a7500d01edd7957b24591}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!HomingOffset@{HomingOffset}}
+\index{HomingOffset@{HomingOffset}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{HomingOffset()}{HomingOffset()}}
+{\footnotesize\ttfamily int32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::\+Homing\+Offset (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/defined Parameter for Homing Process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & Client position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Homing\+Offset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a1aa136fcbc0c95be80392991039eb7cc}\label{classhyu_ecat_1_1_ecat_maxon_a1aa136fcbc0c95be80392991039eb7cc}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!HomingSpeed@{HomingSpeed}}
+\index{HomingSpeed@{HomingSpeed}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{HomingSpeed()}{HomingSpeed()}}
+{\footnotesize\ttfamily uint32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::\+Homing\+Speed (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/defined Parameter for Homing Process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & Client Position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Homing\+Speed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_acd3e1d75bec0ebdd3ea75b9388cb8f4a}\label{classhyu_ecat_1_1_ecat_maxon_acd3e1d75bec0ebdd3ea75b9388cb8f4a}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!initialized@{initialized}}
+\index{initialized@{initialized}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{initialized()}{initialized()}}
+{\footnotesize\ttfamily bool hyu\+Ecat\+::\+Ecat\+Maxon\+::initialized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the Elmo is Initialized. 
+
+Returns true if Elmo has reached \char`\"{}operation enabled\char`\"{} state. The transition through the state machine is handled automatically. \begin{DoxyReturn}{Returns}
+mixedboolean Success\+:1, False\+:0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a8aefa8c1b26c796e4fea4454fb94f521}\label{classhyu_ecat_1_1_ecat_maxon_a8aefa8c1b26c796e4fea4454fb94f521}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!isHoming@{isHoming}}
+\index{isHoming@{isHoming}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{isHoming()}{isHoming()}}
+{\footnotesize\ttfamily bool hyu\+Ecat\+::\+Ecat\+Maxon\+::is\+Homing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the Elmo acheived Homing. 
+
+Returns true if Elmo has reached \char`\"{}operation enabled\char`\"{} state. The transition through the state machine is handled automatically. \begin{DoxyReturn}{Returns}
+mixedboolean Success\+:1, False\+:0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a761434b6995af09435c13d0887dc82b8}\label{classhyu_ecat_1_1_ecat_maxon_a761434b6995af09435c13d0887dc82b8}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!Maxon\_DeviceState@{Maxon\_DeviceState}}
+\index{Maxon\_DeviceState@{Maxon\_DeviceState}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{Maxon\_DeviceState()}{Maxon\_DeviceState()}}
+{\footnotesize\ttfamily int hyu\+Ecat\+::\+Ecat\+Maxon\+::\+Maxon\+\_\+\+Device\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Show the statusword in string(int) 
+
+\begin{DoxyReturn}{Returns}
+state\+\_\+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a652e6a509c63598ac058f365c55c7bcc}\label{classhyu_ecat_1_1_ecat_maxon_a652e6a509c63598ac058f365c55c7bcc}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!processData@{processData}}
+\index{processData@{processData}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{processData()}{processData()}}
+{\footnotesize\ttfamily virtual void hyu\+Ecat\+::\+Ecat\+Maxon\+::process\+Data (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index,  }\item[{uint8\+\_\+t $\ast$}]{domain\+\_\+address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Define a T\+P\+DO \& R\+P\+DO process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a4ea91e30c9a2da31ef911377b1cddd38}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a21f28e6e9ec8a40079752e3d4847559f}\label{classhyu_ecat_1_1_ecat_maxon_a21f28e6e9ec8a40079752e3d4847559f}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!syncs@{syncs}}
+\index{syncs@{syncs}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{syncs()}{syncs()}}
+{\footnotesize\ttfamily virtual const ec\+\_\+sync\+\_\+info\+\_\+t$\ast$ hyu\+Ecat\+::\+Ecat\+Maxon\+::syncs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+manage the syncs 
+
+\begin{DoxyReturn}{Returns}
+address of Elmo\+\_\+syncs\mbox{[}0\mbox{]} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a1728261bee14e2072f144afcfacfb2a1}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a8259d62f398c72a9aece2f6edc808e5e}\label{classhyu_ecat_1_1_ecat_maxon_a8259d62f398c72a9aece2f6edc808e5e}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!syncSize@{syncSize}}
+\index{syncSize@{syncSize}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{syncSize()}{syncSize()}}
+{\footnotesize\ttfamily virtual size\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::sync\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+size of sync 
+
+\begin{DoxyReturn}{Returns}
+normalized size of Elmo\+\_\+sync 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_p_d_o_config_8h}{P\+D\+O\+Config.\+h}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{classhyu_ecat_1_1_slave_a8fdbb57a76a03e69c7babbb44c8f740a}{hyu\+Ecat\+::\+Slave}}.
+
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_ae801fc90e779e305063777680681fe4f}\label{classhyu_ecat_1_1_ecat_maxon_ae801fc90e779e305063777680681fe4f}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!writeTorque@{writeTorque}}
+\index{writeTorque@{writeTorque}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{writeTorque()}{writeTorque()}}
+{\footnotesize\ttfamily void hyu\+Ecat\+::\+Ecat\+Maxon\+::write\+Torque (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{torque }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write Output Torque in 1000 percentage. 
+
+User must first set max\+\_\+torque. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em torque} & int16\+\_\+t \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a65f530f171c3352b2345a31a57fd9c82}\label{classhyu_ecat_1_1_ecat_maxon_a65f530f171c3352b2345a31a57fd9c82}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!control\_word\_@{control\_word\_}}
+\index{control\_word\_@{control\_word\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{control\_word\_}{control\_word\_}}
+{\footnotesize\ttfamily uint16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::control\+\_\+word\+\_\+ = 0}
+
+write \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a9a0d5df045ea9d5521970c6d8d861e91}\label{classhyu_ecat_1_1_ecat_maxon_a9a0d5df045ea9d5521970c6d8d861e91}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!max\_torque\_@{max\_torque\_}}
+\index{max\_torque\_@{max\_torque\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{max\_torque\_}{max\_torque\_}}
+{\footnotesize\ttfamily uint16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::max\+\_\+torque\+\_\+ = 1800}
+
+write (max current = 1000, as set in Elmo Motion Studio) \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_ae271b4c057cc68aedc30c05aefe608c8}\label{classhyu_ecat_1_1_ecat_maxon_ae271b4c057cc68aedc30c05aefe608c8}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!mode\_of\_operation\_@{mode\_of\_operation\_}}
+\index{mode\_of\_operation\_@{mode\_of\_operation\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{mode\_of\_operation\_}{mode\_of\_operation\_}}
+{\footnotesize\ttfamily int8\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::mode\+\_\+of\+\_\+operation\+\_\+ = M\+O\+D\+E\+\_\+\+C\+Y\+C\+L\+I\+C\+\_\+\+S\+Y\+N\+C\+\_\+\+T\+O\+R\+Q\+UE}
+
+write (use enum Mode\+Of\+Operation for convenience) \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a9c0fae730543270f17b150e41fe3b3ea}\label{classhyu_ecat_1_1_ecat_maxon_a9c0fae730543270f17b150e41fe3b3ea}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!mode\_of\_operation\_display\_@{mode\_of\_operation\_display\_}}
+\index{mode\_of\_operation\_display\_@{mode\_of\_operation\_display\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{mode\_of\_operation\_display\_}{mode\_of\_operation\_display\_}}
+{\footnotesize\ttfamily int8\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::mode\+\_\+of\+\_\+operation\+\_\+display\+\_\+ = 0}
+
+read \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a04b6576647ff311847db30eb80310aab}\label{classhyu_ecat_1_1_ecat_maxon_a04b6576647ff311847db30eb80310aab}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!position\_@{position\_}}
+\index{position\_@{position\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{position\_}{position\_}}
+{\footnotesize\ttfamily int32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::position\+\_\+ = 0}
+
+read \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a22b27c32596fcba9837356cc4a48b2d5}\label{classhyu_ecat_1_1_ecat_maxon_a22b27c32596fcba9837356cc4a48b2d5}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!status\_word\_@{status\_word\_}}
+\index{status\_word\_@{status\_word\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{status\_word\_}{status\_word\_}}
+{\footnotesize\ttfamily uint16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::status\+\_\+word\+\_\+ = 0}
+
+read \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a0e97f181874fbcdfcc8a2c0ec9dcec99}\label{classhyu_ecat_1_1_ecat_maxon_a0e97f181874fbcdfcc8a2c0ec9dcec99}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!target\_position\_@{target\_position\_}}
+\index{target\_position\_@{target\_position\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{target\_position\_}{target\_position\_}}
+{\footnotesize\ttfamily int32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::target\+\_\+position\+\_\+ = 0}
+
+write \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a8991718f3096d6fa1c24b71493319f56}\label{classhyu_ecat_1_1_ecat_maxon_a8991718f3096d6fa1c24b71493319f56}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!target\_torque\_@{target\_torque\_}}
+\index{target\_torque\_@{target\_torque\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{target\_torque\_}{target\_torque\_}}
+{\footnotesize\ttfamily int16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::target\+\_\+torque\+\_\+ = 0}
+
+write (max torque (max current) = 1000) \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_aac5f7611eea8391a7d1d277c5350cfde}\label{classhyu_ecat_1_1_ecat_maxon_aac5f7611eea8391a7d1d277c5350cfde}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!target\_velocity\_@{target\_velocity\_}}
+\index{target\_velocity\_@{target\_velocity\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{target\_velocity\_}{target\_velocity\_}}
+{\footnotesize\ttfamily int32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::target\+\_\+velocity\+\_\+ = 0}
+
+write \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_a6b24fa43871bb3e69ca4fb3d86843247}\label{classhyu_ecat_1_1_ecat_maxon_a6b24fa43871bb3e69ca4fb3d86843247}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!torque\_@{torque\_}}
+\index{torque\_@{torque\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{torque\_}{torque\_}}
+{\footnotesize\ttfamily int16\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::torque\+\_\+ = 0}
+
+read \mbox{\Hypertarget{classhyu_ecat_1_1_ecat_maxon_ad9234116bb13a2edb30ff62e8677f3cd}\label{classhyu_ecat_1_1_ecat_maxon_ad9234116bb13a2edb30ff62e8677f3cd}} 
+\index{hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}!velocity\_@{velocity\_}}
+\index{velocity\_@{velocity\_}!hyuEcat::EcatMaxon@{hyuEcat::EcatMaxon}}
+\doxysubsubsection{\texorpdfstring{velocity\_}{velocity\_}}
+{\footnotesize\ttfamily int32\+\_\+t hyu\+Ecat\+::\+Ecat\+Maxon\+::velocity\+\_\+ = 0}
+
+read 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ecat\+System/\mbox{\hyperlink{_ecat___maxon_8h}{Ecat\+\_\+\+Maxon.\+h}}\end{DoxyCompactItemize}

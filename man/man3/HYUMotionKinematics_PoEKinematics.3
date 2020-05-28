@@ -1,0 +1,252 @@
+.TH "HYUMotionKinematics::PoEKinematics" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HYUMotionKinematics::PoEKinematics \- \fBPoEKinematics\fP Class for Tree-type Manipulator\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PoEKinematics\&.h>\fP
+.PP
+Inherits \fBHYUMotionBase::LieOperator\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPoEKinematics\fP ()"
+.br
+.RI "\fBPoEKinematics\fP class constructor\&. "
+.ti -1c
+.RI "\fBPoEKinematics\fP (const MatrixXi &_ChainMat)"
+.br
+.RI "\fBPoEKinematics\fP class constructor\&. "
+.ti -1c
+.RI "EIGEN_MAKE_ALIGNED_OPERATOR_NEW void \fBUpdateKinematicInfo\fP (Vector3d _w, Vector3d _p, Vector3d _l, int _link_num)"
+.br
+.RI "Construct the kinematic infomation\&. "
+.ti -1c
+.RI "Vector3d \fBGetV\fP (const Vector3d &_w, const Vector3d &_p)"
+.br
+.RI "Calculate the joint velocity v\&. "
+.ti -1c
+.RI "\fBSE3\fP \fBGetM\fP (const Vector3d &_link)"
+.br
+.RI "Calculate the initial configuration of serial robot\&. "
+.ti -1c
+.RI "\fBse3\fP \fBGetTwist\fP (const Vector3d &_w, const Vector3d &_v)"
+.br
+.RI "Calculate the Twist of joint\&. "
+.ti -1c
+.RI "void \fBHTransMatrix\fP (const double *_q)"
+.br
+.RI "Calculate the Homogeneous transformation matrix SE(3) "
+.ti -1c
+.RI "void \fBPrepareJacobian\fP (const double *_q)"
+.br
+.ti -1c
+.RI "void \fBGetSpaceJacobian\fP (MatrixXd &_SpaceJacobian)"
+.br
+.RI "calculate the space jacobian "
+.ti -1c
+.RI "void \fBGetBodyJacobian\fP (MatrixXd &_BodyJacobian)"
+.br
+.RI "calculate the body jacobian "
+.ti -1c
+.RI "void \fBGetAnalyticJacobian\fP (MatrixXd &_AnalyticJacobian)"
+.br
+.RI "calcuate the analytic jacobian "
+.ti -1c
+.RI "void \fBGetpinvJacobian\fP (MatrixXd &_pinvJacobian)"
+.br
+.ti -1c
+.RI "void \fBGetScaledTransJacobian\fP (MatrixXd &_ScaledTransJacobian)"
+.br
+.ti -1c
+.RI "void \fBGetTaskVelocity\fP (double *_qdot, VectorXd *_TaskVelocity, int &_size)"
+.br
+.ti -1c
+.RI "void \fBGetManipulability\fP (double *_TaskEigen, double *_OrientEigen)"
+.br
+.ti -1c
+.RI "void \fBGetForwardKinematics\fP (Vector3d *_Position, Vector3d *_Orientation, int &_NumChain)"
+.br
+.RI "forward kinematics of serial robot "
+.ti -1c
+.RI "\fBSE3\fP \fBGetForwardKinematicsSE3\fP (const int &_EndPosition) const"
+.br
+.ti -1c
+.RI "void \fBGetAngleAxis\fP (Vector3d *_Axis, double *_Angle, int &_NumChain)"
+.br
+.ti -1c
+.RI "void \fBSO3toRollPitchYaw\fP (const Matrix3d &_RotMat, Vector3d &_Orientation)"
+.br
+.ti -1c
+.RI "void \fBRollPitchYawtoSO3\fP (const double &_Roll_rad, const double &_Pitch_rad, const double &_Yaw_rad, Matrix3d &_RotMat)"
+.br
+.ti -1c
+.RI "\fBSE3\fP \fBGetTMat\fP (int _begin, int _end)"
+.br
+.ti -1c
+.RI "int \fBGetNumChain\fP (void) const"
+.br
+.ti -1c
+.RI "\fBse3\fP \fBGetTwist\fP (int _pos) const"
+.br
+.ti -1c
+.RI "\fBSE3\fP \fBGetMMat\fP (int _pos) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBPoEKinematics\fP Class for Tree-type Manipulator\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.2\&.0 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "HYUMotionKinematics::PoEKinematics::PoEKinematics ()"
+
+.PP
+\fBPoEKinematics\fP class constructor\&. A chain matrix should be defined\&. 
+.SS "HYUMotionKinematics::PoEKinematics::PoEKinematics (const MatrixXi & _ChainMat)"
+
+.PP
+\fBPoEKinematics\fP class constructor\&. A chain matrix should be defined\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void HYUMotionKinematics::PoEKinematics::GetAnalyticJacobian (MatrixXd & _AnalyticJacobian)\fC [inline]\fP"
+
+.PP
+calcuate the analytic jacobian 
+.PP
+\fBReturns\fP
+.RS 4
+6 x n(DoF) jacobian matrix 
+.RE
+.PP
+
+.SS "void HYUMotionKinematics::PoEKinematics::GetBodyJacobian (MatrixXd & _BodyJacobian)\fC [inline]\fP"
+
+.PP
+calculate the body jacobian 
+.PP
+\fBReturns\fP
+.RS 4
+6 x n(DoF) jacobian matrix w\&.r\&.t\&., end-effector coordinate 
+.RE
+.PP
+
+.SS "void HYUMotionKinematics::PoEKinematics::GetForwardKinematics (Vector3d * _Position, Vector3d * _Orientation, int & _NumChain)"
+
+.PP
+forward kinematics of serial robot 
+.PP
+\fBReturns\fP
+.RS 4
+end-effector position x, y, z\&. not orientation(Working) 
+.RE
+.PP
+
+.SS "\fBSE3\fP HYUMotionKinematics::PoEKinematics::GetM (const Vector3d & _link)"
+
+.PP
+Calculate the initial configuration of serial robot\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_link\fP total length of robot 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+SE(3) 
+.RE
+.PP
+
+.SS "void HYUMotionKinematics::PoEKinematics::GetSpaceJacobian (MatrixXd & _SpaceJacobian)\fC [inline]\fP"
+
+.PP
+calculate the space jacobian 
+.PP
+\fBReturns\fP
+.RS 4
+6 x n(DoF) jacobian matrix w\&.r\&.t, base coordinate 
+.RE
+.PP
+
+.SS "\fBse3\fP HYUMotionKinematics::PoEKinematics::GetTwist (const Vector3d & _w, const Vector3d & _v)"
+
+.PP
+Calculate the Twist of joint\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_w\fP joint axis with respect to the base coordinate 
+.br
+\fI_v\fP joint velocity 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+se3 vector 
+.RE
+.PP
+
+.SS "Vector3d HYUMotionKinematics::PoEKinematics::GetV (const Vector3d & _w, const Vector3d & _p)"
+
+.PP
+Calculate the joint velocity v\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_w\fP joint axis with respect to the base coordinate 
+.br
+\fI_p\fP lint position attached to joint coordinate 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+v 
+.RE
+.PP
+
+.SS "void HYUMotionKinematics::PoEKinematics::HTransMatrix (const double * _q)"
+
+.PP
+Calculate the Homogeneous transformation matrix SE(3) 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_q\fP generalized coordinate of joint position 
+.RE
+.PP
+
+.SS "void HYUMotionKinematics::PoEKinematics::UpdateKinematicInfo (Vector3d _w, Vector3d _p, Vector3d _l, int _link_num)"
+
+.PP
+Construct the kinematic infomation\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_w\fP omega(twist) 
+.br
+\fI_p\fP link position 
+.br
+\fI_l\fP link length 
+.br
+\fI_link_num\fP number of link attached to base-coordinate 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

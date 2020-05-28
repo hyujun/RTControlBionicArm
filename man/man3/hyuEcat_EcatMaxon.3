@@ -1,0 +1,351 @@
+.TH "hyuEcat::EcatMaxon" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hyuEcat::EcatMaxon \- EtherCAT API for Maxon Epos4-EtherCAT 50/15\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Ecat_Maxon\&.h>\fP
+.PP
+Inherits \fBhyuEcat::Slave\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBModeOfOperation\fP { \fBMODE_NO_MODE\fP = 0, \fBMODE_PROFILED_POSITION\fP = 1, \fBMODE_PROFILED_VELOCITY\fP = 3, \fBMODE_PROFILED_TORQUE\fP = 4, \fBMODE_HOMING\fP = 6, \fBMODE_INTERPOLATED_POSITION\fP = 7, \fBMODE_CYCLIC_SYNC_POSITION\fP = 8, \fBMODE_CYCLIC_SYNC_VELEOCITY\fP = 9, \fBMODE_CYCLIC_SYNC_TORQUE\fP = 10 }"
+.br
+.RI "Description of Mode of Operation\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEcatMaxon\fP ()"
+.br
+.RI "\fBEcatMaxon\fP constructor\&. "
+.ti -1c
+.RI "bool \fBinitialized\fP () const"
+.br
+.RI "Check the Elmo is Initialized\&. "
+.ti -1c
+.RI "bool \fBisHoming\fP () const"
+.br
+.RI "Check the Elmo acheived Homing\&. "
+.ti -1c
+.RI "int \fBMaxon_DeviceState\fP (void) const"
+.br
+.RI "Show the statusword in string(int) "
+.ti -1c
+.RI "void \fBwriteTorque\fP (int16_t torque)"
+.br
+.RI "Write Output Torque in 1000 percentage\&. "
+.ti -1c
+.RI "int32_t \fBHomingOffset\fP (int position)"
+.br
+.RI "Pre-defined Parameter for Homing Process\&. "
+.ti -1c
+.RI "int8_t \fBHomingMethod\fP (int position)"
+.br
+.RI "Pre-defined Parameter for Homing Process\&. "
+.ti -1c
+.RI "uint32_t \fBHomingSpeed\fP (int position)"
+.br
+.RI "Pre-defined Parameter for Homing Process\&. "
+.ti -1c
+.RI "uint16_t \fBHomingCurrentLimit\fP (int position)"
+.br
+.RI "Pre-defined Parameter for Homing Process\&. "
+.ti -1c
+.RI "virtual void \fBprocessData\fP (size_t index, uint8_t *domain_address)"
+.br
+.RI "Define a TPDO & RPDO process\&. "
+.ti -1c
+.RI "virtual const ec_sync_info_t * \fBsyncs\fP ()"
+.br
+.RI "manage the syncs "
+.ti -1c
+.RI "virtual size_t \fBsyncSize\fP ()"
+.br
+.RI "size of sync "
+.ti -1c
+.RI "virtual const ec_pdo_entry_info_t * \fBchannels\fP ()"
+.br
+.RI "base method for PDO entries "
+.ti -1c
+.RI "virtual void \fBdomains\fP (\fBDomainMap\fP &domains) const"
+.br
+.RI "base method for pdo domains "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int32_t \fBtarget_position_\fP = 0"
+.br
+.ti -1c
+.RI "int32_t \fBtarget_velocity_\fP = 0"
+.br
+.ti -1c
+.RI "int16_t \fBtarget_torque_\fP = 0"
+.br
+.ti -1c
+.RI "uint16_t \fBmax_torque_\fP = 1800"
+.br
+.ti -1c
+.RI "uint16_t \fBcontrol_word_\fP = 0"
+.br
+.ti -1c
+.RI "int8_t \fBmode_of_operation_\fP = MODE_CYCLIC_SYNC_TORQUE"
+.br
+.ti -1c
+.RI "int32_t \fBposition_\fP = 0"
+.br
+.ti -1c
+.RI "int32_t \fBvelocity_\fP = 0"
+.br
+.ti -1c
+.RI "int16_t \fBtorque_\fP = 0"
+.br
+.ti -1c
+.RI "uint16_t \fBstatus_word_\fP = 0"
+.br
+.ti -1c
+.RI "int8_t \fBmode_of_operation_display_\fP = 0"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+EtherCAT API for Maxon Epos4-EtherCAT 50/15\&. 
+
+
+.PP
+\fBVersion\fP
+.RS 4
+1\&.1\&.0 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const ec_pdo_entry_info_t* hyuEcat::EcatMaxon::channels ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for PDO entries 
+.PP
+\fBReturns\fP
+.RS 4
+NULL 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual void hyuEcat::EcatMaxon::domains (\fBDomainMap\fP & domains) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+base method for pdo domains 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdomains\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "uint16_t hyuEcat::EcatMaxon::HomingCurrentLimit (int position)\fC [inline]\fP"
+
+.PP
+Pre-defined Parameter for Homing Process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Client Position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+HomingCurrentLimit 
+.RE
+.PP
+
+.SS "int8_t hyuEcat::EcatMaxon::HomingMethod (int position)\fC [inline]\fP"
+
+.PP
+Pre-defined Parameter for Homing Process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Client Position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+HomingMethod 
+.RE
+.PP
+
+.SS "int32_t hyuEcat::EcatMaxon::HomingOffset (int position)\fC [inline]\fP"
+
+.PP
+Pre-defined Parameter for Homing Process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Client position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+HomingOffset 
+.RE
+.PP
+
+.SS "uint32_t hyuEcat::EcatMaxon::HomingSpeed (int position)\fC [inline]\fP"
+
+.PP
+Pre-defined Parameter for Homing Process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP Client Position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+HomingSpeed 
+.RE
+.PP
+
+.SS "bool hyuEcat::EcatMaxon::initialized () const\fC [inline]\fP"
+
+.PP
+Check the Elmo is Initialized\&. Returns true if Elmo has reached 'operation enabled' state\&. The transition through the state machine is handled automatically\&. 
+.PP
+\fBReturns\fP
+.RS 4
+mixedboolean Success:1, False:0 
+.RE
+.PP
+
+.SS "bool hyuEcat::EcatMaxon::isHoming () const\fC [inline]\fP"
+
+.PP
+Check the Elmo acheived Homing\&. Returns true if Elmo has reached 'operation enabled' state\&. The transition through the state machine is handled automatically\&. 
+.PP
+\fBReturns\fP
+.RS 4
+mixedboolean Success:1, False:0 
+.RE
+.PP
+
+.SS "int hyuEcat::EcatMaxon::Maxon_DeviceState (void) const\fC [inline]\fP"
+
+.PP
+Show the statusword in string(int) 
+.PP
+\fBReturns\fP
+.RS 4
+state_ 
+.RE
+.PP
+
+.SS "virtual void hyuEcat::EcatMaxon::processData (size_t index, uint8_t * domain_address)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Define a TPDO & RPDO process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIdomain_address\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual const ec_sync_info_t* hyuEcat::EcatMaxon::syncs ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+manage the syncs 
+.PP
+\fBReturns\fP
+.RS 4
+address of Elmo_syncs[0] 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "virtual size_t hyuEcat::EcatMaxon::syncSize ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+size of sync 
+.PP
+\fBReturns\fP
+.RS 4
+normalized size of Elmo_sync 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBPDOConfig\&.h\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBhyuEcat::Slave\fP\&.
+.SS "void hyuEcat::EcatMaxon::writeTorque (int16_t torque)\fC [inline]\fP"
+
+.PP
+Write Output Torque in 1000 percentage\&. User must first set max_torque\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItorque\fP int16_t 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "uint16_t hyuEcat::EcatMaxon::control_word_ = 0"
+write 
+.SS "uint16_t hyuEcat::EcatMaxon::max_torque_ = 1800"
+write (max current = 1000, as set in Elmo Motion Studio) 
+.SS "int8_t hyuEcat::EcatMaxon::mode_of_operation_ = MODE_CYCLIC_SYNC_TORQUE"
+write (use enum ModeOfOperation for convenience) 
+.SS "int8_t hyuEcat::EcatMaxon::mode_of_operation_display_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatMaxon::position_ = 0"
+read 
+.SS "uint16_t hyuEcat::EcatMaxon::status_word_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatMaxon::target_position_ = 0"
+write 
+.SS "int16_t hyuEcat::EcatMaxon::target_torque_ = 0"
+write (max torque (max current) = 1000) 
+.SS "int32_t hyuEcat::EcatMaxon::target_velocity_ = 0"
+write 
+.SS "int16_t hyuEcat::EcatMaxon::torque_ = 0"
+read 
+.SS "int32_t hyuEcat::EcatMaxon::velocity_ = 0"
+read 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.

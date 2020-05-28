@@ -1,0 +1,60 @@
+\hypertarget{_controller_8h}{}\doxysection{Control/\+Controller.h File Reference}
+\label{_controller_8h}\index{Control/Controller.h@{Control/Controller.h}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+{\ttfamily \#include \char`\"{}../\+K\+D\+L/\+Property\+Definition.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+K\+D\+L/\+Serial\+Manipulator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+K\+D\+L/\+Lie\+Operator.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_h_y_u_control_1_1_controller}{H\+Y\+U\+Control\+::\+Controller}}
+\begin{DoxyCompactList}\small\item\em control algorithm for manipulator \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_h_y_u_control}{H\+Y\+U\+Control}}
+\begin{DoxyCompactList}\small\item\em control and trajecotry namespace for manipulator \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_controller_8h_a07c58acfd7a8686c28d3fc5bd915329b}\label{_controller_8h_a07c58acfd7a8686c28d3fc5bd915329b}} 
+\#define {\bfseries \+\_\+\+U\+S\+E\+\_\+\+M\+A\+T\+H\+\_\+\+D\+E\+F\+I\+N\+ED}
+\item 
+\#define \mbox{\hyperlink{_controller_8h_aadc9af28ce3348e1d24efa7e31ff9e37}{Kp\+Base}}~100
+\item 
+\#define \mbox{\hyperlink{_controller_8h_a20f214e22342c99fbd85fc0d99cb5fe9}{Kd\+Base}}~8
+\item 
+\#define \mbox{\hyperlink{_controller_8h_aa5791d2ada4291aa06e6ef20d6ce5d37}{Hinf\+Base}}~5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyDate}{Date}
+2019-\/05-\/15 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Junho Park 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_controller_8h_aa5791d2ada4291aa06e6ef20d6ce5d37}\label{_controller_8h_aa5791d2ada4291aa06e6ef20d6ce5d37}} 
+\index{Controller.h@{Controller.h}!HinfBase@{HinfBase}}
+\index{HinfBase@{HinfBase}!Controller.h@{Controller.h}}
+\doxysubsubsection{\texorpdfstring{HinfBase}{HinfBase}}
+{\footnotesize\ttfamily \#define Hinf\+Base~5}
+
+Inital value of H-\/infinity Gain \mbox{\Hypertarget{_controller_8h_a20f214e22342c99fbd85fc0d99cb5fe9}\label{_controller_8h_a20f214e22342c99fbd85fc0d99cb5fe9}} 
+\index{Controller.h@{Controller.h}!KdBase@{KdBase}}
+\index{KdBase@{KdBase}!Controller.h@{Controller.h}}
+\doxysubsubsection{\texorpdfstring{KdBase}{KdBase}}
+{\footnotesize\ttfamily \#define Kd\+Base~8}
+
+Inital value of Kd \mbox{\Hypertarget{_controller_8h_aadc9af28ce3348e1d24efa7e31ff9e37}\label{_controller_8h_aadc9af28ce3348e1d24efa7e31ff9e37}} 
+\index{Controller.h@{Controller.h}!KpBase@{KpBase}}
+\index{KpBase@{KpBase}!Controller.h@{Controller.h}}
+\doxysubsubsection{\texorpdfstring{KpBase}{KpBase}}
+{\footnotesize\ttfamily \#define Kp\+Base~100}
+
+Inital value of Kp 

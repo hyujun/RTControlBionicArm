@@ -1,0 +1,69 @@
+.TH "KDL/LieOperator.h" 3 "Tue May 12 2020" "Version 1.0.0" "Bionic Arm Ver.1" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KDL/LieOperator.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <Eigen/Dense>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBHYUMotionBase::LieOperator\fP"
+.br
+.RI "Lie-algebra operator collection\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBHYUMotionBase\fP"
+.br
+.RI "Biorobotics Lab Lie-Group Operator\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef Matrix< double, 6, 1 > \fBse3\fP"
+.br
+.ti -1c
+.RI "typedef Matrix< double, 4, 4 > \fBSE3\fP"
+.br
+.ti -1c
+.RI "typedef Matrix< double, 6, 6 > \fBAdjoint\fP"
+.br
+.ti -1c
+.RI "typedef Matrix< double, 6, 6 > \fBadjoint\fP"
+.br
+.ti -1c
+.RI "typedef Matrix3d \fBSO3\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor\fP
+.RS 4
+Junho Park 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef Matrix<double, 6, 6> \fBAdjoint\fP"
+Size definition of Adjoint operator(twist) 
+.SS "typedef Matrix<double, 6, 6> \fBadjoint\fP"
+Size definition of adjoint operator(wrench) 
+.SS "typedef Matrix<double, 6, 1> \fBse3\fP"
+Size definition of se3(vector) 
+.SS "typedef Matrix<double, 4, 4> \fBSE3\fP"
+Size definition of SE3(matrix) 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Bionic Arm Ver\&.1 from the source code\&.
