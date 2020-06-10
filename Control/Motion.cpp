@@ -25,7 +25,7 @@ Motion::Motion(SerialManipulator *_pManipulator)
 	TotalChain = pManipulator->GetTotalChain();
 
 	MotionProcess=0;
-	motion_cycle = 3;
+	motion_cycle = 0;
 
 	dq.resize(TotalDoF);
 	dqdot.resize(TotalDoF);
