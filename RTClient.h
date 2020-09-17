@@ -33,7 +33,6 @@
 #include <rtdk.h>		//The rdtk real-time printing library
 /****************************************************************************/
 
-#include "EcatDataSocket.h"
 #include "EcatControlSocket.h"
 
 #include "EcatSystem/RTControlSocket.h"
