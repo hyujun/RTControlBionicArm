@@ -250,8 +250,8 @@ void RTRArm_run(void *arg)
 
 			if(HomingFlag == 0)
 			{
-				isElmoHoming();
-				//HomingFlag = 1;
+				//isElmoHoming();
+				HomingFlag = 1;
 			}
 			else
 			{
@@ -265,7 +265,7 @@ void RTRArm_run(void *arg)
 				motion.JointMotion( TargetPos_Rad, TargetVel_Rad, TargetAcc_Rad, finPos, ActualPos_Rad, ActualVel_Rad, double_gt, JointState, ControlMotion );
 
 				//Control.PDController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq, float_dt );
-				Control.PDGravController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq);
+				//Control.PDGravController( ActualPos_Rad, ActualVel_Rad, TargetPos_Rad, TargetVel_Rad, TargetToq);
 
 				BionicArm.TorqueConvert(TargetToq, TargetTor, MaxTor);
 
@@ -275,7 +275,7 @@ void RTRArm_run(void *arg)
 
 					if(double_gt >= 1.0)
 					{
-						ecat_elmo[j].writeTorque(TargetTor[j]);
+						//ecat_elmo[j].writeTorque(TargetTor[j]);
 					}
 					else
 					{
@@ -388,7 +388,7 @@ void can_task_proc(void *arg)
 		fprintf(stderr, "Failed to queue bind, code %d\n", err);
 	}
 
-	unsigned int can_cycle_ns = 20e6;
+	unsigned int can_cycle_ns = 25e6;
 	rt_task_set_periodic(NULL, TM_NOW, can_cycle_ns);
 
 	while(1)
@@ -398,10 +398,10 @@ void can_task_proc(void *arg)
 
 		if(system_ready)
 		{
-			port[0] = 10; //flex
-			port[1] = 10; //extend
-			port[2] = 0;
-			port[3] = 0;
+			port[0] = 50; //flex    now
+			port[1] = 50; //extend  now
+			port[2] = 0;  // after
+			port[3] = 0;  // after
 
 			while(1)
 			{
@@ -813,9 +813,9 @@ void print_run(void *arg)
 
 					}
 					reset_count=0;
-#endif
-				}
 
+				}
+#endif
 				rt_printf("\n");
 			}
 		}
@@ -856,26 +856,22 @@ void plot_run(void *arg)
 
 void tcpip_run(void *arg)
 {
+	auto tcp_port = "4676";
+	char buffer[256] = {0};
+	char szSendMessage[256] = {0};
+	int tcp_flag=0;
+	Poco::Net::SocketAddress server_addr(tcp_port);
+	Poco::Net::ServerSocket server_sock(server_addr);
 
-	ServerSocket sock(SERVER_PORT);
-	TCPServer server(new SessionFactory(), sock);
+	Poco::Net::Socket::SocketList connectedSockList;
+	connectedSockList.push_back(server_sock);
 
-	cout << "Simple TCP Server Application." << endl;
-	cout << "maxConcurrentConnections: " << server.maxConcurrentConnections() << endl;
-
-	int current_Thread=0;
-	server.start();
-
-	rt_task_set_periodic(NULL, TM_NOW, 1e7);
+	rt_task_set_periodic(NULL, TM_NOW, 1e6);
 
 	while(1)
 	{
 		rt_task_wait_period(NULL);
-		current_Thread = server.currentConnections();
-		if(current_Thread != 0)
-		{
 
-		}
 	}
 }
 
@@ -973,8 +969,8 @@ int main(int argc, char **argv)
 	// TO DO: Specify the cycle period (cycle_ns) here, or use default value
 	//cycle_ns = 200000; // nanosecond -> 5kHz
 	//cycle_ns = 250000; // nanosecond -> 4kHz
-	cycle_ns = 500000; // nanosecond -> 2kHz
-	//cycle_ns = 1000000; // nanosecond -> 1kHz
+	//cycle_ns = 500000; // nanosecond -> 2kHz
+	cycle_ns = 1000000; // nanosecond -> 1kHz
 	//cycle_ns = 1250000; // nanosecond -> 800Hz
 	period = ((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 

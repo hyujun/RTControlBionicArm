@@ -9,6 +9,8 @@
 #ifndef RTCLIENT_H_
 #define RTCLIENT_H_
 
+#include <algorithm>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -46,6 +48,9 @@
 #include "KDL/SerialManipulator.h"
 #include "Control/KistHand.h"
 #include "devMouseObject.h"
+
+#include "Poco/Net/ServerSocket.h"
+#include "Poco/Net/SocketAddress.h"
 
 #define WAKEUP_TIME				(5)				/**<Initial waiting time*/
 #define NSEC_PER_SEC 			1000000000		/**<Expression of second in nano second*/
