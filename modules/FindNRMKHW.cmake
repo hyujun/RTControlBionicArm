@@ -34,7 +34,6 @@ if(UNIX)
     if(NOT NRMKHW_LIBRARY_DIR)
         message(FATAL_ERROR "NRMK HW: Could not find NRMK HW library directory")
     else()
-<<<<<<< Updated upstream
         list(APPEND NRMKHW_LIBRARY_DIR ${NRMKHW_LIBRARY_DIR})
     endif()
 endif()
@@ -76,10 +75,3 @@ if(DEFINED NRMKHW_LIBRARIES)
     set(NRMKHW_FOUND true)
 endif()
 message(STATUS "Found NRMKHW: ${NRMKHW_LIBRARIES}")
-=======
-        list(APPEND NRMKHW_LIBRARIES ${NRMKHW_LIBRARY_DIR})
-    endif()
-endif()
-
-set(NRMKHW_FOUND true)
->>>>>>> Stashed changes

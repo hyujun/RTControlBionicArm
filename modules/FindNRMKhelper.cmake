@@ -1,27 +1,23 @@
-if(NRMKHW_FOUND)
+if(NRMKhelper_FOUND)
     return()
 endif()
 
 set(NRMKhelper_HINTS
-        ./modules
+        ./modules/helper
         #${NRMKHW_DIR}
         )
 
 if(NOT NRMKhelper_ROOT_DIR)
     message(STATUS "Looking for NRMK helper install directory ...")
     find_path(NRMKhelper_ROOT_DIR
-            NAMES helper/inc/NRMKHelper.h
+            NAMES inc/NRMKHelper.h
             HINTS ${NRMKhelper_HINTS}
 
             )
     if(NOT NRMKhelper_ROOT_DIR)
         message(FATAL_ERROR "NRMK helper: Could not find NRMK helper install directory")
     else()
-<<<<<<< Updated upstream
         message(STATUS "NRMK helper: NRMK helper install dirctory structure at ${NRMKhelper_ROOT_DIR}")
-=======
-        message(STATUS "NRMK helper: NRMK helper install dirctory structure at ${NRMK helper_ROOT_DIR}")
->>>>>>> Stashed changes
         set(NRMKhelper_INSTALLED true)
     endif()
 endif()
@@ -38,22 +34,23 @@ if(UNIX)
     if(NOT NRMKhelper_LIBRARY_DIR)
         message(FATAL_ERROR "NRMK helper: Could not find NRMK helper library directory")
     else()
-<<<<<<< Updated upstream
         list(APPEND NRMKhelper_LIBRARY_DIR ${NRMKhelper_LIBRARY_DIR})
     endif()
 endif()
 
-list(APPEND components
+list(APPEND components_NRMKHelper
         ${NRMKhelper_FIND_COMPONENTS}
-        "NRMKHelperi686"
+        "libNRMKHelperi686"
+        #"NRMKHelper"
+        #"NRMKCore"
         )
-list(REMOVE_DUPLICATES components)
+list(REMOVE_DUPLICATES components_NRMKHelper)
 
-foreach(comp ${components})
+foreach(comp ${components_NRMKHelper})
     if(NOT NRMKhelper_${comp}_LIBRARY)
         find_library(
                 NRMKhelper_${comp}_LIBRARY
-                NAMES lib${comp}.a lib${comp}.so lib${comp}.la
+                NAMES ${comp}.a ${comp}.so ${comp}.lib ${comp}.exp
                 HINTS ${NRMKhelper_LIBRARY_DIR}
                 PATH_SUFFIXES
                 lib
@@ -80,10 +77,3 @@ if(DEFINED NRMKhelper_LIBRARIES)
     set(NRMKhelper_FOUND true)
 endif()
 message(STATUS "Found NRMKhelper: ${NRMKhelper_LIBRARIES}")
-=======
-        list(APPEND NRMKhelper_LIBRARIES ${NRMKhelper_LIBRARY_DIR})
-    endif()
-endif()
-
-set(NRMKHW_FOUND true)
->>>>>>> Stashed changes

@@ -225,7 +225,7 @@ if(${Poco_OSP_FOUND})
 		include(${Poco_OSP_Bundles_file})
 	endif()
 endif()
-
+list(REMOVE_DUPLICATES Poco_INCLUDE_DIRS) # remove duplicate defaults
 message(STATUS "Found Poco: ${Poco_LIBRARIES}")
 
 

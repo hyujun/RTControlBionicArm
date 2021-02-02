@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="Remote Host (3be123c7-034d-4daa-a895-7ab14fc79298)">
     <serverData>
-      <paths name="Remote Host (c2a088e7-9b0b-4e58-ad53-411db112e551)">
+      <paths name="Remote Host (2dbe2d6c-daa5-4a18-9bf1-eae191f140ff)">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/user/release/RTControlBionicarmDir" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/tmp/tmp.fsbEtckgSH" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release-remote-host" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Remote Host (3be123c7-034d-4daa-a895-7ab14fc79298)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.NXvFuJa0eY" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release" />
           </excludedPaths>
         </serverdata>
       </paths>

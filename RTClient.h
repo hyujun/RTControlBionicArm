@@ -35,7 +35,7 @@
 #include <rtdk.h>		//The rdtk real-time printing library
 /****************************************************************************/
 
-#include "EcatControlSocket.h"
+#include "EcatDataSocket.h"
 
 #include "EcatSystem/RTControlSocket.h"
 #include "EcatSystem/Ecat_Master.h"
@@ -49,8 +49,8 @@
 #include "Control/KistHand.h"
 #include "devMouseObject.h"
 
-#include "Poco/Net/ServerSocket.h"
-#include "Poco/Net/SocketAddress.h"
+#include <Poco/Net/ServerSocket.h>
+#include <Poco/Net/SocketAddress.h>
 
 #define WAKEUP_TIME				(5)				/**<Initial waiting time*/
 #define NSEC_PER_SEC 			1000000000		/**<Expression of second in nano second*/

@@ -10,8 +10,16 @@
 
 #pragma once
 
-#include "Poco/Event.h"
-#include "NRMKSocketBase.h"
+#include <Poco/Event.h>
+#include <NRMKSocketBase.h>
+
+typedef unsigned int UINT32;	/**<typedef uint32_t*/
+typedef int64_t		INT64;		/**<typedef uint64_t*/
+typedef int32_t 	INT32;		/**<typedef int32_t*/
+typedef int16_t 	INT16;		/**<typedef int16_t*/
+typedef uint16_t 	UINT16;		/**<typedef uint16_t*/
+typedef uint8_t 	UINT8;		/**<typedef uint8_t*/
+typedef int8_t 		INT8;   	/**<typedef int8_t*/
 
 /**
  * @brief NRMK TCP/IP namespace
