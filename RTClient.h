@@ -35,8 +35,7 @@
 #include <rtdk.h>		//The rdtk real-time printing library
 /****************************************************************************/
 
-#include "EcatDataSocket.h"
-
+#include "Network/EcatDataSocket.h"
 #include "EcatSystem/RTControlSocket.h"
 #include "EcatSystem/Ecat_Master.h"
 #include "EcatSystem/Ecat_Elmo.h"
@@ -47,7 +46,7 @@
 #include "Control/Trajectory.h"
 #include "KDL/SerialManipulator.h"
 #include "Control/KistHand.h"
-#include "devMouseObject.h"
+#include "Network/devMouseObject.h"
 
 #include <Poco/Net/ServerSocket.h>
 #include <Poco/Net/SocketAddress.h>

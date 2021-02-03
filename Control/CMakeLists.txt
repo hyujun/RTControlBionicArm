@@ -14,9 +14,9 @@ target_include_directories( ${PROJECT_NAME}
         )
 
 find_package(Eigen 3.0.0)
-IF( NOT Eigen_FOUND )
+IF( Eigen_FOUND )
+    add_definitions( ${Eigen_DEFINITIONS} )
+    target_include_directories (${PROJECT_NAME} PUBLIC ${Eigen_INCLUDE_DIRS} )
+ELSE()
     MESSAGE( FATAL_ERROR "Please point the environment variable EIGEN_INCLUDE_DIR to the include directory of your Eigen installation.")
 ENDIF()
-add_definitions(${Eigen_DEFINITIONS})
-include_directories ( ${Eigen_INCLUDE_DIRS} )
-message(STATUS "Eigen includes : ${Eigen_INCLUDE_DIRS}" )

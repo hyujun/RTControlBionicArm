@@ -3,7 +3,7 @@ if(NRMKhelper_FOUND)
 endif()
 
 set(NRMKhelper_HINTS
-        ./modules/helper
+        ../modules/helper
         #${NRMKHW_DIR}
         )
 

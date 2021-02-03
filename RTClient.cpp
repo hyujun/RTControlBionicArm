@@ -6,7 +6,7 @@
 #include "RTClient.h"
 
 //Modify this number to indicate the actual number of motor on the network
-#define ELMO_TOTAL 5
+#define ELMO_TOTAL 6
 #define BIONIC_ARM_DOF 6
 /****************************************************************************/
 hyuEcat::Master ecatmaster;
@@ -62,7 +62,6 @@ RT_TASK devmouse_task;
 
 RT_QUEUE msg_can;
 RT_QUEUE msg_plot;
-RT_QUEUE msg_tcpip;
 /****************************************************************************/
 // For RT thread management
 unsigned long fault_count=0;
